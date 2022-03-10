@@ -25,3 +25,24 @@
     @apply rounded border border-secondary-300 bg-secondary-50 py-2 px-3 text-secondary-500 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-700;
   }
 }
+
+.heroAnimate {
+  animation-name: heroAnimation;
+  animation-delay: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes heroAnimation {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
