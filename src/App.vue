@@ -6,6 +6,12 @@ export default {
   components: {
     ModalsContainer,
   },
+  watch: {
+    $route(to) {
+      const nowTitle = `${to.meta.title}` || 'ChillBar 秋吧';
+      document.title = nowTitle;
+    },
+  },
 };
 </script>
 <template>

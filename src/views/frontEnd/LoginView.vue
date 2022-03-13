@@ -1,6 +1,6 @@
 <script>
 import {
-  ref, inject, reactive, onBeforeMount,
+  ref, inject, reactive, onBeforeMount, onMounted,
 } from 'vue';
 import { useRouter } from 'vue-router';
 import useStore from '@/stores';
@@ -15,7 +15,7 @@ export default {
     const axios = inject('axios');
     const { adminStore } = useStore();
     const {
-      handleSetLogin, handleCheckUser, handleGetToken,
+      handleSetLogin, handleCheckUser, handleGetToken, isLoggedIn,
     } = adminStore;
     const router = useRouter();
     const userName = ref('');
@@ -60,7 +60,11 @@ export default {
 
     onBeforeMount(() => {
       handleGetToken();
-      if (handleCheckUser()) {
+      handleCheckUser();
+    });
+
+    onMounted(() => {
+      if (isLoggedIn === false) {
         router.push('/login');
       } else {
         router.push('/admin');

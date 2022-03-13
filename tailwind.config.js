@@ -11,7 +11,6 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Noto Sans TC', ...fontFamily.sans],
-        serif: ['Metal', ...fontFamily.serif],
       },
       colors: {
         primary: {
