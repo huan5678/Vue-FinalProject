@@ -25,14 +25,15 @@ export default {
 </script>
 
 <template>
-  <a v-if="isExternalLink" v-bind="$attrs" rel="noopener" :href="to" target="_blank">
+  <a v-if="isExternalLink" v-bind="$attrs"
+  rel="noopener" :href="to" target="_blank">
     <slot />
   </a>
   <router-link
     v-else
     v-bind="$props"
-    class="py-2 px-3 font-medium text-gray-500 border-b-2 border-transparent
-    transition duration-300 ease-in-out"
+    class="py-2 px-3 text-gray-500 border-b-2 border-transparent
+    transition duration-300 ease-in-out font-normal md:font-thin"
     :class="
       isActive
         ? `border-primary-300 text-primary-400 disabled cursor-default`
