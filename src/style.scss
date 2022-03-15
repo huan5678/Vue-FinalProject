@@ -29,20 +29,40 @@
 .heroAnimate {
   animation-name: heroAnimation;
 }
+@media screen and (orientation: landscape) {
+  @keyframes heroAnimation {
+    0% {
+      opacity: 0;
+      background-size: 150% auto;
+    }
+    25% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      background-size: 120% auto;
+    }
+  }
+}
 
-@keyframes heroAnimation {
-  0% {
-    opacity: 0;
-    background-size: 150% auto;
-  }
-  25% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-    background-size: 120% auto;
+@media screen and (orientation: portrait) {
+  @keyframes heroAnimation {
+    0% {
+      opacity: 0;
+      background-size: auto 150%;
+    }
+    25% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      background-size: auto 120%;
+    }
   }
 }

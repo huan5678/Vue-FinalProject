@@ -15,6 +15,6 @@ export default {
 };
 </script>
 <template>
-  <router-view />
-  <modals-container></modals-container>
+    <router-view />
+    <modals-container></modals-container>
 </template>
