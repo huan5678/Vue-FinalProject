@@ -3,10 +3,12 @@ import { onMounted } from 'vue';
 // import { useRouter } from 'vue-router';
 // import useStore from '@/stores';
 import TheHero from '@/components/TheHero.vue';
+import TheContact from '@/components/TheContact.vue';
 
 export default {
   components: {
     TheHero,
+    TheContact,
   },
   setup() {
     // const router = useRouter();
@@ -22,4 +24,5 @@ export default {
 </script>
 <template>
   <TheHero />
+  <TheContact />
 </template>
