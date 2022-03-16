@@ -28,9 +28,11 @@ export default {
 <template>
   <section class="bg-secondary-900">
     <nav class="container flex justify-between p-3">
-      <h2>
-        <AppLink to="/"> LOGO </AppLink>
-      </h2>
+      <a href="/">
+        <SvgLoader name="bannerLogo"
+          class="w-36 h-12 text-primary-500" />
+        <h2 class="text-primary-500 hidden">ChillBar秋吧</h2>
+      </a>
       <ul class="flex gap-4 justify-between items-center" v-if="route.name !== 'product-detail'">
         <li>
           <AppLink to="product"> 產品列表 </AppLink>
@@ -42,11 +44,11 @@ export default {
           <AppLink to="http://google.com">Google</AppLink>
         </li> -->
       </ul>
-      <div class="flex justify-center items-center gap-4" v-if="route.name === 'dashboard'">
+      <div class="flex gap-4 justify-center items-center" v-if="route.name === 'dashboard'">
         <h2 class="text-lg text-secondary-50">管理者登出</h2>
         <button
-          class="py-1 px-6 text-white bg-primary-500 hover:shadow-primary-600 rounded
-          hover:shadow-inner transition duration-300"
+          class="py-1 px-6 text-white bg-primary-500 rounded hover:shadow-inner
+          hover:shadow-primary-600 transition duration-300"
           @click="handleIsLogout()"
         >
           登出

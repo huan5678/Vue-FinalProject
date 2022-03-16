@@ -103,7 +103,7 @@ export default {
                   type="button"
                   id="couponCode"
                   name="couponCode"
-                  class="w-full rounded bg-primary-500 p-2"
+                  class="p-2 w-full bg-primary-500 rounded"
                   @click="handleCreateCode"
                 >
                 <i class="text-white bi bi-gift-fill"></i>
@@ -138,7 +138,7 @@ export default {
         </div>
         <div class="flex-auto">
           <span class="block mb-4">是否啟用優惠券</span>
-          <div class="flex justify-start items-center gap-2">
+          <div class="flex gap-2 justify-start items-center">
             <input id="couponIsEnabled"
             class="rounded"
               type="checkbox"
@@ -160,8 +160,8 @@ export default {
           {{ selectType === 'productEdit' ? '取消修改' : '取消新增' }}
         </button>
         <button
-          class="flex-auto py-2 text-white bg-primary-500 rounded-md
-          hover:bg-primary-600 hover:shadow hover:shadow-primary-400
+          class="flex-auto py-2 text-white bg-primary-500 hover:bg-primary-600
+          rounded-md hover:shadow hover:shadow-primary-400
           transition duration-300"
           type="submit"
         >

@@ -43,7 +43,7 @@ export default {
 </script>
 
 <template>
-  <section class="pt-12 bg-gray-100 pb-20">
+  <section class="pt-12 pb-20 bg-gray-100">
     <h2 class="mb-8 text-2xl text-center">購物車</h2>
     <table class="container">
       <thead class="border-b-2 border-secondary-700">
@@ -92,8 +92,8 @@ export default {
             <button class="" @click="handleDeleteCart(cart.id)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="w-6 h-6 transition duration-500 ease-out
-                hover:scale-150 hover:text-primary-500"
+                class="w-6 h-6 hover:text-primary-500 transition duration-500
+                ease-out hover:scale-150"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

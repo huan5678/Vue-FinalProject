@@ -16,7 +16,7 @@ module.exports = {
     'tailwindcss/classnames-order': 'warn',
     'tailwindcss/no-custom-classname': 'warn',
     'tailwindcss/no-contradicting-classname': 'error',
-    "vuejs-accessibility/label-has-for": 'off',
+    'vuejs-accessibility/label-has-for': 'off',
   },
   plugins: ['vue', 'tailwindcss'],
 };

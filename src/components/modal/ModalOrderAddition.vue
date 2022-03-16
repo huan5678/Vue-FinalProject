@@ -130,8 +130,8 @@ export default {
           取消修改
         </button>
         <button
-          class="flex-auto py-2 text-white bg-primary-500 rounded-md
-          hover:bg-primary-600 hover:shadow hover:shadow-primary-400
+          class="flex-auto py-2 text-white bg-primary-500 hover:bg-primary-600
+          rounded-md hover:shadow hover:shadow-primary-400
           transition duration-300"
           type="submit"
         >

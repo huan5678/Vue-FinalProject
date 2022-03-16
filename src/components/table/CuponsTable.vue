@@ -73,9 +73,9 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="py-2 px-4 text-primary-500 border-primary-500 border
-            rounded hover:shadow transition duration-200
-            hover:shadow-primary-400 hover:bg-primary-600 hover:text-primary-50"
+            class="py-2 px-4 text-primary-500 hover:text-primary-50 hover:bg-primary-600
+            rounded border border-primary-500 hover:shadow
+            hover:shadow-primary-400 transition duration-200"
             @click="openModal('getCouponDetail', item)"
           >
             查看細節
@@ -84,8 +84,8 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="py-2 px-4 text-secondary-50 bg-secondary-400 rounded
-            hover:bg-secondary-500 hover:shadow
+            class="py-2 px-4 text-secondary-50 bg-secondary-400 hover:bg-secondary-500
+            rounded hover:shadow
             hover:shadow-secondary-400 transition duration-200"
             @click="openModal('couponEdit', item)"
           >
@@ -95,9 +95,9 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="py-2 px-4 text-secondary-400 border border-secondary-300 rounded
-            transition duration-200 hover:border-transparent hover:text-white
-            hover:shadow hover:shadow-secondary-400 hover:bg-secondary-500"
+            class="py-2 px-4 text-secondary-400 hover:text-white hover:bg-secondary-500 rounded
+            border border-secondary-300 hover:border-transparent hover:shadow
+            hover:shadow-secondary-400 transition duration-200"
             @click="openModal('productDelete', item)"
           >
             刪除優惠券
@@ -110,9 +110,9 @@ export default {
     <p>目前有 {{ adminData.dataList?.length }} 種優惠券</p>
     <button
       type="button"
-      class="py-2 px-4 text-primary-500 border border-primary-500
-        transition duration-200 rounded hover:text-primary-50
-        hover:shadow hover:shadow-primary-400 hover:bg-primary-600"
+      class="py-2 px-4 text-primary-500 hover:text-primary-50 hover:bg-primary-600
+        rounded border border-primary-500 hover:shadow
+        hover:shadow-primary-400 transition duration-200"
       @click="openModal('couponCreate', tempProduct)"
     >
       新增優惠券

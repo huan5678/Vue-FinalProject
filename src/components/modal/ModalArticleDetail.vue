@@ -63,7 +63,7 @@ export default {
     </div>
     <div class="flex flex-col p-4">
       <h2 class="text-2xl font-medium">文章圖片</h2>
-      <img :src="articleData?.image" class="object max-h-48" :alt="articleDate?.title">
+      <img :src="articleData?.image" class="max-h-48 object" :alt="articleDate?.title">
     </div>
     <div class="flex justify-between p-4">
       <div class="p-2 divide-y">
@@ -80,7 +80,7 @@ export default {
         id="toggle"
         :checked="articleData?.isPublic"
         disabled>
-        <span class="ml-3 text-gray-900 text-sm font-medium">
+        <span class="ml-3 text-sm font-medium text-gray-900">
           {{ articleData?.isPublic === true ? '公開' : '未公開' }}
         </span>
         </label>

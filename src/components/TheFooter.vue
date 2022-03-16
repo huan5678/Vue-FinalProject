@@ -8,19 +8,19 @@ export default {
 };
 </script>
 <template>
-  <section class="bg-secondary-900 pt-4 pb-8">
+  <section class="pt-4 pb-8 bg-secondary-900">
     <nav class="container flex flex-col justify-center">
       <ul class="flex flex-col justify-between items-center">
         <li>
           <SvgLoader name="bannerLogo"
-            class="text-secondary-200 h-12 w-36 pb-4" />
+            class="pb-4 w-36 h-12 text-secondary-200" />
         </li>
-        <li class="text-lg text-secondary-300 flex items-center gap-2">
+        <li class="flex gap-2 items-center rfs:text-base text-secondary-300">
           本網站僅供個人作品使用，不做任何商業用途 -
-          <a href="admin" class="hover:text-secondary-200 tracking-[.1rem]">後台管理</a>
+          <a href="admin" class="tracking-[.1rem] hover:text-secondary-200">後台管理</a>
         </li>
-        <li class="flex items-center justify-center">
-          <p class="text-secondary-300">
+        <li class="flex justify-center items-center">
+          <p class="text-secondary-300 rfs:text-base">
             ChillBar COPYRIGHT © 2022
           </p>
         </li>

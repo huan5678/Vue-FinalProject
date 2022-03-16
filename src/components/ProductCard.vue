@@ -27,9 +27,9 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col justify-between rounded-md shadow
-  overflow-hidden relative h-full">
-    <div class="group cursor-pointer h-full"
+  <div class="flex overflow-hidden relative flex-col justify-between
+  h-full rounded-md shadow">
+    <div class="group h-full cursor-pointer"
     @click="handleOpenProductDetail(products.id)"
     @keydown="handleOpenProductDetail(products.id)">
       <div class="overflow-clip">

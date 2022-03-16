@@ -210,7 +210,7 @@ export default {
             <div v-for="tag in tagList" :key="tag.value">
               <input
                 type="checkbox"
-                class="rounded mr-1"
+                class="mr-1 rounded"
                 :id="tag.value"
                 v-model="articleData.tag"
                 :value="tag.value"
@@ -232,8 +232,8 @@ export default {
           {{ selectType === 'productEdit' ? '取消修改' : '取消新增' }}
         </button>
         <button
-          class="flex-auto py-2 text-white bg-primary-500 rounded-md
-          hover:bg-primary-600 hover:shadow hover:shadow-primary-400
+          class="flex-auto py-2 text-white bg-primary-500 hover:bg-primary-600
+          rounded-md hover:shadow hover:shadow-primary-400
           transition duration-300"
           type="submit"
         >

@@ -117,7 +117,7 @@ export default {
         <button
           type="submit"
           class="grid place-content-center py-3 mx-auto w-10/12 text-xl
-          text-white bg-black rounded transition duration-300 ease-in-out hover:bg-primary-700"
+          text-white bg-black hover:bg-primary-700 rounded transition duration-300 ease-in-out"
           :class="{
             'opacity-30 cursor-not-allowed': cartListLength === 0,
           }"

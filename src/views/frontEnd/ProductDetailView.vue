@@ -42,7 +42,7 @@ export default {
     <section
       class="flex overflow-hidden flex-col pb-4 space-y-4 bg-gray-50 rounded-md"
     >
-      <AppLink to="/product" class="text-secondary-700 flex items-center p-3 gap-3">
+      <AppLink to="/product" class="flex gap-3 items-center p-3 text-secondary-700">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
           <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147
           2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1
@@ -123,7 +123,7 @@ export default {
               </select>
               <button
                 class="flex justify-center items-center py-3 w-full rounded
-                border border-danger-700 transition duration-300"
+                border transition duration-300 border-danger-700"
                 @click="handleUpdateCart(products.id, qty)"
                 :disabled="qty === 0"
                 :class="
@@ -133,7 +133,7 @@ export default {
                 "
               >
                 <svg
-                  class="mr-3 -ml-1 w-5 h-5 text-danger-50 animate-spin"
+                  class="mr-3 -ml-1 w-5 h-5 animate-spin text-danger-50"
                   :class="isLoading === products.id ? '' : 'hidden'"
                   :disabled="isLoading === products.id"
                   xmlns="http://www.w3.org/2000/svg"

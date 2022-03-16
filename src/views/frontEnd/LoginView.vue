@@ -88,7 +88,7 @@ export default {
     <div class="container max-w-lg">
       <form class="p-8 space-y-8 bg-white rounded shadow-sm" @submit.prevent="handlerSubmit">
         <legend class="text-3xl font-medium
-        text-center text-primary-600 tracking-wide">管理者登入</legend>
+        tracking-wide text-center text-primary-600">管理者登入</legend>
         <div class="space-y-4">
           <label for="name" class="block font-normal">使用者帳號</label>
           <input
@@ -97,10 +97,10 @@ export default {
             name="userName"
             placeholder="請輸入帳號Email"
             v-model.trim="userName"
-            class="p-2 w-full text-primary-800 border font-light
+            class="p-2 w-full font-light text-primary-800 invalid:text-primary-600
             focus:text-primary-600 bg-gray-50 rounded
-            focus:border-primary-500 focus:ring-primary-500
-            invalid:border-primary-600 invalid:text-primary-600"
+            border invalid:border-primary-600
+            focus:border-primary-500 focus:ring-primary-500"
           />
         </div>
         <div class="space-y-4">
@@ -108,17 +108,18 @@ export default {
           <input
             id="password"
             type="password"
-            class="p-2 w-full text-primary-800 bg-gray-50 rounded border
-            invalid:text-primary-600 invalid:border-primary-600 font-light
-            focus:text-primary-600 focus:border-primary-500 focus:ring-primary-500"
+            class="p-2 w-full font-light text-primary-800
+            invalid:text-primary-600 focus:text-primary-600
+            bg-gray-50 rounded border
+            invalid:border-primary-600 focus:border-primary-500 focus:ring-primary-500"
             v-model="userPassword"
             placeholder="請輸入密碼"
           />
         </div>
         <button
           type="submit"
-          class="py-4 w-full text-secondary-50 bg-secondary-400 rounded-lg
-          hover:bg-secondary-600
+          class="py-4 w-full text-secondary-50 bg-secondary-400 hover:bg-secondary-600
+          rounded-lg
           transition duration-300"
         >
           登入

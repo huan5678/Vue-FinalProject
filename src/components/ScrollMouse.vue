@@ -1,218 +1,54 @@
 <template>
-  <div class="mouse">
+  <div class="scrollAnimate">
+    <div class="scrollLine">
+    </div>
     <span class="
-    text-primary-500 text-center font-thin
-    absolute bottom-0 left-0
-    -translate-x-[15%] translate-y-full
+    absolute top-0 left-0
+    font-thin text-center text-primary-500
+    -translate-y-[150%] -translate-x-1/2
+    animate-pulse
     ">scroll</span>
   </div>
 </template>
 <style lang="scss" scoped>
-$colorBg: #151625;
-$colorOutline: #f59f13;
-$colorOutlineFade: #2a2c4b;
+$colorPrimary: #f59f13;
+$colorSecondary: rgba(42,44,75,0);
 
-$widthMouse: 26px;
-$heightMouse: 44px;
-$borderMouse: 3px;
+$line-height: 60px;
+$line-height-abs: -60px;
 
-$posMouse: 8px;
-$posText: 2px;
+$animDuration: 6s;
 
-$sizeTrackball: 5px;
-$posTrackball: 10px;
-$shrinkTrackball: 0.4;
-
-$animDuration: 5s;
-
-@mixin bgGradient {
-  background: $colorOutlineFade
-    linear-gradient(transparent 0%, transparent 50%, $colorOutline 50%, $colorOutline 100%);
-}
-.mouse {
-  @include bgGradient;
-  position: relative;
-  width: $widthMouse;
-  height: $heightMouse;
-  border-radius: 100px;
-  background-size: 100% 200%;
-  animation: colorSlide $animDuration linear infinite, nudgeMouse $animDuration ease-out infinite;
-  &:before,
-  &:after {
-    content: '';
+.scrollAnimate {
+    width: 1px;
+    height: $line-height;
     position: absolute;
-    top: 0;
-    right: 0;
     bottom: 0;
     left: 0;
-    margin: auto;
-  }
-  &:before {
-    width: $widthMouse - $borderMouse;
-    height: $heightMouse - $borderMouse;
-    background-color: $colorBg;
-    border-radius: 100px;
-  }
-  &:after {
-    background-color: $colorOutline;
-    width: $sizeTrackball;
-    height: $sizeTrackball;
-    border-radius: 100%;
-    animation: trackBallSlide $animDuration linear infinite;
-  }
+    right: 0;
+    margin: 0 auto;
+    transform: translateY(-50%);
+    .scrollLine {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: linear-gradient(to bottom, $colorPrimary 50%, $colorSecondary 50%);
+      background-position: 0 $line-height-abs;
+      background-size: 100% 200%;
+      animation: scrolldown $animDuration cubic-bezier(0.43, 0.04, 0.59, 0.93) forwards infinite;
+    }
 }
 
-@keyframes colorSlide {
-  0% {
-    background-position: 0% 100%;
-  }
-  50% {
-    background-position: 0% 0%;
-  }
-  50.5% {
-    background-position: 0% 100%;
-  }
-  to {
-    background-position: 0% 0%;
-  }
-
+@keyframes scrolldown {
+    0%{
+      background-position: 0 $line-height-abs;
+    }
+    75% {
+      background-position: 0 0;
+    }
+    100%{
+      background-position: 0 $line-height;
+    }
 }
 
-@keyframes trackBallSlide {
-  0% {
-    opacity: 1;
-    transform: scale(1) translateY(-$posTrackball);
-  }
-  6% {
-    opacity: 1;
-    transform: scale(0.9) translateY($posTrackball/4);
-  }
-  14% {
-    opacity: 0;
-    transform: scale($shrinkTrackball) translateY($posTrackball * 2);
-  }
-  15%,
-  19% {
-    opacity: 0;
-    transform: scale($shrinkTrackball) translateY(-$posTrackball);
-  }
-  28%,
-  29.99% {
-    opacity: 1;
-    transform: scale(1) translateY(-$posTrackball);
-  }
-  30% {
-    opacity: 1;
-    transform: scale(1) translateY(-$posTrackball);
-  }
-  36% {
-    opacity: 1;
-    transform: scale(0.9) translateY($posTrackball/4);
-  }
-  44% {
-    opacity: 0;
-    transform: scale($shrinkTrackball) translateY($posTrackball * 2);
-  }
-  45%,
-  49% {
-    opacity: 0;
-    transform: scale($shrinkTrackball) translateY(-$posTrackball);
-  }
-  58%,
-  59.99% {
-    opacity: 1;
-    transform: scale(1) translateY(-$posTrackball);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1) translateY(-$posTrackball);
-  }
-  66% {
-    opacity: 1;
-    transform: scale(0.9) translateY($posTrackball/4);
-  }
-  74% {
-    opacity: 0;
-    transform: scale($shrinkTrackball) translateY($posTrackball * 2);
-  }
-  75%,
-  79% {
-    opacity: 0;
-    transform: scale($shrinkTrackball) translateY(-$posTrackball);
-  }
-  88%,
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(-$posTrackball);
-  }
-}
-
-@keyframes nudgeMouse {
-  0% {
-    transform: translateY(0);
-  }
-  20% {
-    transform: translateY($posMouse);
-  }
-  30% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY($posMouse);
-  }
-  60% {
-    transform: translateY(0);
-  }
-  80% {
-    transform: translateY($posMouse);
-  }
-  90% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes nudgeText {
-  0% {
-    transform: translateY(0);
-  }
-  20% {
-    transform: translateY($posText);
-  }
-  30% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY($posText);
-  }
-  60% {
-    transform: translateY(0);
-  }
-  80% {
-    transform: translateY($posText);
-  }
-  90% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes colorText {
-  21% {
-    color: $colorOutlineFade;
-  }
-  30% {
-    color: $colorOutline;
-  }
-  51% {
-    color: $colorOutlineFade;
-  }
-  60% {
-    color: $colorOutline;
-  }
-  81% {
-    color: $colorOutlineFade;
-  }
-  90% {
-    color: $colorOutline;
-  }
-}
 </style>
