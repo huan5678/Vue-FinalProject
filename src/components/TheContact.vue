@@ -24,11 +24,11 @@ export default {
 <template>
     <aside class="p-12 bg-secondary-200 sm:p-16 lg:p-24">
       <div class="max-w-xl mx-auto text-center">
-        <p class="text-sm font-normal text-secondary-400">
+        <p class="rfs:text-lg font-normal text-secondary-400">
           不要錯過第一手最新消息
         </p>
 
-        <p class="mt-2 text-3xl font-thin text-secondary-600 sm:text-4xl">
+        <p class="mt-2 rfs:text-2xl font-thin text-secondary-600 sm:text-4xl">
           現在訂閱電子報由時未晚
         </p>
 
@@ -51,20 +51,7 @@ export default {
           >
             訂閱電子報
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              class="flex-shrink-0 w-4 h-4 ml-3"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
+            <i class="bi bi-envelope-plus text-2xl ml-3"></i>
           </button>
         </form>
       </div>
