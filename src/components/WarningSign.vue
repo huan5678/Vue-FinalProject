@@ -16,18 +16,18 @@ export default {
 </script>
 
 <template>
-<div class="fixed w-full bottom-0" v-if="showAlert">
-  <div class="py-3 px-2 w-full
-    flex justify-center items-center gap-6
+<div class="fixed bottom-0 w-full" v-if="showAlert">
+  <div class="flex gap-6 justify-center
+    items-center py-3 px-2 w-full
   text-white bg-primary-400/70">
-    <div class="container mx-auto whitespace-nowrap w-full overflow-hidden"
+    <div class="container overflow-hidden mx-auto w-full whitespace-nowrap"
     >
-      <p class="text-sm font-medium text-left sm:text-center
-      inline-block
+      <p class="inline-block text-sm font-medium text-left
+      sm:text-center
       " v-for="item in 4" :key="item"
       >
         <span class="mx-2">禁止酒駕</span>
-        <SvgLoader name="dontDrunkDrive" class="inline h-8 w-8 mx-2" />
+        <SvgLoader name="dontDrunkDrive" class="inline mx-2 w-8 h-8" />
         <span class="mx-2">酒後不開車</span>
         <span class="mx-2">安全有保障</span>
         <span class="mx-2">未滿18歲請勿飲酒</span>
@@ -38,11 +38,11 @@ export default {
 
     <button
       aria-label="Close"
-      class="transition rounded-lg
-      bg-primary-700/30 hover:bg-primary-900/40 py-1 px-3"
+      class="btn btn-sm border-0
+      bg-primary-700/30 hover:bg-primary-900/40 rounded-lg transition"
       @click="handleCloseAlert"
     >
-      <i class="bi bi-x-lg rfs:text-lg"></i>
+      <i class="rfs:text-base bi bi-x-lg"></i>
     </button>
   </div>
 </div>

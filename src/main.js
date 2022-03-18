@@ -4,9 +4,10 @@ import { vfmPlugin } from 'vue-final-modal';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
-import App from './App.vue';
-import router from './router';
-import svgLoader from './components/SvgLoader.vue';
+import App from '@/App.vue';
+import router from '@/router';
+import svgLoader from '@/components/SvgLoader.vue';
+import AlertModal from '@/components/AlertModal.vue';
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './style.scss';
@@ -25,5 +26,6 @@ const req = require.context('@/assets/svg', true, /\.svg$/);
 requireAll(req);
 
 app.component('SvgLoader', svgLoader);
+app.component('AlertModal', AlertModal);
 
 app.mount('#app');

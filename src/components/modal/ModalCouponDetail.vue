@@ -50,8 +50,9 @@ export default {
         <span class="block text-sm">優惠券是否啟用</span>
         <label for="toggle" class="flex relative items-center mb-4 cursor-pointer">
         <input type="checkbox" id="toggle" class="sr-only" disabled>
-        <div class="w-11 h-6 bg-gray-200 rounded-full border-2 border-gray-200 toggle-bg"></div>
-        <span class="ml-3 text-sm font-medium text-gray-900">
+        <div class="w-11 h-6 bg-secondary-200
+        rounded-full border-2 border-secondary-200"></div>
+        <span class="ml-3 text-sm font-medium text-secondary-900">
           {{ couponData?.is_enabled === 1 ? '啟用' : '未啟用' }}
         </span>
         </label>

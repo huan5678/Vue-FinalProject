@@ -55,10 +55,27 @@ module.exports = {
     },
     backgroundColor: ['responsive', 'hover', 'focus', 'checked', 'even'],
     margin: ['responsive', 'group-hover', 'last'],
+    extend: {
+      fontSize: ['rfs'],
+      padding: ['rfs'],
+      margin: ['rfs'],
+      gap: ['rfs'],
+    },
+  },
+  daisyui: {
+    styled: true,
+    themes: false,
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+    prefix: '',
+    darkTheme: 'dark',
   },
   plugins: [
     require('@tailwindcss/forms'),
     require('tailwindcss-rfs'),
+    require('daisyui'),
     function ({ addComponents }) {
       addComponents({
         '.container': {

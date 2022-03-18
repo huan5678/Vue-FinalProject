@@ -80,7 +80,7 @@ export default {
       :close-modal="handleOpenModal"
     />
     <form class="container p-4 space-y-4" @submit.prevent="handleProductAddition">
-      <div class="flex flex-wrap space-between">
+      <div class="flex flex-wrap justify-between">
         <div class="flex gap-4 justify-between w-full">
           <div class="flex-auto">
             <label for="couponName" class="block mb-4"

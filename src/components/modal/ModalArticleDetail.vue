@@ -63,7 +63,8 @@ export default {
     </div>
     <div class="flex flex-col p-4">
       <h2 class="text-2xl font-medium">文章圖片</h2>
-      <img :src="articleData?.image" class="max-h-48 object" :alt="articleDate?.title">
+      <img :src="articleData?.image" :alt="articleDate?.title"
+      class="max-h-48 object-cover object-center">
     </div>
     <div class="flex justify-between p-4">
       <div class="p-2 divide-y">

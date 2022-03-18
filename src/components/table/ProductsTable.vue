@@ -34,9 +34,9 @@ export default {
 };
 </script>
 <template>
-  <table class="mb-4 bg-gray-50 rounded table-auto">
-    <thead class="bg-gray-800">
-      <tr class="text-white">
+  <table class="table w-full">
+    <thead>
+      <tr class="text-secondary-400">
         <td width="200" class="p-4 text-lg whitespace-nowrap">產品名稱</td>
         <td width="250" class="p-4 text-lg text-right whitespace-nowrap">原價</td>
         <td width="250" class="p-4 text-lg text-right whitespace-nowrap">售價</td>
@@ -47,7 +47,7 @@ export default {
     </thead>
     <tbody>
       <tr
-        class="hover:bg-gray-200 border-b border-gray-300"
+        class="hover"
         v-for="item in adminData.dataList"
         :key="item.id"
       >
@@ -82,8 +82,9 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="py-2 px-4 text-primary-500 hover:text-primary-50 hover:bg-primary-600
-            rounded border border-primary-500 hover:shadow
+            class="text-primary-500 hover:text-primary-50 hover:bg-primary-500
+            font-normal btn btn-outline btn-xs sm:btn-sm md:btn-md
+            hover:shadow hover:border-primary-500
             hover:shadow-primary-400 transition duration-200"
             @click="openModal('getProductDetail', item)"
           >
@@ -93,8 +94,9 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="py-2 px-4 text-secondary-50 bg-secondary-400 hover:bg-secondary-500
-            rounded hover:shadow
+            class="text-secondary-400 hover:bg-secondary-500
+            font-normal btn btn-outline btn-xs sm:btn-sm md:btn-md
+            hover:shadow border-secondary-400 hover:border-secondary-500
             hover:shadow-secondary-400 transition duration-200"
             @click="openModal('productEdit', item)"
           >
@@ -104,9 +106,10 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="py-2 px-4 text-secondary-400 hover:text-white hover:bg-secondary-500 rounded
-            border border-secondary-300 hover:border-transparent hover:shadow
-            hover:shadow-secondary-400 transition duration-200"
+            class="text-red-400 hover:text-white hover:bg-red-500
+            font-normal btn btn-outline btn-xs sm:btn-sm md:btn-md
+            border border-red-300 hover:border-transparent hover:shadow
+            hover:shadow-red-400 transition duration-200"
             @click="openModal('productDelete', item)"
           >
             刪除品項
@@ -119,9 +122,7 @@ export default {
     <p>目前有{{ adminData.dataList.length }}項產品</p>
     <button
       type="button"
-      class="py-2 px-4 text-primary-500 hover:text-primary-50 hover:bg-primary-600
-        rounded border border-primary-500 hover:shadow
-        hover:shadow-primary-400 transition duration-200"
+      class="font-normal btn btn-xs sm:btn-sm md:btn-md transition duration-200"
       @click="openModal('productCreate', tempProduct)"
     >
       新增品項

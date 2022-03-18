@@ -30,6 +30,7 @@ export default {
         origin_price: 0,
         price: 0,
         unit: '',
+        recommend: false,
         description: '',
         content: '',
         is_enabled: '',
@@ -92,7 +93,7 @@ export default {
       :close-modal="handleOpenModal"
     />
     <form class="container p-4 space-y-4" @submit.prevent="handleProductAddition">
-      <div class="flex flex-wrap space-between">
+      <div class="flex flex-wrap justify-between">
         <div class="flex gap-4 justify-between">
           <div class="flex-auto">
             <div class="flex gap-2 justify-between">
@@ -205,16 +206,17 @@ export default {
               </select>
           </div>
           <div class="flex-auto">
-            <label for="productRating" class="block mb-4"
-              >產品星級</label>
-              <select class="w-full rounded" id="productRating"
-              required v-model="productData.rating">
-                <option v-for="star in 5"
-                :value="star"
-                :key="star + new Date()">
-                  {{ star }}星
-                </option>
-              </select>
+            <label for="productRecommend" class="block mb-4"
+              >產品是否於首頁推薦</label>
+            <label for="productRecommend" class="flex relative items-center mb-4 cursor-pointer">
+              <input type="checkbox" id="productRecommend"
+              class="sr-only" v-model="productData.recommend">
+              <div class="w-11 h-6 bg-secondary-200
+              rounded-full border-2 border-secondary-200"></div>
+              <span class="ml-3 text-sm font-medium text-secondary-900">
+                <!-- {{ couponData?.is_enabled === 1 ? '啟用' : '未啟用' }} -->
+              </span>
+            </label>
           </div>
         </div>
       </div>

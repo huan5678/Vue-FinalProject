@@ -113,14 +113,15 @@ export default {
         <tr>
           <td colSpan="3" class="py-5">
             <button
-              class="py-2 px-5 hover:text-white hover:bg-black rounded border border-black
+              class="py-2 px-5 hover:text-secondary-100 hover:bg-secondary-700
+              rounded border border-secondary-700
               hover:border-transparent transition duration-300 ease-in-out"
               @click="handleClearCart"
               v-if="cartList.length > 0"
             >
               刪除全部品項
             </button>
-            <p v-else class="pt-3 pl-12 text-left text-primary">您的購物車是空的</p>
+            <p v-else class="pt-3 pl-12 text-left text-primary-500">您的購物車是空的</p>
           </td>
           <td class="text-center" v-show="cartList.length > 0">
             <span class="block text-sm line-through">原始總金額</span>

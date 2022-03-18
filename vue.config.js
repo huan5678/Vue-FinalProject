@@ -9,7 +9,7 @@ module.exports = {
   pluginOptions: {
     svgSpriteLoader: {
       // directory
-      dir: path.resolve(__dirname, 'src/assets/svg'),
+      dir: resolve('src/assets/svg'),
       // test rule
       test: /\.svg$/,
       // https://github.com/JetBrains/svg-sprite-loader#configuration

@@ -5,12 +5,14 @@ export default {
   setup() {
     const email = ref('');
     const handleSubscribed = function (emailSet) {
-      let subscribedEmailArr = [];
-      subscribedEmailArr = JSON.parse(localStorage.getItem('subscribedEmail')) || [];
-      if (subscribedEmailArr.findIndex(emailSet) === -1) {
-        subscribedEmailArr.push(emailSet);
-        localStorage.setItem('subscribedEmail', JSON.stringify(subscribedEmailArr));
-        email.value = '';
+      if (email.value !== undefined || email.value !== '') {
+        let subscribedEmailArr = [];
+        subscribedEmailArr = JSON.parse(localStorage.getItem('subscribedEmail')) || [];
+        if (subscribedEmailArr.findIndex(emailSet) === -1) {
+          subscribedEmailArr.push(emailSet);
+          localStorage.setItem('subscribedEmail', JSON.stringify(subscribedEmailArr));
+          email.value = '';
+        }
       }
     };
     return {
@@ -23,7 +25,7 @@ export default {
 
 <template>
     <aside class="p-12 bg-secondary-200 sm:p-16 lg:p-24">
-      <div class="max-w-xl mx-auto text-center">
+      <div class="mx-auto max-w-xl text-center">
         <p class="rfs:text-lg font-normal text-secondary-400">
           不要錯過第一手最新消息
         </p>
@@ -38,20 +40,18 @@ export default {
             <input
               type="email"
               placeholder="請輸入電子郵件信箱"
-              class="form-control w-full p-3 border-2 border-gray-700 rounded-lg"
+              class="p-3 w-full border-gray-700 form-control"
               v-model="email"
             />
           </div>
-
           <button
             type="submit"
-            class="flex items-center justify-between w-full px-5 py-3 mt-4
-            font-medium text-white bg-primary-600 rounded-lg
-            sm:w-auto sm:mt-0 sm:ml-4 hover:bg-primary-500"
+            class="w-full btn gap-1 border-0
+            font-normal text-white bg-primary-600 hover:bg-primary-500
+            sm:mt-0 sm:ml-4 sm:w-auto py-2 px-5 mt-4"
           >
             訂閱電子報
-
-            <i class="bi bi-envelope-plus text-2xl ml-3"></i>
+            <i class="ml-3 text-2xl bi bi-envelope-plus"></i>
           </button>
         </form>
       </div>

@@ -5,8 +5,8 @@
     <span class="
     absolute top-0 left-0
     font-thin text-center text-primary-500
-    -translate-y-[150%] -translate-x-1/2
-    animate-pulse
+    animate-pulse -translate-x-1/2
+    -translate-y-[150%]
     ">scroll</span>
   </div>
 </template>

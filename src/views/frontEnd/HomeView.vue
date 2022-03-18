@@ -6,12 +6,14 @@ import TheHero from '@/components/TheHero.vue';
 import TheContact from '@/components/TheContact.vue';
 import TheFeatures from '@/components/TheFeatures.vue';
 import WarningSign from '@/components/WarningSign.vue';
+import TheCart from '@/components/TheCart.vue';
 
 export default {
   components: {
     TheHero,
     TheContact,
     TheFeatures,
+    TheCart,
     WarningSign,
   },
   setup() {
@@ -30,5 +32,6 @@ export default {
   <TheHero />
   <TheFeatures />
   <TheContact />
+  <TheCart />
   <WarningSign />
 </template>

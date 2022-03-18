@@ -4,12 +4,8 @@ import {
 } from 'vue';
 import { useRouter } from 'vue-router';
 import useStore from '@/stores';
-import AlertModal from '@/components/AlertModal.vue';
 
 export default {
-  components: {
-    AlertModal,
-  },
   setup() {
     const baseUrl = process.env.VUE_APP_API_URL;
     const axios = inject('axios');
@@ -54,7 +50,7 @@ export default {
         });
     }
 
-    const cancel = function () {
+    const handleCloseModal = function () {
       openModal.value = false;
     };
 
@@ -76,7 +72,7 @@ export default {
       userPassword,
       handlerSubmit,
       openModal,
-      cancel,
+      handleCloseModal,
       modalMessage,
     };
   },
@@ -126,7 +122,7 @@ export default {
         </button>
       </form>
     </div>
-    <AlertModal v-model="openModal" @cancel="cancel">
+    <AlertModal v-model="openModal" @handleCloseModal="handleCloseModal">
       <template v-slot:title>{{ modalMessage.title }}</template>
       <p class="mb-2 text-center">{{ modalMessage.message }}</p>
       <p>{{ modalMessage.detail }}</p>

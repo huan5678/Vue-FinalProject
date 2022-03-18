@@ -27,7 +27,7 @@ export default {
       scroll.value = (window.scrollY > 0);
     });
 
-    const animationCtrl = function (img) {
+    const handleAnimateCtrl = function (img) {
       return {
         backgroundImage: `url(${img})`,
         animationDuration: `${animationDuration}s`,
@@ -46,7 +46,7 @@ export default {
     return {
       Banners,
       scroll,
-      animationCtrl,
+      handleAnimateCtrl,
       active,
       preActive,
       handleGoProducts,
@@ -58,24 +58,24 @@ export default {
 <template>
   <section class="overflow-hidden relative min-h-[90vh] bg-secondary-900">
     <div class="before:block absolute before:absolute
-    w-full before:w-full
-    h-full before:h-full before:bg-secondary-900/60
+    w-full before:w-full h-full before:h-full
+    before:bg-gradient-to-b from-secondary-900/50 to-secondary-900/90
     bg-center bg-no-repeat opacity-0
     "
     v-for="(img, idx) in Banners" :key="img"
     :class="{ heroAnimate: active === idx || preActive === idx-1 }"
-    :style="animationCtrl(img, idx)" />
+    :style="handleAnimateCtrl(img)" />
     <div class="container flex relative flex-col justify-center items-center h-[90vh]">
       <SvgLoader name="bannerLogo"
       class="
       text-primary-500 scale-50 md:scale-75
       lg:scale-110" />
-      <h1 class="p-2 pt-7 mb-9 rfs:text-5xl font-extralight tracking-[.5rem] text-primary-500">
+      <h1 class="p-2 pt-7 mb-9 rfs:text-5xl font-extralight tracking-[.5rem] text-primary-400">
         喝酒是一種生活的態度
       </h1>
       <button type="button"
       class="py-4 px-8 text-lg font-thin text-primary-300
-      hover:text-secondary-800 hover:bg-primary-400 rounded border border-primary-300
+      hover:text-secondary-800 hover:bg-primary-400 border border-primary-300
       transition-all duration-300"
       @click="handleGoProducts">發現更多美好</button>
       <div

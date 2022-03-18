@@ -72,7 +72,7 @@ export default {
                   v-show="products.rating > idx"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
-                  class="w-6 h-6 text-warning-500"
+                  class="w-6 h-6 text-primary-500"
                   viewBox="0 0 16 16"
                 >
                   <path
@@ -123,17 +123,17 @@ export default {
               </select>
               <button
                 class="flex justify-center items-center py-3 w-full rounded
-                border transition duration-300 border-danger-700"
+                border transition duration-300 border-secondary-700"
                 @click="handleUpdateCart(products.id, qty)"
                 :disabled="qty === 0"
                 :class="
                   qty === 0
-                    ? 'bg-danger-700 text-gray-50 opacity-40 cursor-not-allowed'
-                    : 'bg-danger-500 text-gray-50 hover:bg-danger-700'
+                    ? 'bg-secondary-700 text-gray-50 opacity-40 cursor-not-allowed'
+                    : 'bg-secondary-500 text-gray-50 hover:bg-secondary-700'
                 "
               >
                 <svg
-                  class="mr-3 -ml-1 w-5 h-5 animate-spin text-danger-50"
+                  class="mr-3 -ml-1 w-5 h-5 animate-spin text-primary-50"
                   :class="isLoading === products.id ? '' : 'hidden'"
                   :disabled="isLoading === products.id"
                   xmlns="http://www.w3.org/2000/svg"
