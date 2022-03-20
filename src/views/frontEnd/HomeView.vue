@@ -6,24 +6,22 @@ import TheHero from '@/components/TheHero.vue';
 import TheContact from '@/components/TheContact.vue';
 import TheFeatures from '@/components/TheFeatures.vue';
 import WarningSign from '@/components/WarningSign.vue';
-import TheCart from '@/components/TheCart.vue';
+import TheRecommend from '@/components/TheRecommend.vue';
 
 export default {
   components: {
     TheHero,
     TheContact,
     TheFeatures,
-    TheCart,
     WarningSign,
+    TheRecommend,
   },
   setup() {
     // const router = useRouter();
-
     // const {  } = useStore();
 
     onMounted(() => {});
     return {
-
     };
   },
 };
@@ -31,7 +29,7 @@ export default {
 <template>
   <TheHero />
   <TheFeatures />
+  <TheRecommend />
   <TheContact />
-  <TheCart />
   <WarningSign />
 </template>

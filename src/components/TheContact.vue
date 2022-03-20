@@ -24,7 +24,7 @@ export default {
 </script>
 
 <template>
-    <aside class="p-12 bg-secondary-200 sm:p-16 lg:p-24">
+    <aside class="p-12 bg-secondary-100 sm:p-16 lg:p-24">
       <div class="mx-auto max-w-xl text-center">
         <p class="rfs:text-lg font-normal text-secondary-400">
           不要錯過第一手最新消息
@@ -47,7 +47,7 @@ export default {
           <button
             type="submit"
             class="w-full btn gap-1 border-0
-            font-normal text-white bg-primary-600 hover:bg-primary-500
+            font-normal text-white bg-primary-500 hover:bg-primary-500/80
             sm:mt-0 sm:ml-4 sm:w-auto py-2 px-5 mt-4"
           >
             訂閱電子報

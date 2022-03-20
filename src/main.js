@@ -8,6 +8,7 @@ import App from '@/App.vue';
 import router from '@/router';
 import svgLoader from '@/components/SvgLoader.vue';
 import AlertModal from '@/components/AlertModal.vue';
+import AppTitle from '@/utils/AppTitle.vue';
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './style.scss';
@@ -27,5 +28,6 @@ requireAll(req);
 
 app.component('SvgLoader', svgLoader);
 app.component('AlertModal', AlertModal);
+app.component('AppTitle', AppTitle);
 
 app.mount('#app');

@@ -8,10 +8,11 @@ import {
 } from 'vue';
 
 import useStore from '@/stores';
-import AppLink from './AppLink.vue';
+import AppLink from '@/utils/AppLink.vue';
+import TheCart from '@/components/TheCart.vue';
 
 export default {
-  components: { AppLink },
+  components: { AppLink, TheCart },
   setup() {
     const route = useRoute();
     const { adminStore, cartStore } = useStore();
@@ -21,12 +22,40 @@ export default {
       handleGetCart,
     } = cartStore;
     const router = useRouter();
-    const isOpenCart = ref(false);
+    const openCart = ref(false);
 
     function handleIsLogout() {
       handleClearToken();
       handleSetLogout();
       router.push('/');
+    }
+
+    function checkoutHandler(boolean) {
+      const checkout = document.getElementById('checkout');
+      const checdiv = document.getElementById('chec-div');
+      const vfmContainer = document.querySelector('.vfm__content');
+      if (!boolean) {
+        checkout.classList.add('translate-x-full');
+        checkout.classList.remove('translate-x-0');
+        setTimeout(() => {
+          checdiv.classList.add('opacity-0');
+          vfmContainer.classList.add('hidden');
+        }, 300);
+        cartData.isOpenCart = boolean;
+      } else {
+        setTimeout(() => {
+          checkout.classList.remove('translate-x-full');
+          checkout.classList.add('translate-x-0');
+          checdiv.classList.add('opacity-100');
+          vfmContainer.classList.remove('hidden');
+        }, 300);
+        cartData.isOpenCart = !boolean;
+      }
+    }
+
+    function handleCart(boolean) {
+      checkoutHandler(boolean);
+      openCart.value = boolean;
     }
 
     watch(
@@ -44,17 +73,18 @@ export default {
       route,
       handleIsLogout,
       cartList: computed(() => cartData.list),
-      isOpenCart,
+      openCart,
+      handleCart,
     };
   },
 };
 </script>
 <template>
   <section class="bg-secondary-900">
-    <nav class="container flex justify-between p-3">
+    <nav class="container flex justify-between items-center p-3">
       <a href="/">
         <SvgLoader name="bannerLogo"
-          class="w-36 h-12 text-primary-500" />
+          class="w-full h-9 text-primary-500" />
         <h2 class="hidden text-primary-500">ChillBar秋吧</h2>
       </a>
       <ul class="flex gap-4 justify-between items-center" v-if="route.name !== 'product-detail'">
@@ -62,16 +92,17 @@ export default {
           <AppLink to="product"> 產品列表 </AppLink>
         </li>
         <li>
-          <AppLink to="admin"> 後台管理 </AppLink>
+          <AppLink to="about"> 關於我們 </AppLink>
         </li>
-        <li class="indicator">
-          <span class="indicator-item indicator-middle indicator-end badge
+        <li class="relative">
+          <span class="badge absolute top-0 right-0
           rfs:text-xs text-primary-50 bg-primary-500
           " v-show="cartList.length > 0">{{ cartList.length }}</span>
-          <label for="openCart" class="drawer-button btn btn-md btn-ghost">
+          <button class="btn btn-md btn-ghost" type="button"
+          @click="handleCart(true)" @keydown="true">
             <i class="bi bi-bag-heart text-secondary-300 text-xl">
             </i>
-          </label>
+          </button>
         </li>
         <!-- <li>
           <AppLink to="http://google.com">Google</AppLink>
@@ -90,22 +121,5 @@ export default {
       </div>
     </nav>
   </section>
-  <Teleport to="#app">
-    <div class="drawer absolute h-screen w-full">
-      <div class="drawer-content">
-        <label for="openCart"></label>
-        <input id="openCart" type="checkbox" v-model="isOpenCart" class="drawer-toggle">
-        <div class="drawer drawer-end">
-          <div class="drawer-side">
-            <label for="openCart" class="drawer-overlay"></label>
-            <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-              <!-- Sidebar content here -->
-              <li><a>Sidebar Item 1</a></li>
-              <li><a>Sidebar Item 2</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Teleport>
+  <TheCart v-model="openCart" @handleCart="handleCart" :handle="handleCart" />
 </template>

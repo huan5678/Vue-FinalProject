@@ -5,7 +5,7 @@ import {
 import { useRoute } from 'vue-router';
 
 import useStore from '@/stores';
-import AppLink from '@/components/AppLink.vue';
+import AppLink from '@/utils/AppLink.vue';
 
 export default {
   components: { AppLink },

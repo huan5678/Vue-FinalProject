@@ -38,6 +38,14 @@ const routes = [
           title: 'ChillBar秋吧 - 管理者登入',
         },
       },
+      {
+        path: 'about',
+        name: 'about',
+        component: () => import('@/views/frontEnd/AboutUsView.vue'),
+        meta: {
+          title: 'ChillBar秋吧 - 關於我們',
+        },
+      },
     ],
   },
   {

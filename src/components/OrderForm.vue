@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 import { Form } from 'vee-validate';
 import * as Yup from 'yup';
 import useStore from '@/stores';
-import InputField from './InputField.vue';
+import InputField from '@/utils/InputField.vue';
 
 export default {
   components: {

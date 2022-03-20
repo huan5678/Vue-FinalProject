@@ -11,12 +11,14 @@ export const useCartStore = defineStore('cart', () => {
     list: [],
     totalPrice: 0,
     finalPrice: 0,
+    isOpenCart: false,
   });
 
   const isLoading = ref('');
 
   function handleGetCart() {
-    axios.get(`${baseUrl}api/${apiPath}/cart`)
+    axios
+      .get(`${baseUrl}api/${apiPath}/cart`)
       .then((res) => {
         // console.log(res.data);
         cartData.list = res.data.data.carts;
@@ -30,12 +32,13 @@ export const useCartStore = defineStore('cart', () => {
 
   function handleAddCart(id, qty = 1) {
     isLoading.value = id;
-    axios.post(`${baseUrl}api/${apiPath}/cart`, {
-      data: {
-        product_id: id,
-        qty,
-      },
-    })
+    axios
+      .post(`${baseUrl}api/${apiPath}/cart`, {
+        data: {
+          product_id: id,
+          qty,
+        },
+      })
       .then((res) => {
         // console.log(res.data);
         cartData.data = res.data.data;
@@ -51,7 +54,8 @@ export const useCartStore = defineStore('cart', () => {
 
   function handleDeleteCart(id) {
     isLoading.value = id;
-    axios.delete(`${baseUrl}api/${apiPath}/cart/${id}`)
+    axios
+      .delete(`${baseUrl}api/${apiPath}/cart/${id}`)
       .then((res) => {
         // console.log(res.data);
         cartData.message = res.data.message;
@@ -66,14 +70,13 @@ export const useCartStore = defineStore('cart', () => {
 
   function handleUpdateCart(id, qty) {
     isLoading.value = id;
-    axios.put(`${baseUrl}api/${apiPath}/cart/${id}`, {
-      data: {
+    axios
+      .put(`${baseUrl}api/${apiPath}/cart/${id}`, {
         data: {
           product_id: id,
           qty,
         },
-      },
-    })
+      })
       .then((res) => {
         // console.log(res.data);
         cartData.message = res.data.message;
@@ -87,7 +90,8 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   function handleClearCart() {
-    axios.delete(`${baseUrl}api/${apiPath}/carts`)
+    axios
+      .delete(`${baseUrl}api/${apiPath}/carts`)
       .then((res) => {
         // console.log(res.data);
         cartData.message = res.data.message;

@@ -61,14 +61,16 @@ export default {
 
 <template>
   <section class="container py-9">
-    <h2 class="rfs:text-5xl font-light text-center
-    pb-4 mb-12 border-b md:w-1/2 mx-auto">六大基酒</h2>
-    <a href="#" class="group">
-      <div class="flex justify-between overflow-hidden
-      odd:flex-row-reverse flex-wrap md:flex-nowrap
+    <AppTitle level="2" class="mb-12">
+      六大基酒
+    </AppTitle>
+    <ul class="group">
+      <li class="flex justify-between overflow-hidden
+      odd:flex-row-reverse flex-wrap md:flex-nowrap cursor-pointer
+      odd:text-right
       bg-secondary-100/20 odd:bg-secondary-50/10 border-b"
       :class="{
-        'group-hover:bg-secondary-100/70': isHovering === idx
+        'group-hover:bg-secondary-100/40': isHovering === idx
       }"
       @mouseover="isHovering = idx"
       @mouseout="isHovering = null"
@@ -76,9 +78,9 @@ export default {
       @blur="isHovering"
       v-for="(item, idx) in data" :key="item.title"
       >
-        <div class="z-20 py-12 px-4 w-full order-1 md:order-none
-        md:w-1/2 sm:px-6 lg:py-16 lg:px-8 text-left">
-            <h2 class="mb-4 font-normal text-primary-500/70
+        <article class="py-12 px-4 w-full order-1 md:order-none
+        md:w-1/2 sm:px-6 lg:py-16 lg:px-8">
+            <h2 class="mb-4 font-medium text-primary-500/70
             rfs:text-3xl transition duration-150 ease-in-out"
             :class="{
               'group-hover:text-primary-500': isHovering === idx
@@ -110,12 +112,18 @@ export default {
                     </button>
                 </div>
             </div>
-        </div>
+        </article>
         <img :src="item.imageUrl" :alt="item.title"
+        :class=
+        "{
+          'saturate-[.3]' : isHovering !== idx,
+          'saturate-[.9]' : isHovering === idx,
+        }"
         class="aspect-video md:aspect-square object-cover object-center
+        transition-all duration-150
         md:max-w-[24rem] md:h-full"/>
-      </div>
-    </a>
+      </li>
+    </ul>
   </section>
 </template>
 <style scoped>
