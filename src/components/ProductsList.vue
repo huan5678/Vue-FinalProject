@@ -12,16 +12,17 @@ export default {
     const {
       productList, handleGetProductList, productCategory, handleGetProductAll, isLoading,
     } = productStore;
-    const selectCategory = ref('');
+    const selectCategory = ref('All');
     onMounted(() => {
       handleGetProductAll();
     });
 
-    function handleCategoryChange() {
-      if (selectCategory.value === 'All') {
+    function handleCategoryChange(value) {
+      selectCategory.value = value;
+      if (value === 'All') {
         handleGetProductAll();
       } else {
-        handleGetProductList(selectCategory.value);
+        handleGetProductList(value);
       }
     }
 
@@ -37,23 +38,27 @@ export default {
 </script>
 
 <template>
-  <section class="container mb-14">
-    <div class="flex gap-2 items-center mb-6">
-      <label for="category" class="text-xl">選擇分類項目</label>
-      <select
-        id="category"
-        class="py-2 rounded border"
-        @change="handleCategoryChange"
-        defaultValue="All"
-        v-model="selectCategory"
-      >
-        <option value="" selected disabled>請選擇</option>
-        <option value="All">全部</option>
-        <option v-for="category in productCategory" :key="category" :value="category">
-          {{ category }}
-        </option>
-      </select>
-
+  <section class="container py-6">
+    <AppTitle level="1" class="mb-6">
+      產品列表
+    </AppTitle>
+    <div class="flex justify-start items-center mb-6">
+      <div class="tabs">
+        <a class="tab tab-lifted transition-all duration-500
+        "
+        :class="{
+          'hover:border-primary-600': selectCategory !== category.category,
+          'hover:text-primary-500': selectCategory !== category.category,
+          'tab-active': selectCategory === category.category,
+          'text-primary-600 hover:text-primary-500': selectCategory === category.category,
+        }"
+        @click="handleCategoryChange(category.category)"
+        @keydown="category"
+        v-for="category in productCategory"
+        :key="category.title">
+          {{ category.title }}
+        </a>
+      </div>
     </div>
     <ul class="grid grid-cols-4 gap-4">
       <li

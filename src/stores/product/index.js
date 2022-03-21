@@ -12,18 +12,48 @@ export const useProductStore = defineStore('product', () => {
     productDetail: {},
   });
   const isLoading = ref('');
-  const productCategory = ref([]);
+  const productCategory = ref([
+    {
+      title: '全品項',
+      category: 'All',
+    },
+    {
+      title: '伏特加',
+      category: 'vodka',
+    },
+    {
+      title: '琴酒',
+      category: 'gin',
+    },
+    {
+      title: '威士忌',
+      category: 'whisky',
+    },
+    {
+      title: '龍舌蘭',
+      category: 'tequila',
+    },
+    {
+      title: '蘭姆酒',
+      category: 'rum',
+    },
+    {
+      title: '白蘭地',
+      category: 'brandy',
+    },
+  ]);
 
   function handleGetProductAll() {
-    axios.get(`${baseUrl}api/${apiPath}/products/all`)
+    axios
+      .get(`${baseUrl}api/${apiPath}/products/all`)
       .then((res) => {
         // console.log(res.data);
         productList.products = res.data.products;
-        res.data.products.forEach((product) => {
-          if (!productCategory.value.includes(product.category)) {
-            productCategory.value.push(product.category);
-          }
-        });
+        // res.data.products.forEach((product) => {
+        //   if (!productCategory.value.includes(product.category)) {
+        //     productCategory.value.push(product.category);
+        //   }
+        // });
       })
       .catch((err) => {
         console.dir(err);
@@ -36,7 +66,8 @@ export const useProductStore = defineStore('product', () => {
       selectCategory = '';
     }
     console.log(selectCategory);
-    axios.get(`${baseUrl}api/${apiPath}/products?page=${page}&category=${selectCategory}`)
+    axios
+      .get(`${baseUrl}api/${apiPath}/products?page=${page}&category=${selectCategory}`)
       .then((res) => {
         // console.log(res.data);
         productList.products = res.data.products;

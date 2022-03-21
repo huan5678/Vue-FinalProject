@@ -87,14 +87,15 @@ export default {
           class="w-full h-9 text-primary-500" />
         <h2 class="hidden text-primary-500">ChillBar秋吧</h2>
       </a>
-      <ul class="flex gap-4 justify-between items-center" v-if="route.name !== 'product-detail'">
-        <li>
+      <ul class="flex gap-4 justify-between items-center"
+      v-if="route.name !== 'product-detail'">
+        <li v-if="route.name !== 'dashboard'">
           <AppLink to="product"> 產品列表 </AppLink>
         </li>
-        <li>
+        <li v-if="route.name !== 'dashboard'">
           <AppLink to="about"> 關於我們 </AppLink>
         </li>
-        <li class="relative">
+        <li class="relative" v-if="route.name !== 'dashboard'">
           <span class="badge absolute top-0 right-0
           rfs:text-xs text-primary-50 bg-primary-500
           " v-show="cartList.length > 0">{{ cartList.length }}</span>

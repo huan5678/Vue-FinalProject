@@ -1,6 +1,11 @@
 <script>
-import { onMounted, computed, toRef } from 'vue';
-import { useRouter } from 'vue-router';
+import {
+  onBeforeMount,
+  onMounted,
+  computed,
+  toRef,
+  inject,
+} from 'vue';
 import { $vfm } from 'vue-final-modal';
 
 import useStore from '@/stores';
@@ -30,24 +35,60 @@ export default {
   },
   setup() {
     const { adminStore, adminDataStore } = useStore();
-    const { handleCheckUser, handleGetToken } = adminStore;
+    const { handleCheckUser, handleGetToken, isLoggedIn } = adminStore;
     const { functionSelected, adminData } = adminDataStore;
-
-    const router = useRouter();
 
     function handleOpenModal(boolean = true) {
       adminData.isOpenModal = boolean;
       $vfm.show('adminModal');
     }
 
+    const Swal = inject('$swal');
+
+    function handleSweetAlert() {
+      Swal.fire({
+        toast: true,
+        position: 'top-end',
+        title: 'Error!',
+        showConfirmButton: false,
+        timer: 3000,
+        text: 'Do you want to continue',
+        icon: 'success',
+        iconColor: 'black',
+        showClass: {
+          popup: 'animate__animated animate__fadeInRight animate__faster',
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutRight animate__faster',
+        },
+      });
+    }
+
     const isOpenModal = toRef(adminData, 'isOpenModal');
 
-    onMounted(() => {
+    onBeforeMount(() => {
       handleGetToken();
-      if (!handleCheckUser()) {
-        router.push('/admin');
-      } else {
-        router.push('/login');
+      handleCheckUser();
+    });
+
+    onMounted(() => {
+      if (isLoggedIn) {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          title: '您已成功登入',
+          icon: 'success',
+          iconColor: '#f59f13',
+          showClass: {
+            popup: 'animate__animated animate__fadeInRight animate__faster',
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutRight animate__faster',
+          },
+        });
       }
     });
 
@@ -55,6 +96,7 @@ export default {
       handleOpenModal,
       isOpenModal,
       modalState: computed(() => functionSelected.selected),
+      handleSweetAlert,
     };
   },
 };
@@ -62,6 +104,7 @@ export default {
 
 <template>
   <main class="bg-gray-100">
+    <button @click="handleSweetAlert" class="btn btn-outline">open sweetalert2</button>
     <div class="container">
       <DashboardTable />
       <vue-final-modal

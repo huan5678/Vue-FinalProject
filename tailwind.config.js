@@ -73,7 +73,7 @@ module.exports = {
     darkTheme: 'dark',
   },
   plugins: [
-    require('@tailwindcss/forms'),
+    // require('@tailwindcss/forms'),
     require('tailwindcss-rfs'),
     require('daisyui'),
     function ({ addComponents }) {

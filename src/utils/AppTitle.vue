@@ -12,7 +12,7 @@ export default defineComponent({
     return h(
       tag,
       {
-        class: `rfs:text-5xl font-medium
+        class: `rfs:text-5xl font-normal
         pb-4 border-b md:w-1/2 mx-auto text-center`,
       },
       this.$slots.default(),

@@ -21,12 +21,12 @@ export default {
           <p class="rfs:text-base text-secondary-300">
             ChillBar COPYRIGHT © 2022
           </p>
-          <a href="admin" class="order-none lg:order-2 mx-auto
+          <router-link to="admin" class="order-none lg:order-2 mx-auto
           btn btn-md font-normal btn-outline rounded-none
           border border-secondary-200 hover:bg-secondary-400
           hover:border-secondary-400 hover:shadow hover:shadow-secondary-500
           text-secondary-300 transition duration-200 ease-in-out
-          tracking-[.1rem] hover:text-secondary-100 ml-auto">後台管理</a>
+          tracking-[.1rem] hover:text-secondary-100 ml-auto">後台管理</router-link>
         </li>
       </ul>
     </nav>

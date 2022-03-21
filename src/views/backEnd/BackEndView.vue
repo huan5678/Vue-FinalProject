@@ -1,25 +1,18 @@
 <script>
 import TheHeader from '@/components/TheHeader.vue';
-import { onBeforeMount, onMounted } from 'vue';
+import { onBeforeMount } from 'vue';
 import useStore from '@/stores';
-import { useRouter } from 'vue-router';
 
 export default {
   name: 'BackEndView',
   components: { TheHeader },
   setup() {
     const { adminStore } = useStore();
-    const { handleCheckUser, handleGetToken, isLoggedIn } = adminStore;
-    const router = useRouter();
+    const { handleCheckUser, handleGetToken } = adminStore;
 
     onBeforeMount(() => {
       handleGetToken();
       handleCheckUser();
-    });
-    onMounted(() => {
-      if (!isLoggedIn) {
-        router.push('/login');
-      }
     });
   },
 };

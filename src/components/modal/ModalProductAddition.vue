@@ -7,10 +7,12 @@ export default {
   components: { ModalCardTitle },
   props: { products: Object },
   setup(props, context) {
-    const { adminDataStore } = useStore();
+    const { adminDataStore, productStore } = useStore();
     const {
       handleEditData, handleCreateData, handleImageUpload, functionSelected, adminData,
     } = adminDataStore;
+
+    const { productCategory } = productStore;
 
     const productData = computed({
       get: () => ({ ...adminData.tempProduct }),
@@ -81,13 +83,14 @@ export default {
       handleRemoveImageArr,
       handleOpenModal: context.attrs.handleOpenModal,
       closeModal,
+      productCategory: computed(() => productCategory),
     };
   },
 };
 </script>
 
 <template>
-  <section class="flex overflow-hidden flex-col pb-4 space-y-4 bg-gray-50 rounded-md">
+  <section class="flex overflow-hidden flex-col pb-4 space-y-4 bg-secondary-50 rounded-md">
     <ModalCardTitle
       :title="selectType === 'productEdit' ? '內容編輯' : '新增產品'"
       :close-modal="handleOpenModal"
@@ -107,7 +110,7 @@ export default {
                     name="productImages"
                     ref="imageFile"
                     class="block file:py-2 file:px-4 file:mr-4 w-full
-                    file:text-sm text-gray-400 file:text-secondary-700
+                    file:text-sm text-secondary-400 file:text-secondary-700
                     file:bg-secondary-100 hover:file:bg-secondary-300 rounded file:rounded-full
                     file:border-0"
                     @change="handleGetImageUrl('mainImage')"
@@ -133,7 +136,7 @@ export default {
                 name="productImages"
                 ref="imageFile"
                 class="block file:py-2 file:px-4 file:mr-4 w-full file:text-sm
-                text-gray-400 file:text-secondary-700 file:bg-secondary-100
+                text-secondary-400 file:text-secondary-700 file:bg-secondary-100
                 hover:file:bg-secondary-300 rounded file:rounded-full file:border-0"
                 @change="handleGetImageUrl()"
               />
@@ -172,7 +175,7 @@ export default {
                 type="text"
                 id="productName"
                 name="productName"
-                class="w-full rounded"
+                class="w-full form-control"
                 v-model="productData.title"
                 required
               />
@@ -184,7 +187,7 @@ export default {
                 type="text"
                 id="productContent"
                 name="productContent"
-                class="w-full rounded"
+                class="w-full form-control"
                 v-model="productData.content"
                 required
               />
@@ -192,31 +195,36 @@ export default {
           <div class="flex-auto">
             <label for="productCategory" class="block mb-4"
               >產品類別</label>
-              <select
-                class="w-full rounded"
+              <input type="text"
+              v-model="productData.category"
+              class="w-full form-control"
+              required
+              list="productCategory">
+              <datalist
+                class=""
                 id="productCategory"
-                required
-                v-model="productData.category"
               >
-                <option value="測試分類">測試分類</option>
-                <option value="上衣類">上衣類</option>
-                <option value="褲類">褲類</option>
-                <option value="裙類">裙類</option>
-                <option value="鞋類">鞋類</option>
-              </select>
+                <template
+                v-for="category in productCategory"
+                :key="category.title"
+                >
+                  <option
+                  :class="{'line-through': category.category === 'All'}"
+                  :disabled="category.category === 'All'"
+                  :value="category.category">
+                    {{ category.title }}
+                  </option>
+                </template>
+              </datalist>
           </div>
           <div class="flex-auto">
             <label for="productRecommend" class="block mb-4"
               >產品是否於首頁推薦</label>
-            <label for="productRecommend" class="flex relative items-center mb-4 cursor-pointer">
               <input type="checkbox" id="productRecommend"
-              class="sr-only" v-model="productData.recommend">
-              <div class="w-11 h-6 bg-secondary-200
-              rounded-full border-2 border-secondary-200"></div>
+              class="toggle" v-model="productData.recommend">
               <span class="ml-3 text-sm font-medium text-secondary-900">
                 <!-- {{ couponData?.is_enabled === 1 ? '啟用' : '未啟用' }} -->
               </span>
-            </label>
           </div>
         </div>
       </div>
@@ -226,7 +234,7 @@ export default {
           <textarea
             id="productDescription"
             name="productDescription"
-            class="w-full rounded"
+            class="w-full form-control"
             v-model="productData.description"
           />
       </div>
@@ -235,7 +243,7 @@ export default {
           <label for="productIsEnable" class="block mb-4"
             >產品啟用狀態</label>
             <select
-              class="w-full rounded"
+              class="w-full form-control"
               id="productIsEnable"
               required
               v-model="productData.is_enabled"
@@ -253,7 +261,7 @@ export default {
               type="text"
               id="productOriginPrice"
               name="productOriginPrice"
-              class="w-full rounded"
+              class="w-full form-control"
               v-model.number="productData.origin_price"
             />
         </div>
@@ -264,7 +272,7 @@ export default {
               type="text"
               id="productPrice"
               name="productPrice"
-              class="w-full rounded"
+              class="w-full form-control"
               required
               v-model.number="productData.price"
             />
@@ -276,23 +284,28 @@ export default {
               type="text"
               id="productUnit"
               name="productUnit"
-              class="w-full rounded"
+              class="w-full form-control"
               v-model="productData.unit"
             />
         </div>
       </div>
       <div class="flex gap-4 justify-between">
         <button
-          class="flex-auto py-2 text-white bg-gray-500 hover:bg-gray-600 rounded-md hover:shadow
-          hover:shadow-gray-400 transition duration-300"
+          class="flex-auto btn
+          bg-secondary-500 hover:bg-secondary-600
+          hover:shadow hover:shadow-secondary-400
+          hover:border-secondary-400 border-secondary-500
+          transition duration-300"
           @click="handleResetFormInput()"
           type="reset"
         >
           {{ selectType === 'productEdit' ? '取消修改' : '取消新增' }}
         </button>
         <button
-          class="flex-auto py-2 text-white bg-primary-500 hover:bg-primary-600
-          rounded-md hover:shadow hover:shadow-primary-400
+          class="flex-auto btn
+          bg-primary-500 hover:bg-primary-600
+          hover:shadow hover:shadow-primary-400
+          border-primary-500 hover:border-primary-600
           transition duration-300"
           type="submit"
         >

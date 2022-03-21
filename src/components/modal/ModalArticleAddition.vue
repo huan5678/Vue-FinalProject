@@ -1,5 +1,6 @@
 <script>
 import { computed, ref } from 'vue';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import useStore from '@/stores';
 import ModalCardTitle from './ModalCardTitle.vue';
 
@@ -107,6 +108,12 @@ export default {
       handleGetImageUrl,
       handleOpenModal: context.attrs.handleOpenModal,
       closeModal,
+      editor: ClassicEditor,
+      editorData: '<p>Content of the editor.</p>',
+      editorConfig: {
+        placeholder: '請輸入文章...',
+        language: 'zh',
+      },
     };
   },
 };
@@ -184,12 +191,12 @@ export default {
         <div class="flex-auto w-full">
           <label for="articleContent" class="block mb-4"
             >文章內容</label>
-          <textarea
-            id="articleContent"
-            name="articleContent"
-            class="w-full rounded"
-            v-model="articleData.content"
-          />
+          <ckeditor id="articleContent"
+          name="articleContent"
+          :editor="editor"
+          v-model="articleData.content"
+          :config="editorConfig"
+          ></ckeditor>
         </div>
         <div class="flex-auto w-1/4">
           <h3 class="block mb-4">文章是否公開</h3>
