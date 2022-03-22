@@ -175,7 +175,7 @@ export default {
                 type="text"
                 id="productName"
                 name="productName"
-                class="w-full form-control"
+                class="w-full form-style"
                 v-model="productData.title"
                 required
               />
@@ -187,7 +187,7 @@ export default {
                 type="text"
                 id="productContent"
                 name="productContent"
-                class="w-full form-control"
+                class="w-full form-style"
                 v-model="productData.content"
                 required
               />
@@ -197,7 +197,7 @@ export default {
               >產品類別</label>
               <input type="text"
               v-model="productData.category"
-              class="w-full form-control"
+              class="w-full form-style"
               required
               list="productCategory">
               <datalist
@@ -234,7 +234,7 @@ export default {
           <textarea
             id="productDescription"
             name="productDescription"
-            class="w-full form-control"
+            class="w-full form-style"
             v-model="productData.description"
           />
       </div>
@@ -243,7 +243,7 @@ export default {
           <label for="productIsEnable" class="block mb-4"
             >產品啟用狀態</label>
             <select
-              class="w-full form-control"
+              class="w-full form-style"
               id="productIsEnable"
               required
               v-model="productData.is_enabled"
@@ -261,7 +261,7 @@ export default {
               type="text"
               id="productOriginPrice"
               name="productOriginPrice"
-              class="w-full form-control"
+              class="w-full form-style"
               v-model.number="productData.origin_price"
             />
         </div>
@@ -272,7 +272,7 @@ export default {
               type="text"
               id="productPrice"
               name="productPrice"
-              class="w-full form-control"
+              class="w-full form-style"
               required
               v-model.number="productData.price"
             />
@@ -284,7 +284,7 @@ export default {
               type="text"
               id="productUnit"
               name="productUnit"
-              class="w-full form-control"
+              class="w-full form-style"
               v-model="productData.unit"
             />
         </div>

@@ -22,6 +22,10 @@ export const useAdminDataStore = defineStore('adminData', () => {
     selected: '',
   });
 
+  function handleResetTempProduct() {
+    adminData.tempProduct = {};
+  }
+
   function handleSelectFunction(selected, item) {
     functionSelected.selected = selected;
     adminData.tempProduct = item;
@@ -182,6 +186,7 @@ export const useAdminDataStore = defineStore('adminData', () => {
     handleDeleteData,
     handleImageUpload,
     handleSelectFunction,
+    handleResetTempProduct,
   };
 });
 export default useAdminDataStore;

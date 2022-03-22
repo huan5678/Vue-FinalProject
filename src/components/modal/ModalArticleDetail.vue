@@ -1,5 +1,5 @@
 <script>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import useStore from '@/stores';
 import useHelper from '@/helpers';
 import ModalCardTitle from './ModalCardTitle.vue';
@@ -24,13 +24,20 @@ export default {
       brandy: '白蘭地',
     });
 
+    const date = computed(() => adminData.tempProduct.create_at);
+    const dateTime = ref(null);
+
+    onMounted(() => {
+      dateTime.value = getDate(date.value);
+    });
+
     return {
       selectType: computed(() => functionSelected.selected),
       articleData: computed(() => adminData.tempProduct),
       tagList,
       handleOpenModal: context.attrs.handleOpenModal,
       closeModal,
-      getDate,
+      dateTime,
     };
   },
 };
@@ -63,7 +70,7 @@ export default {
     </div>
     <div class="flex flex-col p-4">
       <h2 class="text-2xl font-medium">文章圖片</h2>
-      <img :src="articleData?.image" :alt="articleDate?.title"
+      <img :src="articleData?.image" :alt="articleData?.title"
       class="object-cover object-center max-h-48">
     </div>
     <div class="flex justify-between p-4">
@@ -88,7 +95,7 @@ export default {
       </div>
       <div class="p-2 divide-y">
         <span class="block text-sm">文章新增日期</span>
-        <h2 class="text-2xl font-medium">{{ getDate(articleData?.created_at) }}</h2>
+        <h2 class="text-2xl font-medium">{{ dateTime }}</h2>
       </div>
     </div>
   </section>
