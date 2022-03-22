@@ -38,8 +38,8 @@ export default {
 
     <button
       aria-label="Close"
-      class="btn btn-sm border-0
-      bg-primary-700/30 hover:bg-primary-900/40 rounded-lg transition"
+      class="bg-primary-700/30 hover:bg-primary-900/40 rounded-lg
+      border-0 transition btn btn-sm"
       @click="handleCloseAlert"
     >
       <i class="rfs:text-base bi bi-x-lg"></i>

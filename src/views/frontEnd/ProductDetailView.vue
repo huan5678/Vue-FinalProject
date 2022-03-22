@@ -123,7 +123,7 @@ export default {
               </select>
               <button
                 class="flex justify-center items-center py-3 w-full rounded
-                border transition duration-300 border-secondary-700"
+                border border-secondary-700 transition duration-300"
                 @click="handleUpdateCart(products.id, qty)"
                 :disabled="qty === 0"
                 :class="
@@ -133,7 +133,7 @@ export default {
                 "
               >
                 <svg
-                  class="mr-3 -ml-1 w-5 h-5 animate-spin text-primary-50"
+                  class="mr-3 -ml-1 w-5 h-5 text-primary-50 animate-spin"
                   :class="isLoading === products.id ? '' : 'hidden'"
                   :disabled="isLoading === products.id"
                   xmlns="http://www.w3.org/2000/svg"

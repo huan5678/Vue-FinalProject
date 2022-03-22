@@ -96,12 +96,12 @@ export default {
           <AppLink to="about"> 關於我們 </AppLink>
         </li>
         <li class="relative" v-if="route.name !== 'dashboard'">
-          <span class="badge absolute top-0 right-0
-          rfs:text-xs text-primary-50 bg-primary-500
+          <span class="absolute top-0 right-0 rfs:text-xs
+          text-primary-50 bg-primary-500 badge
           " v-show="cartList.length > 0">{{ cartList.length }}</span>
           <button class="btn btn-md btn-ghost" type="button"
           @click="handleCart(true)" @keydown="true">
-            <i class="bi bi-bag-heart text-secondary-300 text-xl">
+            <i class="text-xl text-secondary-300 bi bi-bag-heart">
             </i>
           </button>
         </li>
@@ -111,12 +111,12 @@ export default {
       </ul>
       <div class="flex gap-4 justify-center items-center" v-if="route.name === 'dashboard'">
         <button
-          class="font-normal btn btn-xs sm:btn-sm md:btn-md
-          bg-primary-400 hover:bg-primary-600 gap-2
-          transition duration-300 rfs:text-base"
+          class="gap-2 rfs:text-base font-normal bg-primary-400 hover:bg-primary-600
+          transition duration-300 btn
+          btn-xs sm:btn-sm md:btn-md"
           @click="handleIsLogout()"
         >
-          <i class="bi bi-person-circle rfs:text-xl"></i>
+          <i class="rfs:text-xl bi bi-person-circle"></i>
           管理者登出
         </button>
       </div>

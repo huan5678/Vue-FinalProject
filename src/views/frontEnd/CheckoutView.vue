@@ -13,4 +13,3 @@ export default {
 <template>
   <OrderForm />
 </template>
-

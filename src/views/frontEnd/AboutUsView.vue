@@ -1,28 +1,18 @@
 <script>
-import { onMounted } from 'vue';
+import { onMounted, inject, ref } from 'vue';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { Form } from 'vee-validate';
-import * as Yup from 'yup';
 import InputField from '@/utils/InputField.vue';
 import aboutImg01 from '@/assets/aboutImg01.jpg';
 import aboutImg02 from '@/assets/aboutImg02.jpg';
 
 export default {
   components: {
-    Form,
     InputField,
   },
   setup() {
-    const phoneRegex = /09\d{2}-?\d{3}-?\d{3}/;
-    const schema = Yup.object().shape({
-      userName: Yup.string().trim().required('請輸入姓名'),
-      userEmail: Yup.string().trim().email('請輸入正確的Email信箱').required('請輸入Email'),
-      userPhone: Yup.string()
-        .test('phone', '請輸入正確的10碼手機號碼(09...)', (value) => phoneRegex.test(value))
-        .required('請輸入電話號碼'),
-      userMessage: Yup.string().required('請輸入想要告訴我們的內容'),
-    });
+    const vueAxios = inject('axios');
+    const Swal = inject('$swal');
 
     onMounted(() => {
       mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_TOKEN;
@@ -44,28 +34,53 @@ export default {
           .addTo(map);
       });
     });
+
+    const formElement = ref(null);
+
+    function handleSubmit() {
+      const crosUrl = 'https://esc-cros-anywhere.herokuapp.com/';
+      const googleUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSeW8xDki0525stZP18uyb-bgY2Dc0uZpvPk1QjWEKweSQP3CQ/formResponse';
+      const formEl = formElement.value;
+      const formData = new FormData(formEl);
+      vueAxios.post(`${crosUrl + googleUrl}`, formData)
+        .then(() => {
+          Swal.fire({
+            title: '您已成功送出訊息',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            text: '感謝您的支持和厚愛，順頌時祺。',
+            icon: 'success',
+          });
+          formElement.value = null;
+        });
+    }
+
     return {
       aboutImg01,
       aboutImg02,
-      schema,
+      formElement,
+      handleSubmit,
     };
   },
 };
 </script>
 
 <template>
-<section class="py-6 relative min-h-screen bg-secondary-900">
-  <img :src="aboutImg01"
-  class="absolute inset-0 object-cover opacity-50" alt="關於我們" />
+<section class="relative bg-fixed bg-center
+min-h-screen bg-no-repeat bg-cover py-12
+" :style="{backgroundImage: `
+linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${aboutImg01})
+`}">
   <div class="container z-10">
-    <div class="card md:w-[80vw] mx-auto bg-base-100">
+    <div class="mx-auto md:w-[80vw] card bg-base-100">
       <article class="card-body">
         <AppTitle class="mb-6" level="1">
           關於秋吧
         </AppTitle>
-        <div class="flex flex-col md:flex-row justify-between gap-6 mb-2">
-          <div class="space-y-2 mb-6 text-secondary-700 mx-auto order-1 md:order-none">
-            <h2 class="text-center text-2xl">我們的理念</h2>
+        <div class="flex flex-col gap-6 justify-between mb-2 md:flex-row">
+          <div class="order-1 mx-auto mb-6 space-y-2 text-secondary-700 md:order-none">
+            <h2 class="text-2xl text-center">我們的理念</h2>
             <p class="font-light md:max-w-screen-md">
               <span class="block text-center text-primary-500">
                 「
@@ -79,25 +94,30 @@ export default {
               我們致力於打造一個舒適的飲酒場景，<br />
               希望客人在我們店裡只有愜意沒有拘謹。</p>
           </div>
-          <figure class="mx-auto">
-            <img :src="aboutImg02"
-            class="max-w-sm order-0 md:order-none object-cover space-y-2"
-            alt="shop" />
-          </figure>
+          <div class="relative
+          bg-cover space-y-2 max-w-sm h-[15vw] w-[32vw]
+          bg-no-repeat bg-top mx-auto
+          lg:max-w-screen-sm md:order-none order-0"
+          :style="{ backgroundImage: `url(${aboutImg02})` }"
+          >
+          </div>
+
         </div>
-        <div class="flex flex-col md:flex-row justify-between gap-6">
-            <Form
-            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeW8xDki0525stZP18uyb-bgY2Dc0uZpvPk1QjWEKweSQP3CQ/formResponse"
-            class="space-y-2 font-light md:w-2/3 order-1 md:order-none"
-            :validation-schema="schema">
+        <div class="flex flex-col gap-6 justify-between md:flex-row">
+            <form
+            ref="formElement"
+            @submit.prevent="handleSubmit"
+            class="order-1 space-y-2 font-light md:order-none md:w-2/3"
+            >
               <legend>
-                <h3 class="text-center font-normal text-lg">與我們聯繫</h3>
+                <h3 class="text-lg font-normal text-center">與我們聯繫</h3>
               </legend>
               <div class="flex gap-4 justify-between items-start mb-6">
               <InputField
                 name="entry.1098885017"
                 type="text"
                 label="姓名"
+                required
                 placeholder="請輸入姓名"
               />
               <InputField
@@ -105,6 +125,7 @@ export default {
                 type="tel"
                 maxlength="10"
                 label="電話"
+                required
                 placeholder="請輸入電話"
               />
             </div>
@@ -112,6 +133,7 @@ export default {
               name="entry.547693488"
               type="email"
               label="Email"
+              required
               placeholder="請輸入Email"
             />
             <div>
@@ -124,33 +146,35 @@ export default {
                 name="entry.1064200367"
                 class="w-full form-control"
                 rows="4"
+                required
                 placeholder="想要告訴我們什麼？"
               ></textarea>
             </div>
             <button
               type="submit"
-              class="btn rounded text-xl w-full font-normal text-secondary-50
-              border-none bg-secondary-300 hover:bg-primary-700
+              class="w-full text-xl font-normal text-secondary-50
+              bg-secondary-300 hover:bg-primary-700
+              rounded border-none btn
             "
             >
               送出訊息
             </button>
-          </Form>
-          <ul class="space-y-2 w-full flex-auto order-0 md:order-none">
+          </form>
+          <ul class="flex-auto space-y-2 w-full max-w-screen-md md:order-none order-0">
             <li>
-              <h3 class="text-center text-lg">
+              <h3 class="text-lg text-center">
               哪裡可以找到我們
               </h3>
             </li>
-            <li class="font-light text-lg flex justify-between">
+            <li class="flex justify-between text-lg font-light">
               <span class="block">地址 :</span>
               <span class="block">台北市中山區林森北路107巷55號2樓</span>
             </li>
-            <li class="font-light text-lg flex justify-between">
+            <li class="flex justify-between text-lg font-light">
               <span class="block">聯絡電話 :</span>
               <span class="block">0912-345678</span>
             </li>
-            <li id="map" class="w-full h-64"></li>
+            <li id="map" class="h-64 max-w-screen-lg"></li>
           </ul>
         </div>
       </article>

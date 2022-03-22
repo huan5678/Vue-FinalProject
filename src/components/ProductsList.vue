@@ -44,7 +44,7 @@ export default {
     </AppTitle>
     <div class="flex justify-start items-center mb-6">
       <div class="tabs">
-        <a class="tab tab-lifted transition-all duration-500
+        <a class="transition-all duration-500 tab tab-lifted
         "
         :class="{
           'hover:border-primary-600': selectCategory !== category.category,

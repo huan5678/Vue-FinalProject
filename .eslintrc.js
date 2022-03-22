@@ -19,4 +19,11 @@ module.exports = {
     'vuejs-accessibility/label-has-for': 'off',
   },
   plugins: ['vue', 'tailwindcss'],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.vue', '.json'],
+      },
+    },
+  },
 };

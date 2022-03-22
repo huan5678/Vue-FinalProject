@@ -82,10 +82,11 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="text-primary-500 hover:text-primary-50 hover:bg-primary-500
-            font-normal btn btn-outline btn-xs sm:btn-sm md:btn-md
-            hover:shadow hover:border-primary-500
-            hover:shadow-primary-400 transition duration-200"
+            class="font-normal text-primary-500 hover:text-primary-50
+            hover:bg-primary-500 hover:border-primary-500
+            hover:shadow hover:shadow-primary-400 transition duration-200
+            btn btn-outline
+            btn-xs sm:btn-sm md:btn-md"
             @click="openModal('getProductDetail', item)"
           >
             查看細節
@@ -94,10 +95,12 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="text-secondary-400 hover:bg-secondary-500
-            font-normal btn btn-outline btn-xs sm:btn-sm md:btn-md
-            hover:shadow border-secondary-400 hover:border-secondary-500
-            hover:shadow-secondary-400 transition duration-200"
+            class="font-normal text-secondary-400
+            hover:bg-secondary-500 border-secondary-400
+            hover:border-secondary-500
+            hover:shadow hover:shadow-secondary-400
+            transition duration-200 btn btn-outline
+            btn-xs sm:btn-sm md:btn-md"
             @click="openModal('productEdit', item)"
           >
             修改內容
@@ -106,10 +109,11 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="text-red-400 hover:text-white hover:bg-red-500
-            font-normal btn btn-outline btn-xs sm:btn-sm md:btn-md
-            border border-red-300 hover:border-transparent hover:shadow
-            hover:shadow-red-400 transition duration-200"
+            class="font-normal text-red-400 hover:text-white
+            hover:bg-red-500 border border-red-300 hover:border-transparent
+            hover:shadow hover:shadow-red-400
+            transition duration-200 btn btn-outline
+            btn-xs sm:btn-sm md:btn-md"
             @click="openModal('productDelete', item)"
           >
             刪除品項
@@ -122,7 +126,7 @@ export default {
     <p>目前有{{ adminData.dataList.length }}項產品</p>
     <button
       type="button"
-      class="font-normal btn btn-xs sm:btn-sm md:btn-md transition duration-200"
+      class="font-normal transition duration-200 btn btn-xs sm:btn-sm md:btn-md"
       @click="openModal('productCreate', tempProduct)"
     >
       新增品項

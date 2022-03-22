@@ -59,8 +59,8 @@ export default {
   <section class="overflow-hidden relative min-h-[90vh] bg-secondary-900">
     <div class="before:block absolute before:absolute
     w-full before:w-full h-full before:h-full
-    before:bg-gradient-to-b from-secondary-900/50 to-secondary-900/90
-    bg-center bg-no-repeat opacity-0
+    bg-center bg-no-repeat before:bg-gradient-to-b
+    from-secondary-900/50 to-secondary-900/90 opacity-0
     "
     v-for="(img, idx) in Banners" :key="img"
     :class="{ heroAnimate: active === idx || preActive === idx-1 }"

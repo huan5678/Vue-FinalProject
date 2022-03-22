@@ -291,22 +291,22 @@ export default {
       </div>
       <div class="flex gap-4 justify-between">
         <button
-          class="flex-auto btn
-          bg-secondary-500 hover:bg-secondary-600
-          hover:shadow hover:shadow-secondary-400
-          hover:border-secondary-400 border-secondary-500
-          transition duration-300"
+          class="flex-auto bg-secondary-500
+          hover:bg-secondary-600 border-secondary-500
+          hover:border-secondary-400 hover:shadow
+          hover:shadow-secondary-400 transition
+          duration-300 btn"
           @click="handleResetFormInput()"
           type="reset"
         >
           {{ selectType === 'productEdit' ? '取消修改' : '取消新增' }}
         </button>
         <button
-          class="flex-auto btn
-          bg-primary-500 hover:bg-primary-600
-          hover:shadow hover:shadow-primary-400
-          border-primary-500 hover:border-primary-600
-          transition duration-300"
+          class="flex-auto bg-primary-500
+          hover:bg-primary-600 border-primary-500
+          hover:border-primary-600 hover:shadow
+          hover:shadow-primary-400 transition
+          duration-300 btn"
           type="submit"
         >
           {{ selectType === 'productEdit' ? '確定修改' : '新增產品' }}

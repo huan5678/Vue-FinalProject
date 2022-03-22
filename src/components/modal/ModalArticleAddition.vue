@@ -1,11 +1,12 @@
 <script>
 import { computed, ref } from 'vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Form } from 'vee-validate';
 import useStore from '@/stores';
 import ModalCardTitle from './ModalCardTitle.vue';
 
 export default {
-  components: { ModalCardTitle },
+  components: { ModalCardTitle, Form },
   props: { products: Object },
   setup(props, context) {
     const { adminDataStore } = useStore();
@@ -125,7 +126,7 @@ export default {
       :title="selectType === 'articleEdit' ? '內容編輯' : '新增文章'"
       :close-modal="handleOpenModal"
     />
-    <form class="container p-4 space-y-4" @submit.prevent="handleProductAddition">
+    <Form class="container p-4 space-y-4" @submit.prevent="handleProductAddition">
       <div class="flex gap-2 justify-between">
         <div class="flex-1">
           <label for="articleImage" class="block mb-4"
@@ -247,6 +248,6 @@ export default {
           {{ selectType === 'productEdit' ? '確定修改' : '新增文章' }}
         </button>
       </div>
-    </form>
+    </Form>
   </section>
 </template>

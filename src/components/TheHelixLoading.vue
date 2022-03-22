@@ -21,29 +21,29 @@ $animation-distance: 25px;
   .dot {
     animation-name: movement;
     animation-duration: $animation-time;
-    animation-iteration-count: infinite; 
+    animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
     height: $dot-size;
     position: absolute;
     top: -#{$dot-size};
     transform: translate3d(0, -#{$animation-distance}, 0) scale(1);
     width: $dot-size;
- 
+
     @for $i from 1 through $dot-count {
       $dot-move: ceil($i / 2);
       $dot-pos: $dot-start - (($dot-size + $dot-space) * $dot-move);
-      
+
       $animation-delay: -#{$i * .1}s;
       @if $i % 2 == 0 {
         $animation-delay: -#{($i * .1) + ($animation-time / 2)};
       }
-      
+
       &:nth-of-type(#{$i}) {
-        animation-delay: $animation-delay; 
+        animation-delay: $animation-delay;
         left: $dot-pos;
-        
+
         &::before {
-          animation-delay: $animation-delay; 
+          animation-delay: $animation-delay;
         }
       }
     }
@@ -51,7 +51,7 @@ $animation-distance: 25px;
     &::before {
       animation-name: size-opacity;
       animation-duration: $animation-time;
-      animation-iteration-count: infinite; 
+      animation-iteration-count: infinite;
       animation-timing-function: ease;
       background: $dot-secColor;
       border-radius: 50%;
@@ -60,7 +60,7 @@ $animation-distance: 25px;
       height: 100%;
       width: 100%;
     }
-    
+
     &:nth-of-type(even)::before {
       background-color: $dot-color;
       box-shadow: inset 0 0 4px darken($dot-color, 10%);
@@ -84,7 +84,7 @@ $animation-distance: 25px;
 }
 
 @keyframes size-opacity {
-  0% { 
+  0% {
     opacity: 1;
     transform: scale(1);
   }

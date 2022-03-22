@@ -15,6 +15,7 @@
     "bootstrap-icons": "^1.8.1",
     "core-js": "^3.6.5",
     "daisyui": "^2.10.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-tailwindcss": "^3.5.0",
     "mapbox-gl": "^2.7.1",
     "pinia": "^2.0.11",

@@ -65,10 +65,10 @@ export default {
       六大基酒
     </AppTitle>
     <ul class="group">
-      <li class="flex justify-between overflow-hidden
-      odd:flex-row-reverse flex-wrap md:flex-nowrap cursor-pointer
-      odd:text-right
-      bg-secondary-100/20 odd:bg-secondary-50/10 border-b"
+      <li class="flex overflow-hidden odd:flex-row-reverse
+      flex-wrap justify-between odd:text-right bg-secondary-100/20
+      odd:bg-secondary-50/10
+      border-b cursor-pointer md:flex-nowrap"
       :class="{
         'group-hover:bg-secondary-100/40': isHovering === idx
       }"
@@ -78,17 +78,17 @@ export default {
       @blur="isHovering"
       v-for="(item, idx) in data" :key="item.title"
       >
-        <article class="py-12 px-4 w-full order-1 md:order-none
-        md:w-1/2 sm:px-6 lg:py-16 lg:px-8">
-            <h2 class="mb-4 font-medium text-primary-500/70
-            rfs:text-3xl transition duration-150 ease-in-out"
+        <article class="order-1 py-12 px-4 w-full sm:px-6
+        md:order-none md:w-1/2 lg:py-16 lg:px-8">
+            <h2 class="mb-4 rfs:text-3xl font-medium
+            text-primary-500/70 transition duration-150 ease-in-out"
             :class="{
               'group-hover:text-primary-500': isHovering === idx
             }"
             >
               {{ item.title }}
             </h2>
-            <p class="text-secondary-400/70 rfs:text-base
+            <p class="rfs:text-base text-secondary-400/70
             transition duration-150 ease-in-out"
             :class="{
               'group-hover:text-secondary-400': isHovering === idx
@@ -119,8 +119,8 @@ export default {
           'saturate-[.3]' : isHovering !== idx,
           'saturate-[.9]' : isHovering === idx,
         }"
-        class="aspect-video md:aspect-square object-cover object-center
-        transition-all duration-150
+        class="aspect-video object-cover object-center transition-all
+        duration-150 md:aspect-square
         md:max-w-[24rem] md:h-full"/>
       </li>
     </ul>
