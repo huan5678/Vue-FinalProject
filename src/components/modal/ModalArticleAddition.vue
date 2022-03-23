@@ -68,10 +68,11 @@ export default {
       const data = {
         data: {
           title: articleData.value.title,
+          subTitle: articleData.value.subTitle,
           author: articleData.value.author,
           isPublic: articleData.value.isPublic,
-          content: article.content,
-          description: articleData.value.description,
+          content: ' ',
+          description: article.content,
           create_at: new Date().getTime(),
           image: articleData.value.image,
           tag: articleData.value.tag,
@@ -165,14 +166,14 @@ export default {
           />
         </div>
         <div class="flex-auto">
-          <label for="articleDescription" class="block mb-4"
+          <label for="articleSubTitle" class="block mb-4"
             >文章副標題</label>
           <input
             type="text"
-            id="articleDescription"
-            name="articleDescription"
+            id="articleSubTitle"
+            name="articleSubTitle"
             class="w-full form-style"
-            v-model="articleData.description"
+            v-model="articleData.subTitle"
             required
           />
         </div>

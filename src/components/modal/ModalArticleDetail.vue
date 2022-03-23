@@ -57,7 +57,7 @@ export default {
       </div>
       <div class="p-2 divide-y">
         <span class="block text-sm">文章副標題</span>
-        <h2 class="text-2xl font-medium">{{articleData?.description}}</h2>
+        <h2 class="text-2xl font-medium">{{articleData?.subTitle}}</h2>
       </div>
       <div class="p-2 divide-y">
         <span class="block text-sm">文章作者</span>
@@ -76,7 +76,7 @@ export default {
     <div class="flex justify-between p-4">
       <div class="p-2 divide-y">
         <h2 class="text-2xl text-medium">文章內文</h2>
-        <p class="">{{articleData?.content}}</p>
+        <div v-html="articleData?.description"></div>
       </div>
     </div>
     <div class="flex justify-between p-4">

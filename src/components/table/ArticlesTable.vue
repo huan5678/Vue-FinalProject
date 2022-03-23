@@ -11,6 +11,7 @@ export default {
       author: '',
       isPublic: false,
       content: '',
+      subTitle: '',
       description: '',
       create_at: '',
       is_enabled: '',
@@ -20,7 +21,23 @@ export default {
 
     function openModal(selected, item) {
       adminData.isOpenModal = true;
-      handleSelectFunction(selected, item);
+      if (selected === 'articleCreate') {
+        const data = {
+          title: '',
+          author: '',
+          isPublic: false,
+          content: '',
+          subTitle: '',
+          description: '',
+          create_at: '',
+          is_enabled: '',
+          image: '',
+          tag: [],
+        };
+        handleSelectFunction(selected, data);
+      } else {
+        handleSelectFunction(selected, item);
+      }
     }
 
     return {
@@ -50,7 +67,7 @@ export default {
         :key="item.id"
       >
         <td class="py-2 px-4 whitespace-nowrap">{{ item.title }}</td>
-        <td class="py-2 px-4 text-right whitespace-nowrap">{{ item.description }}</td>
+        <td class="py-2 px-4 text-right whitespace-nowrap">{{ item.subTitle }}</td>
         <td class="py-2 px-4 text-right whitespace-nowrap">{{ item.tag }}</td>
         <td
           class="py-2 px-4 text-center whitespace-nowrap"
