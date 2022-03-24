@@ -111,7 +111,6 @@ export default {
         v-model="isOpenModal"
         id="adminModal"
         classes="flex justify-center items-center bg-opacity-50 backdrop-blur-[2px]"
-        content-class="bg-gray-50 rounded-md shadow-md overflow-hidden"
         focus-trap
       >
         <ModalCardDelete v-if="modalState === 'productDelete'" :handleOpenModal="handleOpenModal" />

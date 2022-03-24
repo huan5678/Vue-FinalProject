@@ -27,18 +27,18 @@ export default {
 </script>
 
 <template>
-  <div class="flex overflow-hidden relative flex-col justify-between
-  h-full rounded-md shadow">
+  <div class="card shadow">
     <div class="group h-full cursor-pointer"
     @click="handleOpenProductDetail(products.id)"
     @keydown="handleOpenProductDetail(products.id)">
-      <div class="overflow-clip">
+      <figure class="overflow-clip">
         <img
           :src="products.imageUrl"
           :alt="products.title"
-          class="object-cover w-full transition-all duration-700 ease-out group-hover:scale-110"
+          class="object-cover w-full transition-all max-h-48 duration-700
+          ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-110"
         />
-      </div>
+      </figure>
       <ul class="p-4 space-y-4">
         <li>
           <h2 class="text-xl text-center">{{ products.title }}</h2>
@@ -55,12 +55,12 @@ export default {
         </li>
       </ul>
     </div>
-    <div class="overflow-clip flex-[1_0_auto]">
+    <div class="card-actions w-full p-4">
       <button
         type="button"
-        class="flex gap-2 justify-center items-center py-4 w-full
-        text-xl text-gray-50 bg-secondary-700 hover:bg-secondary-900 transition-all duration-500
-        ease-in-out hover:scale-110"
+        class="btn font-normal text-gray-50 bg-secondary-400
+        transition-all duration-500 ease-[cubic-bezier(0.18,0.89,0.32,1.28)]
+        hover:bg-secondary-700 hover:text-xl w-full"
         :class="isLoading === products.id ? 'bg-gray-300 hover:bg-gray-300' : ''"
         :disabled="isLoading === products.id"
         @click="handleAddCart(products.id)"

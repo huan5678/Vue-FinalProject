@@ -1,5 +1,10 @@
 <script>
-import { computed, ref, reactive } from 'vue';
+import {
+  computed,
+  ref,
+  reactive,
+  watch,
+} from 'vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Form } from 'vee-validate';
 import useStore from '@/stores';
@@ -25,6 +30,10 @@ export default {
 
     const article = reactive({
       content: '',
+    });
+
+    watch(() => articleData.value.description, (nv) => {
+      article.content = nv;
     });
 
     const tagList = ref([

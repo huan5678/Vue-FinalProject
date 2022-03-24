@@ -50,9 +50,9 @@ export default {
 };
 </script>
 <template>
-  <table class="mb-4 bg-gray-50 rounded table-auto">
-    <thead class="bg-gray-800">
-      <tr class="text-white">
+  <table class="table w-full">
+    <thead class="">
+      <tr class="text-secondary-400">
         <td width="200" class="p-4 text-lg whitespace-nowrap">文章標題</td>
         <td width="250" class="p-4 text-lg text-right whitespace-nowrap">副標題</td>
         <td width="250" class="p-4 text-lg text-right whitespace-nowrap">標籤</td>
@@ -62,7 +62,7 @@ export default {
     </thead>
     <tbody>
       <tr
-        class="hover:bg-gray-200 border-b border-gray-300"
+        class="hover"
         v-for="item in adminData.dataList"
         :key="item.id"
       >
@@ -78,9 +78,9 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="py-2 px-4 text-primary-500 hover:text-primary-50 hover:bg-primary-600
-            rounded border border-primary-500 hover:shadow
-            hover:shadow-primary-400 transition duration-200"
+            class="btn btn-outline text-primary-500 hover:text-primary-50 hover:bg-primary-600
+            border border-primary-500 hover:shadow
+            hover:shadow-primary-400 hover:border-primary-600"
             @click="openModal('getArticleDetail', item)"
           >
             查看內容
@@ -89,9 +89,9 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="py-2 px-4 text-secondary-50 bg-secondary-400 hover:bg-secondary-500
-            rounded hover:shadow
-            hover:shadow-secondary-400 transition duration-200"
+            class="btn btn-outline text-secondary-400 hover:bg-secondary-500
+            hover:shadow hover:text-secondary-50
+            hover:shadow-secondary-400"
             @click="openModal('articleEdit', item)"
           >
             修改內容
@@ -100,9 +100,9 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="py-2 px-4 text-secondary-400 hover:text-white hover:bg-secondary-500 rounded
-            border border-secondary-300 hover:border-transparent hover:shadow
-            hover:shadow-secondary-400 transition duration-200"
+            class="btn btn-outline text-red-400 hover:text-white hover:bg-red-500
+            border border-red-300 hover:border-transparent hover:shadow
+            hover:shadow-red-400"
             @click="openModal('productDelete', item)"
           >
             刪除文章
@@ -115,8 +115,8 @@ export default {
     <p>目前有{{ adminData.dataList.length }}篇文章</p>
     <button
       type="button"
-      class="py-2 px-4 text-primary-500 hover:text-primary-50 hover:bg-primary-600
-        rounded border border-primary-500 hover:shadow
+      class="btn btn-outline text-primary-500 hover:text-primary-50 hover:bg-primary-600
+        border border-primary-500 hover:shadow hover:border-primary-600
         hover:shadow-primary-400 transition duration-200"
       @click="openModal('articleCreate', tempProduct)"
     >
