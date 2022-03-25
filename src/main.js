@@ -5,6 +5,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueSweetalert2 from 'vue-sweetalert2';
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import { Roulette } from 'vue3-roulette';
 
 import App from '@/App.vue';
 import router from '@/router';
@@ -37,5 +38,6 @@ requireAll(req);
 app.component('SvgLoader', svgLoader);
 app.component('AlertModal', AlertModal);
 app.component('AppTitle', AppTitle);
+app.component('AppRoulette', Roulette);
 
 app.mount('#app');

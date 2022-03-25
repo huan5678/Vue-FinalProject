@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <div class="card shadow">
+  <div class="shadow card">
     <div class="group h-full cursor-pointer"
     @click="handleOpenProductDetail(products.id)"
     @keydown="handleOpenProductDetail(products.id)">
@@ -35,7 +35,7 @@ export default {
         <img
           :src="products.imageUrl"
           :alt="products.title"
-          class="object-cover w-full transition-all max-h-48 duration-700
+          class="object-cover w-full max-h-48 transition-all duration-700
           ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-110"
         />
       </figure>
@@ -55,12 +55,12 @@ export default {
         </li>
       </ul>
     </div>
-    <div class="card-actions w-full p-4">
+    <div class="p-4 w-full card-actions">
       <button
         type="button"
-        class="btn font-normal text-gray-50 bg-secondary-400
-        transition-all duration-500 ease-[cubic-bezier(0.18,0.89,0.32,1.28)]
-        hover:bg-secondary-700 hover:text-xl w-full"
+        class="w-full hover:text-xl font-normal text-gray-50
+        bg-secondary-400 hover:bg-secondary-700 transition-all
+        duration-500 ease-[cubic-bezier(0.18,0.89,0.32,1.28)] btn"
         :class="isLoading === products.id ? 'bg-gray-300 hover:bg-gray-300' : ''"
         :disabled="isLoading === products.id"
         @click="handleAddCart(products.id)"

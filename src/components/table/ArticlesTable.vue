@@ -78,9 +78,10 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="btn btn-outline text-primary-500 hover:text-primary-50 hover:bg-primary-600
-            border border-primary-500 hover:shadow
-            hover:shadow-primary-400 hover:border-primary-600"
+            class="text-primary-500 hover:text-primary-50
+            hover:bg-primary-600 border border-primary-500
+            hover:border-primary-600 hover:shadow hover:shadow-primary-400
+            btn btn-outline"
             @click="openModal('getArticleDetail', item)"
           >
             查看內容
@@ -89,9 +90,9 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="btn btn-outline text-secondary-400 hover:bg-secondary-500
-            hover:shadow hover:text-secondary-50
-            hover:shadow-secondary-400"
+            class="text-secondary-400 hover:text-secondary-50 hover:bg-secondary-500 hover:shadow
+            hover:shadow-secondary-400 btn
+            btn-outline"
             @click="openModal('articleEdit', item)"
           >
             修改內容
@@ -100,9 +101,9 @@ export default {
         <td class="py-2 px-4 text-center whitespace-nowrap">
           <button
             type="button"
-            class="btn btn-outline text-red-400 hover:text-white hover:bg-red-500
-            border border-red-300 hover:border-transparent hover:shadow
-            hover:shadow-red-400"
+            class="text-red-400 hover:text-white hover:bg-red-500 border border-red-300
+            hover:border-transparent hover:shadow hover:shadow-red-400 btn
+            btn-outline"
             @click="openModal('productDelete', item)"
           >
             刪除文章
@@ -115,9 +116,9 @@ export default {
     <p>目前有{{ adminData.dataList.length }}篇文章</p>
     <button
       type="button"
-      class="btn btn-outline text-primary-500 hover:text-primary-50 hover:bg-primary-600
-        border border-primary-500 hover:shadow hover:border-primary-600
-        hover:shadow-primary-400 transition duration-200"
+      class="text-primary-500 hover:text-primary-50 hover:bg-primary-600 border border-primary-500
+        hover:border-primary-600 hover:shadow hover:shadow-primary-400 transition
+        duration-200 btn btn-outline"
       @click="openModal('articleCreate', tempProduct)"
     >
       新增文章

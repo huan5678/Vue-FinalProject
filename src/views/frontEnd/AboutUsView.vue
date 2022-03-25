@@ -67,8 +67,8 @@ export default {
 </script>
 
 <template>
-<section class="relative bg-fixed bg-center
-min-h-screen bg-no-repeat bg-cover py-12
+<section class="relative py-12 min-h-screen
+bg-fixed bg-center bg-no-repeat bg-cover
 " :style="{backgroundImage: `
 linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${aboutImg01})
 `}">
@@ -95,9 +95,9 @@ linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${abo
               希望客人在我們店裡只有愜意沒有拘謹。</p>
           </div>
           <div class="relative
-          bg-cover space-y-2 max-w-sm h-[15vw] w-[32vw]
-          bg-no-repeat bg-top mx-auto
-          lg:max-w-screen-sm md:order-none order-0"
+          mx-auto space-y-2 w-[32vw] max-w-sm h-[15vw]
+          bg-top bg-no-repeat bg-cover
+          md:order-none lg:max-w-screen-sm order-0"
           :style="{ backgroundImage: `url(${aboutImg02})` }"
           >
           </div>
@@ -174,7 +174,7 @@ linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${abo
               <span class="block">聯絡電話 :</span>
               <span class="block">0912-345678</span>
             </li>
-            <li id="map" class="h-64 max-w-screen-lg"></li>
+            <li id="map" class="max-w-screen-lg h-64"></li>
           </ul>
         </div>
       </article>

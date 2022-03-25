@@ -1,5 +1,5 @@
 {
-  "name": "vue-week7",
+  "name": "chill-bar",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -34,6 +34,7 @@
     "vue-final-modal": "^3.4.3",
     "vue-router": "^4.0.0-0",
     "vue-sweetalert2": "^5.0.2",
+    "vue3-roulette": "^0.2.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

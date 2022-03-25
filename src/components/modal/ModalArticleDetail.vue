@@ -45,14 +45,14 @@ export default {
 
 <template>
   <section class="container">
-    <div class="card bg-secondary-50">
+    <div class="bg-secondary-50 card">
 
       <ModalCardTitle
         title="文章詳細內容"
         className="bg-secondary-500"
         :close-modal="handleOpenModal"
       />
-      <ul class="flex justify-between flex-wrap space-y-2 p-4">
+      <ul class="flex flex-wrap justify-between p-4 space-y-2">
         <li class="p-2 space-y-2">
           <span class="block text-sm border-b">文章標籤</span>
           <p class="text-2xl font-medium">{{articleData?.title}}</p>
@@ -69,7 +69,7 @@ export default {
           <span class="block text-sm border-b">文章標籤</span>
           <p class="text-2xl font-medium">{{ tagList[articleData?.tag]}}</p>
         </li>
-        <li class="w-full flex justify-between">
+        <li class="flex justify-between w-full">
           <div class="p-2 space-y-2">
             <span class="block text-sm border-b">文章內文</span>
             <div v-html="articleData?.description"></div>

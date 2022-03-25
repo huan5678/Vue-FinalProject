@@ -226,7 +226,7 @@ export default {
           class="flex flex-wrap gap-2 justify-around items-center"
           >
             <div class="form-control" v-for="tag in tagList" :key="tag.value">
-              <label class="label cursor-pointer" :for="tag.value">
+              <label class="cursor-pointer label" :for="tag.value">
                 <input
                 type="checkbox"
                 class="checkbox"
