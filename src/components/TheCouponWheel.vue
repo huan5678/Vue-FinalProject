@@ -29,5 +29,5 @@ export default {
 </script>
 
 <template>
-  <Roulette ref="wheel" :items="items" @click="launchWheel" />
+  <AppRoulette ref="wheel" :items="items" @click="launchWheel" />
 </template>

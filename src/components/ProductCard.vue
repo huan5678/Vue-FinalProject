@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <div class="shadow card">
+  <div class="shadow card h-full">
     <div class="group h-full cursor-pointer"
     @click="handleOpenProductDetail(products.id)"
     @keydown="handleOpenProductDetail(products.id)">
@@ -58,9 +58,9 @@ export default {
     <div class="p-4 w-full card-actions">
       <button
         type="button"
-        class="w-full hover:text-xl font-normal text-gray-50
+        class="w-full hover:text-base font-normal text-gray-50
         bg-secondary-400 hover:bg-secondary-700 transition-all
-        duration-500 ease-[cubic-bezier(0.18,0.89,0.32,1.28)] btn"
+        duration-500 ease-[cubic-bezier(0.4,0,1,1)] btn"
         :class="isLoading === products.id ? 'bg-gray-300 hover:bg-gray-300' : ''"
         :disabled="isLoading === products.id"
         @click="handleAddCart(products.id)"

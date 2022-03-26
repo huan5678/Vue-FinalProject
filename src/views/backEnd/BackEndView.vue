@@ -1,6 +1,6 @@
 <script>
 import TheHeader from '@/components/TheHeader.vue';
-import { onBeforeMount } from 'vue';
+import { onMounted } from 'vue';
 import useStore from '@/stores';
 
 export default {
@@ -10,7 +10,7 @@ export default {
     const { adminStore } = useStore();
     const { handleCheckUser, handleGetToken } = adminStore;
 
-    onBeforeMount(() => {
+    onMounted(() => {
       handleGetToken();
       handleCheckUser();
     });

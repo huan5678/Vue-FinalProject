@@ -1,5 +1,9 @@
 <script>
-import { computed, ref } from 'vue';
+import {
+  computed,
+  onMounted,
+  ref,
+} from 'vue';
 import useStore from '@/stores';
 import ModalCardTitle from './ModalCardTitle.vue';
 
@@ -20,12 +24,13 @@ export default {
     });
 
     const imageFile = ref(null);
+    const mainImageFile = ref(null);
 
     function closeModal() {
       context.attrs.handleOpenModal(false);
     }
 
-    function handleResetFormInput() {
+    function resetForm() {
       productData.value = {
         title: '',
         category: '',
@@ -39,22 +44,32 @@ export default {
         imageUrl: '',
         imagesUrl: [],
       };
+      productData.value.imagesUrl = [];
+    }
+
+    function handleResetFormInput() {
+      resetForm();
       closeModal();
     }
 
     function handleProductAddition() {
       if (functionSelected.selected === 'productEdit') {
-        handleEditData(productData.value.id, productData.value);
+        handleEditData(productData.value.id, { data: productData.value });
       } else {
-        handleCreateData(productData.value);
+        handleCreateData({ data: productData.value });
       }
-      handleResetFormInput();
+      closeModal();
     }
 
-    function handleGetImageUrl(target) {
-      const file = imageFile.value.files[0];
-      console.log(imageFile);
-      console.log(file);
+    const handleGetImageUrl = async (target) => {
+      let file = [];
+      if (target === 'mainImage') {
+        [file] = mainImageFile.value.files;
+      } else {
+        [file] = imageFile.value.files;
+      }
+      console.log('imageFile = ', imageFile);
+      console.log('file = ', file);
       handleImageUpload(file)
         .then((res) => {
           if (target === 'mainImage') {
@@ -67,15 +82,22 @@ export default {
         .catch((err) => {
           console.dir(err);
         });
-    }
+    };
 
     function handleRemoveImageArr(idx) {
       productData.value.imagesUrl.splice(idx, 1);
     }
 
+    onMounted(() => {
+      if (functionSelected.selected === 'productCreate') {
+        resetForm();
+      }
+    });
+
     return {
       selectType: computed(() => functionSelected.selected),
       productData,
+      mainImageFile,
       imageFile,
       handleResetFormInput,
       handleProductAddition,
@@ -106,9 +128,9 @@ export default {
                   <input
                     type="file"
                     accept="image/*"
-                    id="productImages"
-                    name="productImages"
-                    ref="imageFile"
+                    id="productMainImage"
+                    name="productMainImage"
+                    ref="mainImageFile"
                     class="block file:py-2 file:px-4 file:mr-4 w-full
                     file:text-sm text-secondary-400 file:text-secondary-700
                     file:bg-secondary-100 hover:file:bg-secondary-300 rounded file:rounded-full

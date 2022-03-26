@@ -12,35 +12,35 @@ export const useAdminStore = defineStore('admin', () => {
   const router = useRouter();
   const params = useRoute();
 
-  function handleCheckUser() {
-    axios.defaults.headers.common.Authorization = token.value;
-    vueAxios
-      .post(`${baseUrl}api/user/check`)
-      .then((res) => {
-        isLoggedIn.value = res.data.success;
-        if (params.name !== 'admin') {
-          router.push('admin');
-        }
-      })
-      .catch((err) => {
-        console.dir(err);
-        isLoggedIn.value = err.response.data.success;
-        if (params.name === 'admin') {
-          router.push('login');
-        }
-      });
-  }
-
-  function handleGetToken() {
+  const handleGetToken = function () {
     const cookies = document.cookie.split('; backendToken=');
-    const cookie2 = cookies.shift().split(';');
-    cookie2.forEach((c) => {
-      if (c.trim().startsWith('backendToken=')) {
-        token.value = c.trim().split('=')['1'];
-      }
-    });
+    if (cookies.length > 1) {
+      cookies.shift().split(';');
+    }
+    token.value = cookies;
     return cookies;
-  }
+  };
+
+  const handleCheckUser = function () {
+    if (token.value) {
+      axios.defaults.headers.common.Authorization = token.value;
+      vueAxios
+        .post(`${baseUrl}api/user/check`)
+        .then((res) => {
+          isLoggedIn.value = res.data.success;
+          if (params.name !== 'admin') {
+            router.push('admin');
+          }
+        })
+        .catch((err) => {
+          console.dir(err);
+          isLoggedIn.value = err.response.data.success;
+          router.push('login');
+        });
+    } else {
+      router.push('login');
+    }
+  };
 
   function handleSetLogin(data) {
     token.value = data.token;

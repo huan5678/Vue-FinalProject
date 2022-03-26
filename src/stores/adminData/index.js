@@ -118,13 +118,13 @@ export const useAdminDataStore = defineStore('adminData', () => {
       });
   }
 
-  function handleEditData(id, data) {
+  function handleEditData(id, item) {
     axios
-      .put(`${baseUrl}api/${apiPath}/admin/${adminData.selectedTarget}/${id}`, data, {
+      .put(`${baseUrl}api/${apiPath}/admin/${adminData.selectedTarget}/${id}`, item, {
         token: adminStore.token,
       })
       .then(() => {
-        handleGetDataList();
+        handleGetDataList(adminData.currentPage, adminData.category);
       })
       .catch((err) => {
         console.dir(err);
@@ -141,13 +141,13 @@ export const useAdminDataStore = defineStore('adminData', () => {
         target = 'coupon';
         break;
       default:
-        target = 'products';
+        target = 'product';
         break;
     }
     axios
       .delete(`${baseUrl}api/${apiPath}/admin/${target}/${id}`, { token: adminStore.token })
       .then(() => {
-        handleGetDataList();
+        handleGetDataList(adminData.currentPage, adminData.category);
       })
       .catch((err) => {
         console.dir(err);

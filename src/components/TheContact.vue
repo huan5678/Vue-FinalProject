@@ -35,19 +35,18 @@ export default {
         </p>
 
         <form class="mt-8 sm:flex" @submit.prevent="handleSubscribed(email)">
-          <div class="sm:flex-1">
-            <label for="email" class="sr-only">Email</label>
+          <div class="sm:flex-1 form-control">
+            <label for="email" class="sr-only label"><span class="label-text">Email</span></label>
             <input
               type="email"
               placeholder="請輸入電子郵件信箱"
-              class="p-3 w-full border-gray-700 form-control"
+              class="input form-style"
               v-model="email"
             />
           </div>
           <button
             type="submit"
-            class="gap-1 py-2 px-5 mt-4
-            w-full font-normal text-white bg-primary-500
+            class="btn font-normal text-white bg-primary-500
             hover:bg-primary-500/80 border-0 sm:mt-0 sm:ml-4 sm:w-auto btn"
           >
             訂閱電子報

@@ -70,10 +70,12 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col flex-auto gap-2 justify-center">
-    <label class="block" :for="name">{{ label }}</label>
+  <div class="form-control w-full">
+    <label class="label" :for="name">
+      <span class="label-text">{{ label }}</span>
+      </label>
     <input
-      class="form-control"
+      class="input form-style"
       :class="{ 'bg-danger-100 ring-danger-500': errorMessage }"
       :name="name"
       :id="name"

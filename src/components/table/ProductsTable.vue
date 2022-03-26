@@ -5,7 +5,7 @@ import useStore from '@/stores';
 export default {
   setup() {
     const { adminDataStore } = useStore();
-    const { adminData, handleGetDataList, handleSelectFunction } = adminDataStore;
+    const { adminData, handleSelectFunction } = adminDataStore;
     const tempProduct = ref({
       title: '',
       category: '',
@@ -25,7 +25,6 @@ export default {
     }
 
     return {
-      handleGetDataList,
       openModal,
       tempProduct,
       adminData: computed(() => adminData),

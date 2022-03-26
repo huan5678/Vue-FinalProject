@@ -80,36 +80,33 @@ export default {
       <form class="p-8 space-y-8 bg-white rounded shadow-sm" @submit.prevent="handlerSubmit">
         <legend class="text-3xl font-medium
         tracking-wide text-center text-primary-600">管理者登入</legend>
-        <div class="space-y-4">
-          <label for="name" class="block font-normal">使用者帳號</label>
+        <div class="form-control">
+          <label for="name" class="label font-normal">
+            <span class="label-text">使用者帳號</span>
+          </label>
           <input
             id="name"
             type="text"
             name="userName"
             placeholder="請輸入帳號Email"
             v-model.trim="userName"
-            class="p-2 w-full font-light text-primary-800 invalid:text-primary-600
-            focus:text-primary-600 bg-gray-50 rounded
-            border invalid:border-primary-600
-            focus:border-primary-500 focus:ring-primary-500"
+            class="input form-style"
           />
         </div>
-        <div class="space-y-4">
-          <label for="password" class="block font-normal">使用者密碼</label>
+        <div class="form-control">
+          <label for="password" class="label font-normal">
+            <span class="label-text">使用者密碼</span></label>
           <input
             id="password"
             type="password"
-            class="p-2 w-full font-light text-primary-800
-            invalid:text-primary-600 focus:text-primary-600
-            bg-gray-50 rounded border
-            invalid:border-primary-600 focus:border-primary-500 focus:ring-primary-500"
+            class="input form-style"
             v-model="userPassword"
             placeholder="請輸入密碼"
           />
         </div>
         <button
           type="submit"
-          class="py-4 w-full text-secondary-50 bg-secondary-400 hover:bg-secondary-600
+          class="btn w-full text-secondary-50 bg-secondary-400 hover:bg-secondary-600
           rounded-lg
           transition duration-300"
         >

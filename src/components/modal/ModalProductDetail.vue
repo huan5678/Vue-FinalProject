@@ -16,11 +16,14 @@ export default {
 </script>
 
 <template>
-  <section class="flex overflow-hidden flex-col pb-4 space-y-4 bg-gray-50 rounded-md">
-    <ModalCardTitle title="產品詳細內容" className="bg-primary-600" :close-modal="handleOpenModal" />
-    <div class="flex justify-between p-4">
-      <img class="max-h-[300px]" :src="targetProduct?.imageUrl" :alt="targetProduct?.title" />
-      <div class="flex-1 p-4 space-y-8">
+  <section class="card-side rounded md:max-w-screen-lg bg-secondary-50 shadow">
+    <ModalCardTitle title="產品詳細內容"
+    :close-modal="handleOpenModal" />
+    <figure>
+      <img class="max-h-48" :src="targetProduct?.imageUrl" :alt="targetProduct?.title" />
+    </figure>
+    <div class="card-body">
+      <div class="space-y-8">
         <div class="flex gap-4 items-center">
           <h2 class="mb-2 text-xl font-bold">
             {{ targetProduct?.title }}
@@ -76,15 +79,17 @@ export default {
           </li>
         </ul>
       </div>
-    </div>
-    <div class="flex overflow-x-auto gap-4">
-      <img
-        v-for="img in targetProduct?.imagesUrl"
-        :key="img"
-        class="object-cover flex-auto w-1/12 max-h-48"
-        :src="img"
-        :alt="img"
-      />
+      <div class="carousel gap-4">
+        <div v-for="img in targetProduct?.imagesUrl"
+            :key="img" class="carousel-item flex-auto">
+          <img
+            class="object-cover max-h-96"
+            width="500"
+            :src="img"
+            :alt="img"
+          />
+        </div>
+      </div>
     </div>
   </section>
 </template>

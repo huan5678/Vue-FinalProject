@@ -22,8 +22,12 @@ module.exports = {
   plugins: ['vue', 'tailwindcss'],
   settings: {
     'import/resolver': {
+      alias: {
+        map: [['@', './src']],
+        extensions: ['.js', '.jsx'],
+      },
       node: {
-        extensions: ['.js', '.vue', '.json'],
+        extensions: ['.js', '.jsx', '.vue', '.json'],
       },
     },
   },

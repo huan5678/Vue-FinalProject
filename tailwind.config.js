@@ -11,6 +11,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Noto Sans TC', ...fontFamily.sans],
+        serif: ['Heisei Mincho Std', ...fontFamily.serif],
       },
       colors: {
         primary: {

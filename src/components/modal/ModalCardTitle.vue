@@ -17,13 +17,13 @@ export default {
 
 <template>
   <div
-  :class="className !== undefined ? className : 'bg-gray-900'"
+  class="flex items-center border-b"
   >
-    <div class="flex justify-between items-center space-y-3">
-      <h2 class="p-4 text-lg text-white">{{ title }}</h2>
+      <h2 class="p-4 text-lg text-secondary-700">{{ title }}</h2>
       <button
         type="button"
-        class="p-4 text-gray-50 hover:text-gray-100 transition-all duration-200
+        class="ml-auto btn btn-ghost hover:bg-transparent
+        text-secondary-700 hover:text-secondary-500
         ease-in-out hover:scale-125"
         @click="closeModal"
       >
@@ -40,6 +40,5 @@ export default {
           />
         </svg>
       </button>
-    </div>
   </div>
 </template>

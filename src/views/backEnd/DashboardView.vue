@@ -104,7 +104,7 @@ export default {
 
 <template>
   <main class="bg-gray-100">
-    <button @click="handleSweetAlert" class="btn btn-outline">open sweetalert2</button>
+    <!-- <button @click="handleSweetAlert" class="btn btn-outline">open sweetalert2</button> -->
     <div class="container">
       <DashboardTable />
       <vue-final-modal

@@ -70,11 +70,13 @@ export default {
       class="
       text-primary-500 scale-50 md:scale-75
       lg:scale-110" />
-      <h1 class="p-2 pt-7 mb-9 rfs:text-5xl font-extralight tracking-[.5rem] text-primary-400">
+      <h1 class="p-2 pt-7 mb-9 font-bold
+      rfs:text-5xl font-serif tracking-[.5rem]
+      text-primary-400">
         喝酒是一種生活的態度
       </h1>
       <button type="button"
-      class="py-4 px-8 text-lg font-thin text-primary-300
+      class="py-4 px-8 text-lg font-thin tracking-wider text-primary-300
       hover:text-secondary-800 hover:bg-primary-400 border border-primary-300
       transition-all duration-300"
       @click="handleGoProducts">發現更多美好</button>
