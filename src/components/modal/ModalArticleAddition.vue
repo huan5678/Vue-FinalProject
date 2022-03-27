@@ -237,6 +237,18 @@ export default {
                 <span class="ml-2 label-text">{{ tag.name }}</span>
               </label>
             </div>
+            <div class="form-control">
+              <label class="cursor-pointer label" for="coupon">
+                <input
+                type="checkbox"
+                class="checkbox"
+                id="coupon"
+                v-model="articleData.tag"
+                value="coupon"
+              >
+                <span class="ml-2 label-text">優惠券</span>
+              </label>
+            </div>
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-<div class="fixed bottom-0 w-full" v-if="showAlert">
+<div class="fixed bottom-0 w-full z-20" v-if="showAlert">
   <div class="flex gap-6 justify-center
     items-center py-3 px-2 w-full
   text-white bg-primary-400/70">

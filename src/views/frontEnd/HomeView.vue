@@ -7,6 +7,7 @@ import TheContact from '@/components/TheContact.vue';
 import TheFeatures from '@/components/TheFeatures.vue';
 import WarningSign from '@/components/WarningSign.vue';
 import TheRecommend from '@/components/TheRecommend.vue';
+import TheCouponWheel from '@/components/TheCouponWheel.vue';
 
 export default {
   components: {
@@ -15,6 +16,7 @@ export default {
     TheFeatures,
     WarningSign,
     TheRecommend,
+    TheCouponWheel,
   },
   setup() {
     // const router = useRouter();
@@ -32,4 +34,5 @@ export default {
   <TheRecommend />
   <TheContact />
   <WarningSign />
+  <TheCouponWheel />
 </template>

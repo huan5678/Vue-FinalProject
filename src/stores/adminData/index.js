@@ -76,7 +76,7 @@ export const useAdminDataStore = defineStore('adminData', () => {
       });
   }
   // GET products/all, products, orders, coupons, articles, article/{id}
-  function handleGetDataList(page = adminData.currentPage, category = adminData.category) {
+  function handleGetDataList(page, category) {
     let target = adminData.selectedTarget;
     switch (target) {
       case 'product':
@@ -95,15 +95,17 @@ export const useAdminDataStore = defineStore('adminData', () => {
         target = 'products';
         break;
     }
+    let currentPage = page;
+    if (page === undefined) {
+      currentPage = adminData.currentPage;
+    }
     let productCategory = category;
     if (category === null) {
       productCategory = '';
     }
     axios
       .get(
-        `${baseUrl}api/${apiPath}/admin/${target}/${
-          target !== 'product' ? `?page=${page}` : ''
-        }${productCategory}`,
+        `${baseUrl}api/${apiPath}/admin/${target}/?page=${currentPage}&category=${productCategory}`,
         {
           token: adminStore.token,
         },

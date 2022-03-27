@@ -88,25 +88,38 @@ export default {
               <i class="text-2xl bi bi-x-lg"></i>
             </button>
           </div>
-          <ul>
+          <ul class="border-t border-secondary-50
+          py-8 space-y-4">
             <li v-for="cart in cartList" :key="cart.id"
-            class="items-stretch py-8 border-t border-secondary-50 md:flex md:py-10 lg:py-8">
-              <div class="w-full md:w-4/12 2xl:w-1/4">
+            class="flex justify-between items-center gap-4 pb-4 border-b">
+              <button
+                type="button"
+                class="
+                text-primary-700 hover:text-primary-100
+                hover:bg-primary-600 rounded
+                border-primary-600
+                hover:border-primary-600
+                btn btn-sm btn-square btn-outline
+              " @click="handleDeleteCart(cart.id)"
+              >
+                <i class="bi bi-x text-xl"></i>
+              </button>
+              <div class="md:w-1/2 lg:w-1/3">
                 <img
                   :src="cart.product.imageUrl"
                   :alt="cart.product.title"
-                  class="object-cover object-center w-full h-full"
+                  class="object-cover object-center"
                 />
               </div>
-              <div class="flex flex-col justify-center md:pl-3 md:w-8/12 2xl:w-3/4">
+              <div class="flex flex-col flex-auto justify-center">
                 <p class="text-secondary-800 md:pt-0 badge
-                badge-outline badge-md">{{ cart.product.category }}</p>
-                <div class="flex gap-4 items-center pt-1 w-full">
+                badge-outline badge-md select-none">{{ cart.product.category }}</p>
+                <div class="flex gap-4 items-center pt-1">
                   <p class="text-base font-medium
                   text-secondary-800">{{ cart.product.title }}</p>
                   <select
                     aria-label="Select quantity"
-                    class="mr-6 ml-auto w-1/4
+                    class="ml-auto w-1/4
                     rounded border border-secondary-200 focus:outline-none"
                     v-model="cart.qty"
                     @change="handleUpdateCart(cart.id, cart.qty)"
@@ -115,17 +128,6 @@ export default {
                       {{ num }}
                     </option>
                   </select>
-                  <button
-                    type="button"
-                    class="
-                    text-primary-700 hover:text-primary-100
-                    hover:bg-primary-600 rounded
-                    border-primary-600
-                    hover:border-primary-600 btn btn-outline
-                  " @click="handleDeleteCart(cart.id)"
-                  >
-                    刪除
-                  </button>
                 </div>
                 <ul class="pt-5 space-y-6">
                   <li class="flex justify-between items-center">

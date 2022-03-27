@@ -33,20 +33,20 @@ export default {
 };
 </script>
 <template>
-  <table class="mb-4 bg-gray-50 rounded table-auto">
-    <thead class="bg-gray-800">
-      <tr class="text-white">
+  <table class="table w-full">
+    <thead class="">
+      <tr class="text-secondary-400">
         <td width="200" class="p-4 text-lg whitespace-nowrap">訂單編號</td>
         <td width="250" class="p-4 text-lg text-right whitespace-nowrap">訂購日期</td>
         <td width="250" class="p-4 text-lg text-right whitespace-nowrap">訂單總價</td>
         <td width="250" class="p-4 text-lg text-center whitespace-nowrap">是否付款</td>
         <td width="200" class="p-4 text-lg text-center whitespace-nowrap">查看細節</td>
-        <td colspan="2" width="400" class="p-4 text-lg text-center whitespace-nowrap">功能</td>
+        <td width="200" class="p-4 text-lg text-center whitespace-nowrap">功能</td>
       </tr>
     </thead>
     <tbody>
       <tr
-        class="hover:bg-gray-200 border-b border-gray-300"
+        class="hover"
         v-for="item in adminData.dataList"
         :key="item.id"
       >

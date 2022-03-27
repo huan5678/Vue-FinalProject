@@ -26,18 +26,22 @@ export default {
 
 <template>
   <a v-if="isExternalLink" v-bind="$attrs"
-  rel="noopener" :href="to" target="_blank">
+  rel="noopener" :href="to" target="_blank"
+  class="py-2 px-3 font-normal text-gray-500 border-b-2
+  border-transparent transition duration-300 ease-in-out md:font-thin"
+  >
     <slot />
   </a>
   <router-link
     v-else
     v-bind="$props"
-    class="py-2 px-3 font-normal text-gray-500 border-b-2
-    border-transparent transition duration-300 ease-in-out md:font-thin"
+    class="py-2 px-3 font-normal border-b
+    transition duration-300 ease-in-out md:font-thin"
     :class="
       isActive
-        ? `border-primary-300 text-primary-400 disabled cursor-default`
-        : `text-gray-300 hover:border-primary-400 hover:text-primary-400 focus:border-primary-400`
+        ? `border-primary-300 text-primary-400 cursor-default border-b-2`
+        : `border-transparent text-gray-400
+        hover:border-primary-400 hover:text-primary-400 focus:border-primary-400`
     "
   >
     <slot />

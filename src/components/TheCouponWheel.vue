@@ -1,21 +1,42 @@
 <script>
-import { ref, onMounted } from 'vue';
-import useStore from '@/stores';
+import { ref } from 'vue';
 
 export default {
-  setup(){
+  setup() {
     const wheel = ref(null);
-    const { adminDataStore } = useStore();
-    const { adminData, handleGetDataList } = adminDataStore;
 
-    onMounted(() => {
-      adminData.selectedTarget = 'coupon';
-      handleGetDataList();
-    })
+    const items = [
+      {
+        id: 1,
+        name: '老闆請你喝一杯',
+        htmlContent: '老闆請你喝一杯',
+        textColor: '#151625',
+        background: '#f59f13',
+      },
+      {
+        id: 2,
+        name: '滿千打8折',
+        htmlContent: '滿千打8折',
+        textColor: '#fde7c4',
+        background: '#151625',
+      },
+      {
+        id: 3,
+        name: '你最棒了',
+        htmlContent: '你最棒了',
+        textColor: '#151625',
+        background: '#f59f13',
+      },
+      {
+        id: 4,
+        name: '神秘驚喜大禮包',
+        htmlContent: '神秘驚喜大禮包',
+        textColor: '#fde7c4',
+        background: '#151625',
+      },
+    ];
 
-    const items = computed(()=>adminData.dataList);
-
-    function launchWheel(){
+    function launchWheel() {
       wheel.value.launchWheel();
     }
 
@@ -29,5 +50,16 @@ export default {
 </script>
 
 <template>
+  <button
+    type="button"
+    class="group btn btn-circle fixed right-4 bottom-16 gap-2
+    border-none bg-primary-700 hover:bg-primary-500"
+  >
+    <i
+      class="bi bi-postcard-heart text-xl
+      transition-all duration-700 ease-in-out
+      group-hover:scale-125"
+    ></i>
+  </button>
   <AppRoulette ref="wheel" :items="items" @click="launchWheel" />
 </template>

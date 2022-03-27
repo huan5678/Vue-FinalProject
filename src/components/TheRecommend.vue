@@ -35,10 +35,24 @@ export default {
       推薦給您
     </AppTitle>
     <swiper
-      class="select-none h-full items-stretch"
-      :slidesPerView="3"
-      :spaceBetween="50"
+      class="select-none"
       :loop="true"
+      :breakpoints="{
+        '640': {
+          slidesPerView: 2,
+          spaceBetween: 15,
+        },
+        '768': {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        '1280': {
+          slidesPerView: 4,
+          spaceBetween: 30,
+        },
+      }"
+      :loopFillGroupWithBlank="true"
+      :grabCursor="true"
       :modules="modules"
       :autoplay="{
         delay: 3000,
@@ -46,6 +60,7 @@ export default {
       }"
     >
     <swiper-slide
+    class="items-stretch h-auto"
     v-for="product in productList"
     :key="product.id"
     >

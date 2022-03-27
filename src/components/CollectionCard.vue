@@ -17,26 +17,31 @@ export default {
 };
 </script>
 <template>
-  <div class="flex flex-col flex-[1_0_0] justify-between
-  overflow-hidden mx-auto max-w-xs bg-secondary-100
-  dark:bg-secondary-800 rounded-lg shadow-lg">
+  <div class="card rounded bg-secondary-100
+  dark:bg-secondary-800 shadow h-full justify-between">
       <div class="py-2 px-4">
-          <h3 class="text-3xl font-bold text-secondary-800 dark:text-secondary-100 uppercase">
+          <h3 class="text-3xl font-bold text-secondary-700
+          font-serif
+          dark:text-secondary-100 uppercase">
             {{ productData.title }}
           </h3>
-          <p class="mt-1 text-sm text-secondary-600 dark:text-secondary-400">
+          <p class="mt-1 text-sm font-serif font-medium
+          text-secondary-400 dark:text-secondary-300">
             {{ productData.content }}</p>
       </div>
 
-      <img class="object-cover mt-2 w-full max-h-64"
+      <img class="object-cover mt-auto w-full max-h-64"
       :src="productData.imageUrl"
       :alt="productData.title">
 
-      <div class="flex justify-between items-center py-2 px-4 bg-secondary-900">
-          <h1 class="text-lg font-bold text-secondary-100">${{ productData.price }}</h1>
-          <button type="button" class="font-light text-secondary-900
-          bg-secondary-100 hover:bg-secondary-200 focus:bg-secondary-400
-          focus:outline-none btn btn-sm"
+      <div class="flex justify-between items-center p-4 bg-secondary-900">
+          <span class="text-xl font-light font-mono
+          text-secondary-100">${{ productData.price }}</span>
+          <button type="button" class="font-light
+          text-primary-600 hover:text-primary-200 focus:text-primary-400
+          hover:bg-transparent hover:border-primary-200
+          rounded-sm
+          btn btn-md btn-outline"
           :class="isLoading === productData.id ? 'bg-gray-300 hover:bg-gray-300' : ''"
           :disabled="isLoading === productData.id"
           @click="handleAddCart(productData.id)"
