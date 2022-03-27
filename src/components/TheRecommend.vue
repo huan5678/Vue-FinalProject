@@ -38,7 +38,6 @@ export default {
       class="select-none h-full items-stretch"
       :slidesPerView="3"
       :spaceBetween="50"
-      :lazy="true"
       :loop="true"
       :modules="modules"
       :autoplay="{
