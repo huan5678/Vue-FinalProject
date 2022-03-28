@@ -32,7 +32,7 @@ export default {
       const header = document.getElementById('header');
       // console.log(header.offsetHeight);
       // console.log(hero.offsetHeight);
-      hero.style.marginTop = `${header.offsetHeight}px`;
+      hero.style.paddingTop = `${header.offsetHeight}px`;
       console.log(hero.style);
     });
 
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <template>
-  <section id="hero" class="overflow-hidden relative min-h-[90vh] bg-secondary-900">
+  <section id="hero" class="overflow-hidden relative min-h-screen bg-secondary-900">
     <div class="before:block absolute before:absolute
     w-full before:w-full h-full before:h-full
     bg-center bg-no-repeat before:bg-gradient-to-b
@@ -74,7 +74,7 @@ export default {
     v-for="(img, idx) in Banners" :key="img"
     :class="{ heroAnimate: active === idx || preActive === idx-1 }"
     :style="handleAnimateCtrl(img)" />
-    <div class="container flex relative flex-col justify-center items-center h-[90vh]">
+    <div class="container flex relative flex-col justify-center items-center h-screen">
       <SvgLoader name="bannerLogo"
       class="
       text-primary-500 scale-50 md:scale-75

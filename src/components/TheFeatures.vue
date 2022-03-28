@@ -88,7 +88,7 @@ export default {
             >
               {{ item.title }}
             </h2>
-            <p class="font-serif rfs:text-base
+            <p class="rfs:text-base
             font-light tracking-wider text-secondary-400/70
             transition duration-150 ease-in-out"
             :class="{

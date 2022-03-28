@@ -7,7 +7,7 @@
     font-thin text-center text-primary-500
     animate-pulse -translate-x-1/2
     -translate-y-[150%]
-    ">scroll</span>
+    "><i class="bi bi-arrow-down-short text-2xl" /></span>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -27,7 +27,7 @@ $animDuration: 6s;
     left: 0;
     right: 0;
     margin: 0 auto;
-    transform: translateY(-50%);
+    transform: translateY(-150%);
     .scrollLine {
       width: 100%;
       height: 100%;

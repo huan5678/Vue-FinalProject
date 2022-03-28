@@ -39,6 +39,14 @@ const routes = [
         },
       },
       {
+        path: 'checkout',
+        name: 'checkout',
+        component: () => import('@/views/frontEnd/CheckoutView.vue'),
+        meta: {
+          title: 'ChillBar秋吧 - 訂單結帳',
+        },
+      },
+      {
         path: 'about',
         name: 'about',
         component: () => import('@/views/frontEnd/AboutUsView.vue'),

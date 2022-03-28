@@ -71,16 +71,14 @@ export default {
             </span>
             NT${{ moneyFormat(cart.product.price) }}
           </td>
-          <td class="text-right">
-            <select
-              class="rounded"
-              v-model="cart.qty"
-              @change="handleUpdateCart(cart.id, cart.qty)"
-            >
-              <option v-for="i in 20" :value="i" :key="i + cart.product.id">
-                {{ i }}
-              </option>
-            </select>
+          <td class="text-right flex gap-1">
+            <button class="btn btn-square" @click="cart.qty += 1; handleUpdateCart(cart.id, cart.qty)">
+              <i class="bi bi-plug-lg" />
+            </button>
+            <span class="">{{ cart.qty }}</span>
+            <button class="btn btn-square" @click="cart.qty -= 1; handleUpdateCart(cart.id, cart.qty)">
+              <i class="bi bi-minus-lg" />
+            </button>
           </td>
           <td class="text-right">
             <span class="block text-sm line-through">

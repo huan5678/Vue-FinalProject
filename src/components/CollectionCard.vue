@@ -25,7 +25,7 @@ export default {
           dark:text-secondary-100 uppercase">
             {{ productData.title }}
           </h3>
-          <p class="mt-1 font-serif text-sm font-medium
+          <p class="mt-1 rfs:text-base font-extralight
           text-secondary-400 dark:text-secondary-300">
             {{ productData.content }}</p>
       </div>
