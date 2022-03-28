@@ -80,7 +80,7 @@ export default {
       >
         <article class="order-1 py-12 px-4 w-full sm:px-6
         md:order-none md:w-1/2 lg:py-16 lg:px-8">
-            <h2 class="mb-4 rfs:text-3xl font-medium font-serif
+            <h2 class="mb-4 font-serif rfs:text-3xl font-medium
             text-primary-500/70 transition duration-150 ease-in-out"
             :class="{
               'group-hover:text-primary-500': isHovering === idx
@@ -88,8 +88,8 @@ export default {
             >
               {{ item.title }}
             </h2>
-            <p class="rfs:text-base text-secondary-400/70
-            font-serif tracking-wider font-light
+            <p class="font-serif rfs:text-base
+            font-light tracking-wider text-secondary-400/70
             transition duration-150 ease-in-out"
             :class="{
               'group-hover:text-secondary-400': isHovering === idx

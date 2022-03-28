@@ -85,13 +85,13 @@ export default {
       <div class="p-4" :class="{'hidden': article.tag[0] !== selectCategory}"
       v-show="selectCategory !== 'All' ">
         <div v-show="article.tag[0] === selectCategory">
-          <div class="flex justify-between gap-4">
+          <div class="flex gap-4 justify-between">
             <article>
-              <h2 class="border-b text-primary-400 text-4xl
-              font-serif font-medium
-              mb-4">{{article.title}}</h2>
-              <div class="space-y-2 font-light
-              font-serif text-lg text-secondary-400"
+              <h2 class="mb-4 font-serif text-4xl
+              font-medium text-primary-400
+              border-b">{{article.title}}</h2>
+              <div class="space-y-2 font-serif
+              text-lg font-light text-secondary-400"
               v-html="article.description" />
             </article>
             <figure>

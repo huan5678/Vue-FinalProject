@@ -46,8 +46,8 @@ export default {
           </div>
           <button
             type="submit"
-            class="btn font-normal text-white bg-primary-500
-            hover:bg-primary-500/80 border-0 sm:mt-0 sm:ml-4 sm:w-auto btn"
+            class="font-normal text-white bg-primary-500 hover:bg-primary-500/80
+            border-0 sm:mt-0 sm:ml-4 sm:w-auto btn"
           >
             訂閱電子報
             <i class="ml-3 text-2xl bi bi-envelope-plus"></i>

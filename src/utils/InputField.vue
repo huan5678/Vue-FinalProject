@@ -70,7 +70,7 @@ export default {
 </script>
 
 <template>
-  <div class="form-control w-full">
+  <div class="w-full form-control">
     <label class="label" :for="name">
       <span class="label-text">{{ label }}</span>
       </label>

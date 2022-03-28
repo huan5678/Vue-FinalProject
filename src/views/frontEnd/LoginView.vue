@@ -81,7 +81,7 @@ export default {
         <legend class="text-3xl font-medium
         tracking-wide text-center text-primary-600">管理者登入</legend>
         <div class="form-control">
-          <label for="name" class="label font-normal">
+          <label for="name" class="font-normal label">
             <span class="label-text">使用者帳號</span>
           </label>
           <input
@@ -94,7 +94,7 @@ export default {
           />
         </div>
         <div class="form-control">
-          <label for="password" class="label font-normal">
+          <label for="password" class="font-normal label">
             <span class="label-text">使用者密碼</span></label>
           <input
             id="password"
@@ -106,9 +106,9 @@ export default {
         </div>
         <button
           type="submit"
-          class="btn w-full text-secondary-50 bg-secondary-400 hover:bg-secondary-600
-          rounded-lg
-          transition duration-300"
+          class="w-full text-secondary-50 bg-secondary-400 hover:bg-secondary-600 rounded-lg
+          transition
+          duration-300 btn"
         >
           登入
         </button>

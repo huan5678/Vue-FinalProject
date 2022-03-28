@@ -5,6 +5,7 @@ import {
   computed,
   watch,
   ref,
+  reactive,
 } from 'vue';
 
 import useStore from '@/stores';
@@ -23,6 +24,37 @@ export default {
     } = cartStore;
     const router = useRouter();
     const openCart = ref(false);
+
+    const scroll = reactive({
+      current: 0,
+      prev: 0,
+      showHeader: true,
+    });
+
+    window.onscroll = () => {
+      scroll.current = window.scrollY;
+    };
+
+    watch(() => scroll.current, (newVal, oldVal) => {
+      const header = document.getElementById('header');
+      if (route.name !== 'home' && window.innerWidth > 540) { return; }
+      if (scroll.current !== 0) {
+        if (oldVal < newVal) {
+          // console.log('header out');
+          header.classList.remove('bg-secondary-900');
+          scroll.showHeader = false;
+        } else if (oldVal > newVal) {
+          // console.log('header in');
+          scroll.showHeader = true;
+          header.classList.add('bg-secondary-900/80');
+        }
+      } else {
+        // console.log('scroll = 0');
+        scroll.showHeader = true;
+        header.classList.remove('bg-secondary-900/80');
+        header.classList.add('bg-secondary-900');
+      }
+    });
 
     function handleIsLogout() {
       handleClearToken();
@@ -75,12 +107,16 @@ export default {
       cartList: computed(() => cartData.list),
       openCart,
       handleCart,
+      scroll,
     };
   },
 };
 </script>
 <template>
-  <section class="bg-secondary-900">
+  <section id="header" class="fixed top-0 left-0 bg-secondary-900
+  w-full z-10 transition-all duration-500"
+  :class="scroll.showHeader ? 'translate-y-0' : '-translate-y-full' "
+  >
     <nav class="container flex justify-between items-center p-3">
       <a href="/">
         <SvgLoader name="bannerLogo"

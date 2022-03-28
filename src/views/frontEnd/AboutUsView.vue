@@ -80,8 +80,8 @@ linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${abo
         </AppTitle>
         <div class="flex flex-col gap-6 justify-between mb-2 md:flex-row">
           <div class="order-1 mx-auto mb-6 space-y-2 text-secondary-700 md:order-none">
-            <h2 class="text-2xl font-serif font-medium text-center">我們的理念</h2>
-            <p class="font-light md:max-w-screen-md font-serif">
+            <h2 class="font-serif text-2xl font-medium text-center">我們的理念</h2>
+            <p class="font-serif font-light md:max-w-screen-md">
               <span class="block text-center text-primary-500">
                 「
                 <span class="font-medium text-primary-500/70">秋日薄暮，用菊花煮竹葉青，人與海棠俱醉</span>
@@ -90,7 +90,7 @@ linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${abo
               來點小酒，人和海棠花皆醉了。<br />
               這樣的場景僅在腦海里一閃而過，就不禁陶醉其中。
             </p>
-            <p class="font-light font-serif">
+            <p class="font-serif font-light">
               我們致力於打造一個舒適的飲酒場景，<br />
               希望客人在我們店裡只有愜意沒有拘謹。</p>
           </div>

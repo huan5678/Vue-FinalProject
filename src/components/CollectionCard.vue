@@ -17,15 +17,15 @@ export default {
 };
 </script>
 <template>
-  <div class="card rounded bg-secondary-100
-  dark:bg-secondary-800 shadow h-full justify-between">
+  <div class="justify-between h-full bg-secondary-100
+  dark:bg-secondary-800 rounded shadow card">
       <div class="py-2 px-4">
-          <h3 class="text-3xl font-bold text-secondary-700
-          font-serif
+          <h3 class="font-serif text-3xl font-bold
+          text-secondary-700
           dark:text-secondary-100 uppercase">
             {{ productData.title }}
           </h3>
-          <p class="mt-1 text-sm font-serif font-medium
+          <p class="mt-1 font-serif text-sm font-medium
           text-secondary-400 dark:text-secondary-300">
             {{ productData.content }}</p>
       </div>
@@ -35,12 +35,12 @@ export default {
       :alt="productData.title">
 
       <div class="flex justify-between items-center p-4 bg-secondary-900">
-          <span class="text-xl font-light font-mono
+          <span class="font-mono text-xl font-light
           text-secondary-100">${{ productData.price }}</span>
           <button type="button" class="font-light
           text-primary-600 hover:text-primary-200 focus:text-primary-400
-          hover:bg-transparent hover:border-primary-200
-          rounded-sm
+          hover:bg-transparent rounded-sm
+          hover:border-primary-200
           btn btn-md btn-outline"
           :class="isLoading === productData.id ? 'bg-gray-300 hover:bg-gray-300' : ''"
           :disabled="isLoading === productData.id"

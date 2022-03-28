@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-  <section class="card-side rounded md:max-w-screen-lg bg-secondary-50 shadow">
+  <section class="bg-secondary-50 rounded shadow md:max-w-screen-lg card-side">
     <ModalCardTitle title="產品詳細內容"
     :close-modal="handleOpenModal" />
     <figure>
@@ -79,9 +79,9 @@ export default {
           </li>
         </ul>
       </div>
-      <div class="carousel gap-4">
+      <div class="gap-4 carousel">
         <div v-for="img in targetProduct?.imagesUrl"
-            :key="img" class="carousel-item flex-auto">
+            :key="img" class="flex-auto carousel-item">
           <img
             class="object-cover max-h-96"
             width="500"

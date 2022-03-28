@@ -6,7 +6,7 @@ import heroBanner03 from '@/assets/heroBanner03.jpg';
 import heroBanner04 from '@/assets/heroBanner04.jpg';
 import ScrollMouse from '@/components/ScrollMouse.vue';
 
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 export default {
   components: {
@@ -25,6 +25,15 @@ export default {
 
     window.addEventListener('scroll', () => {
       scroll.value = (window.scrollY > 0);
+    });
+
+    onMounted(() => {
+      const hero = document.getElementById('hero');
+      const header = document.getElementById('header');
+      // console.log(header.offsetHeight);
+      // console.log(hero.offsetHeight);
+      hero.style.marginTop = `${header.offsetHeight}px`;
+      console.log(hero.style);
     });
 
     const handleAnimateCtrl = function (img) {
@@ -56,7 +65,7 @@ export default {
 </script>
 
 <template>
-  <section class="overflow-hidden relative min-h-[90vh] bg-secondary-900">
+  <section id="hero" class="overflow-hidden relative min-h-[90vh] bg-secondary-900">
     <div class="before:block absolute before:absolute
     w-full before:w-full h-full before:h-full
     bg-center bg-no-repeat before:bg-gradient-to-b
@@ -70,8 +79,8 @@ export default {
       class="
       text-primary-500 scale-50 md:scale-75
       lg:scale-110" />
-      <h1 class="p-2 pt-7 mb-9 font-bold
-      rfs:text-5xl font-serif tracking-[.5rem]
+      <h1 class="p-2 pt-7 mb-9 font-serif
+      rfs:text-5xl font-bold tracking-[.5rem]
       text-primary-400">
         喝酒是一種生活的態度
       </h1>

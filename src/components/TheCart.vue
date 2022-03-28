@@ -88,10 +88,10 @@ export default {
               <i class="text-2xl bi bi-x-lg"></i>
             </button>
           </div>
-          <ul class="border-t border-secondary-50
-          py-8 space-y-4">
+          <ul class="py-8 space-y-4
+          border-t border-secondary-50">
             <li v-for="cart in cartList" :key="cart.id"
-            class="flex justify-between items-center gap-4 pb-4 border-b">
+            class="flex gap-4 justify-between items-center pb-4 border-b">
               <button
                 type="button"
                 class="
@@ -102,7 +102,7 @@ export default {
                 btn btn-sm btn-square btn-outline
               " @click="handleDeleteCart(cart.id)"
               >
-                <i class="bi bi-x text-xl"></i>
+                <i class="text-xl bi bi-x"></i>
               </button>
               <div class="md:w-1/2 lg:w-1/3">
                 <img
@@ -112,8 +112,8 @@ export default {
                 />
               </div>
               <div class="flex flex-col flex-auto justify-center">
-                <p class="text-secondary-800 md:pt-0 badge
-                badge-outline badge-md select-none">{{ cart.product.category }}</p>
+                <p class="text-secondary-800 select-none md:pt-0
+                badge badge-outline badge-md">{{ cart.product.category }}</p>
                 <div class="flex gap-4 items-center pt-1">
                   <p class="text-base font-medium
                   text-secondary-800">{{ cart.product.title }}</p>

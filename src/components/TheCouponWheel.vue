@@ -52,13 +52,13 @@ export default {
 <template>
   <button
     type="button"
-    class="group btn btn-circle fixed right-4 bottom-16 gap-2
-    border-none bg-primary-700 hover:bg-primary-500"
+    class="group fixed right-4 bottom-16 gap-2 bg-primary-700 hover:bg-primary-500
+    border-none btn btn-circle"
   >
     <i
-      class="bi bi-postcard-heart text-xl
-      transition-all duration-700 ease-in-out
-      group-hover:scale-125"
+      class="text-xl transition-all duration-700
+      ease-in-out group-hover:scale-125 bi
+      bi-postcard-heart"
     ></i>
   </button>
   <AppRoulette ref="wheel" :items="items" @click="launchWheel" />
