@@ -1,5 +1,6 @@
 <script>
 import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { Form } from 'vee-validate';
 import * as Yup from 'yup';
 import useStore from '@/stores';
@@ -25,7 +26,9 @@ export default {
       userAddress: Yup.string().required('請輸入寄件地址'),
     });
 
-    function handleSubmit(data, { reset }) {
+    const router = useRouter();
+
+    function handleSubmit(data) {
       console.log(data);
       const orderData = {
         name: data.userName,
@@ -34,8 +37,10 @@ export default {
         address: data.userAddress,
         message: userRemark.value,
       };
-      handleSendOrder(orderData);
-      reset();
+      const toggle = handleSendOrder(orderData);
+      if (toggle) {
+        router.push('checkout/:id');
+      }
     }
     return {
       orderResult: computed(() => orderResult),
@@ -50,15 +55,18 @@ export default {
 </script>
 
 <template>
-  <section class="container pt-14 pb-20" id="order">
-    <h2 class="mb-8 text-2xl text-center">填寫訂單資料</h2>
+  <section id="order"
+  class="container py-4 lg:pt-14 lg:pb-20">
+    <h2 class="mb-8 text-2xl font-medium text-center">填寫訂單資料</h2>
     <Form
       action=""
-      class="mx-auto space-y-4 md:w-2/3"
+      class="mx-auto space-y-4"
       @submit="handleSubmit"
       :validation-schema="schema"
     >
-      <div class="flex gap-4 justify-between items-start mb-6">
+      <div class="flex justify-between items-start
+      flex-wrap lg:flex-nowrap
+      gap-6 mb-6">
         <InputField
           name="userName"
           type="text"
@@ -104,7 +112,7 @@ export default {
         <textarea
           id="userRemark"
           name="userRemark"
-          class="w-full form-control"
+          class="w-full form-style"
           v-model="userRemark"
           rows="4"
           placeholder="想要告訴我們什麼？"
@@ -112,18 +120,18 @@ export default {
           :class="{ 'opacity-30 cursor-not-allowed': cartListLength === 0 }"
         ></textarea>
       </div>
-
       <div class="pt-12">
         <button
           type="submit"
-          class="grid place-content-center py-3 mx-auto w-10/12 text-xl
-          text-white bg-black hover:bg-primary-700 rounded transition duration-300 ease-in-out"
+          class="btn w-full text-xl font-medium border-none
+          text-white bg-secondary-700 hover:bg-primary-700
+          rounded transition duration-300 ease-in-out"
           :class="{
             'opacity-30 cursor-not-allowed': cartListLength === 0,
           }"
           :disabled="cartListLength === 0"
         >
-          {{ cartListLength > 0 ? '送出預訂資料' : '目前購物車沒有商品' }}
+          {{ cartListLength > 0 ? '送出訂單資料' : '目前購物車沒有商品' }}
         </button>
       </div>
     </Form>

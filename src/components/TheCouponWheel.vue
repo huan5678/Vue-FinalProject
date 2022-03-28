@@ -50,16 +50,12 @@ export default {
 </script>
 
 <template>
-  <button
-    type="button"
-    class="group fixed right-4 bottom-16 gap-2 bg-primary-700 hover:bg-primary-500
-    border-none btn btn-circle"
-  >
-    <i
-      class="text-xl transition-all duration-700
-      ease-in-out group-hover:scale-125 bi
-      bi-postcard-heart"
-    ></i>
-  </button>
+  <div class="fixed right-0 bottom-0
+  translate-x-1/4 -translate-y-1/4 tooltip" data-tip="驚喜大轉盤">
+    <SvgLoader
+    name="wheel"
+    class="scale-50 active:scale-75
+    transition-all duration-500 ease-[cubic-bezier(0.18,0.89,0.32,1.28)]" />
+  </div>
   <AppRoulette ref="wheel" :items="items" @click="launchWheel" />
 </template>

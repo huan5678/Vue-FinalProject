@@ -9,7 +9,7 @@ import { Roulette } from 'vue3-roulette';
 
 import App from '@/App.vue';
 import router from '@/router';
-import svgLoader from '@/components/SvgLoader.vue';
+import svgLoader from '@/utils/SvgLoader.vue';
 import AlertModal from '@/components/AlertModal.vue';
 import AppTitle from '@/utils/AppTitle.vue';
 

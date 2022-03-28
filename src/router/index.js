@@ -40,10 +40,18 @@ const routes = [
       },
       {
         path: 'checkout',
+        name: 'check-order',
+        component: () => import('@/views/frontEnd/CheckOrderView.vue'),
+        meta: {
+          title: 'ChillBar秋吧 - 確認訂單',
+        },
+      },
+      {
+        path: 'checkout/:id',
         name: 'checkout',
         component: () => import('@/views/frontEnd/CheckoutView.vue'),
         meta: {
-          title: 'ChillBar秋吧 - 訂單結帳',
+          title: 'ChillBar秋吧 - 建立結帳',
         },
       },
       {

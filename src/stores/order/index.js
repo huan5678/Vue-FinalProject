@@ -1,12 +1,10 @@
 import { reactive, inject } from 'vue';
 import { defineStore } from 'pinia';
-import { useCartStore } from '../cart';
 
 export const useOrderStore = defineStore('order', () => {
   const axios = inject('axios');
   const baseUrl = process.env.VUE_APP_API_URL;
   const apiPath = process.env.VUE_APP_API_PATH;
-  const { handleGetCart } = useCartStore();
   const orderResult = reactive({
     success: false,
     message: '',
@@ -22,17 +20,18 @@ export const useOrderStore = defineStore('order', () => {
   });
 
   function handleSendOrder(data) {
-    axios.post(`${baseUrl}api/${apiPath}/order`, {
-      data: {
-        user: {
-          name: data.name,
-          email: data.email,
-          tel: data.tel,
-          address: data.address,
+    axios
+      .post(`${baseUrl}api/${apiPath}/order`, {
+        data: {
+          user: {
+            name: data.name,
+            email: data.email,
+            tel: data.tel,
+            address: data.address,
+          },
+          message: data.message,
         },
-        message: data.message,
-      },
-    })
+      })
       .then((res) => {
         // console.log(res.data);
         orderResult.success = res.data.success;
@@ -40,7 +39,7 @@ export const useOrderStore = defineStore('order', () => {
         orderResult.total = res.data.total;
         orderResult.create_at = res.data.create_at;
         orderResult.orderId = res.data.orderId;
-        handleGetCart();
+        return res.data.success;
       })
       .catch((err) => {
         console.dir(err);
@@ -48,7 +47,8 @@ export const useOrderStore = defineStore('order', () => {
   }
 
   function handleGetOrderList() {
-    axios.get(`${baseUrl}api/${apiPath}/orders`)
+    axios
+      .get(`${baseUrl}api/${apiPath}/orders`)
       .then((res) => {
         // console.log(res.data);
         orderList.success = res.data.success;

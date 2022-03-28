@@ -35,24 +35,27 @@ export default {
       scroll.current = window.scrollY;
     };
 
+    const header = ref(null);
     watch(() => scroll.current, (newVal, oldVal) => {
-      const header = document.getElementById('header');
-      if (route.name !== 'home' && window.innerWidth > 540) { return; }
+      if (route.name !== 'home' && window.innerWidth > 540) {
+        header.value.classList.add('bg-secondary-900');
+        return;
+      }
       if (scroll.current !== 0) {
         if (oldVal < newVal) {
           // console.log('header out');
-          header.classList.remove('bg-secondary-900');
+          header.value.classList.remove('bg-secondary-900');
           scroll.showHeader = false;
         } else if (oldVal > newVal) {
           // console.log('header in');
           scroll.showHeader = true;
-          header.classList.add('bg-secondary-900/80');
+          header.value.classList.add('bg-secondary-900/80');
         }
       } else {
         // console.log('scroll = 0');
         scroll.showHeader = true;
-        header.classList.remove('bg-secondary-900/80');
-        header.classList.add('bg-secondary-900');
+        header.value.classList.remove('bg-secondary-900/80');
+        header.value.classList.add('bg-secondary-900');
       }
     });
 
@@ -98,6 +101,14 @@ export default {
     );
 
     onMounted(() => {
+      if (route.name !== 'home') {
+        header.value.classList.remove('bg-secondary-900/80');
+        header.value.classList.remove('fixed');
+        header.value.classList.remove('top-0');
+        header.value.classList.remove('left-0');
+        header.value.classList.add('bg-secondary-900');
+        return;
+      }
       handleGetCart();
     });
 
@@ -108,12 +119,13 @@ export default {
       openCart,
       handleCart,
       scroll,
+      header,
     };
   },
 };
 </script>
 <template>
-  <section id="header" class="fixed top-0 left-0 bg-secondary-900
+  <section ref="header" class="
   w-full z-10 transition-all duration-500"
   :class="scroll.showHeader ? 'translate-y-0' : '-translate-y-full' "
   >

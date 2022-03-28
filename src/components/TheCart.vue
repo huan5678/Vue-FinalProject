@@ -45,6 +45,7 @@ export default {
     }
 
     function handleCheckout() {
+      context.attrs.handle(false);
       router.push('/checkout');
     }
 
@@ -259,7 +260,7 @@ export default {
                 </p>
               </div>
               <button
-                @onclick="handleCheckout"
+                @click="handleCheckout"
                 class="
                 w-full text-base leading-none text-secondary-50 bg-secondary-800
                 border border-secondary-800 btn
