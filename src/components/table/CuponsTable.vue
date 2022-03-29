@@ -70,18 +70,6 @@ export default {
           >
             {{ handleDateChange(item?.due_date) }}
           </td>
-
-          <td class="py-2 px-4 text-center whitespace-nowrap">
-            <button
-              type="button"
-              class="py-2 px-4 text-primary-500 hover:text-primary-50 hover:bg-primary-600
-              rounded border border-primary-500 hover:shadow
-              hover:shadow-primary-400 transition duration-200"
-              @click="openModal('getCouponDetail', item)"
-            >
-              查看細節
-            </button>
-          </td>
           <td class="py-2 px-4 text-center whitespace-nowrap">
             <button
               type="button"

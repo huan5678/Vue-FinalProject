@@ -1,12 +1,12 @@
 <script>
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import heroBanner01 from '@/assets/heroBanner01.jpg';
 import heroBanner02 from '@/assets/heroBanner02.jpg';
 import heroBanner03 from '@/assets/heroBanner03.jpg';
 import heroBanner04 from '@/assets/heroBanner04.jpg';
 import ScrollMouse from '@/components/ScrollMouse.vue';
 
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 
 export default {
   components: {
@@ -14,6 +14,7 @@ export default {
   },
   setup() {
     const router = useRouter();
+    const route = useRoute();
     const Banners = ref([
       heroBanner01, heroBanner02, heroBanner03, heroBanner04,
     ]);
@@ -23,18 +24,20 @@ export default {
     const active = ref(0);
     const preActive = ref(0);
 
-    window.addEventListener('scroll', () => {
-      scroll.value = (window.scrollY > 0);
-    });
-
-    onMounted(() => {
-      const hero = document.getElementById('hero');
-      const header = document.getElementById('header');
-      // console.log(header.offsetHeight);
-      // console.log(hero.offsetHeight);
-      hero.style.paddingTop = `${header.offsetHeight}px`;
-      console.log(hero.style);
-    });
+    if (route.name !== 'home') {
+      window.addEventListener('scroll', () => {
+        const hero = document.getElementById('hero');
+        const header = document.getElementById('header');
+        scroll.value = (window.scrollY > 0);
+        if (window.scrollY === 0) {
+          hero.style.transform = 'translateY(0px)';
+        } else if (window.scrollY < header.offsetHeight) {
+          hero.style.transform = `translateY(-${header.offsetHeight}px)`;
+        } else {
+          hero.style.transform = 'translateY(0px)';
+        }
+      });
+    }
 
     const handleAnimateCtrl = function (img) {
       return {
@@ -65,7 +68,8 @@ export default {
 </script>
 
 <template>
-  <section id="hero" class="overflow-hidden relative min-h-screen bg-secondary-900">
+  <section id="hero" class="relative transition-all duration-500
+  min-h-screen bg-secondary-900">
     <div class="before:block absolute before:absolute
     w-full before:w-full h-full before:h-full
     bg-center bg-no-repeat before:bg-gradient-to-b

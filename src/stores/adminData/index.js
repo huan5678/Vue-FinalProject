@@ -77,6 +77,7 @@ export const useAdminDataStore = defineStore('adminData', () => {
   }
   // GET products/all, products, orders, coupons, articles, article/{id}
   function handleGetDataList(page, category) {
+    console.log(`getDataList page=${page}, category=${category}`);
     let target = adminData.selectedTarget;
     switch (target) {
       case 'product':
@@ -99,17 +100,14 @@ export const useAdminDataStore = defineStore('adminData', () => {
     if (page === undefined) {
       currentPage = adminData.currentPage;
     }
-    let productCategory = category;
-    if (category === null) {
+    let productCategory = `&category=${category}`;
+    if (category === null || category === undefined) {
       productCategory = '';
     }
     axios
-      .get(
-        `${baseUrl}api/${apiPath}/admin/${target}/?page=${currentPage}&category=${productCategory}`,
-        {
-          token: adminStore.token,
-        },
-      )
+      .get(`${baseUrl}api/${apiPath}/admin/${target}/?page=${currentPage}${productCategory}`, {
+        token: adminStore.token,
+      })
       .then((res) => {
         // console.log(res.data);
         adminData.dataList = res.data[`${target}`];

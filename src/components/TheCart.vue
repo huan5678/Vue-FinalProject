@@ -1,5 +1,5 @@
 <script>
-import { computed, watch, ref } from 'vue';
+import { computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import useStore from '@/stores';
 
@@ -23,7 +23,6 @@ export default {
       return num !== undefined ? Number(number.toFixed(1)).toLocaleString() : 0;
     }
 
-    const deliveryFee = ref(60);
     const cartTotalPrice = computed(() => moneyFormat(cartData.totalPrice));
 
     watch(
@@ -32,11 +31,8 @@ export default {
         if (newValue.length > 0) handleGetCart();
       },
     );
-    if (cartData.totalPrice >= 1000) {
-      deliveryFee.value = 0;
-    }
 
-    const cartFinalPrice = computed(() => moneyFormat(cartData.totalPrice + deliveryFee.value));
+    const cartFinalPrice = computed(() => moneyFormat(cartData.totalPrice));
 
     function handleCloseCart(event) {
       if (event.target.id === 'checkout') {
@@ -59,7 +55,6 @@ export default {
       handleClearCart,
       handleUpdateCart,
       moneyFormat,
-      deliveryFee,
       cart,
       handleCloseCart,
       isLoading: computed(() => cartStore.isLoading),
@@ -241,14 +236,9 @@ export default {
                   <p class="text-base leading-none text-secondary-800">${{ cartTotalPrice }}</p>
                 </li>
                 <li class="flex justify-between items-center">
-                  <p class="text-base leading-none text-secondary-800">運費</p>
+                  <p class="text-base leading-none text-secondary-800">折價</p>
                   <p class="text-base leading-none text-secondary-800">
-                    {{ deliveryFee === 0 ? '滿千免運' : `${deliveryFee}` }}
                   </p>
-                </li>
-                <li class="flex justify-between items-center" v-if="cart">
-                  <p class="text-base leading-none text-secondary-800">折扣</p>
-                  <p class="text-base leading-none text-secondary-800">$35</p>
                 </li>
               </ul>
             </div>

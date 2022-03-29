@@ -39,6 +39,7 @@ export default {
     watch(() => scroll.current, (newVal, oldVal) => {
       if (route.name !== 'home' && window.innerWidth > 540) {
         header.value.classList.add('bg-secondary-900');
+        return;
       }
       if (scroll.current !== 0) {
         if (oldVal < newVal) {
@@ -108,7 +109,7 @@ export default {
         header.value.classList.add('bg-secondary-900');
       } else {
         header.value.classList.add('bg-secondary-900/80');
-        header.value.classList.add('fixed');
+        header.value.classList.add('absolute');
         header.value.classList.add('top-0');
         header.value.classList.add('left-0');
       }

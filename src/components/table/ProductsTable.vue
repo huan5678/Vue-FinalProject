@@ -40,8 +40,7 @@ export default {
         <td width="250" class="p-4 text-lg text-right whitespace-nowrap">原價</td>
         <td width="250" class="p-4 text-lg text-right whitespace-nowrap">售價</td>
         <td width="250" class="p-4 text-lg text-center whitespace-nowrap">是否啟用</td>
-        <td width="200" class="p-4 text-lg text-center whitespace-nowrap">查看細節</td>
-        <td colspan="2" width="400" class="p-4 text-lg text-center whitespace-nowrap">功能</td>
+        <td colspan="3" width="400" class="p-4 text-lg text-center whitespace-nowrap">功能</td>
       </tr>
     </thead>
     <tbody>

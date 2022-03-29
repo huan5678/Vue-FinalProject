@@ -19,8 +19,12 @@ export default {
     onMounted(() => {
       handleGetProductAll();
     });
+
+    const recommendArr = computed(() => productList.products);
+    const result = computed(() => recommendArr.value.filter((item) => item.recommend));
+
     return {
-      productList: computed(() => productList.products),
+      productList: computed(() => result.value),
       productCategory: computed(() => productCategory),
       isLoading: computed(() => isLoading),
       modules: [Autoplay],
@@ -64,7 +68,7 @@ export default {
     v-for="product in productList"
     :key="product.id"
     >
-      <CollectionCard v-if="product.recommend" :product="product" />
+      <CollectionCard :product="product" />
     </swiper-slide>
     </swiper>
   </section>

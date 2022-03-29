@@ -40,8 +40,7 @@ export default {
         <td width="250" class="p-4 text-lg text-right whitespace-nowrap">訂購日期</td>
         <td width="250" class="p-4 text-lg text-right whitespace-nowrap">訂單總價</td>
         <td width="250" class="p-4 text-lg text-center whitespace-nowrap">是否付款</td>
-        <td width="200" class="p-4 text-lg text-center whitespace-nowrap">查看細節</td>
-        <td width="200" class="p-4 text-lg text-center whitespace-nowrap">功能</td>
+        <td colspan="3" class="p-4 text-lg text-center whitespace-nowrap">功能</td>
       </tr>
     </thead>
     <tbody>

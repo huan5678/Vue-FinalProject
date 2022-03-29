@@ -1,6 +1,6 @@
 const getDate = function (timestamp = 0) {
   let times = null;
-  if (timestamp.length < 13) {
+  if (timestamp.toString().length < 13) {
     times = timestamp * 1000;
   } else {
     times = timestamp;
