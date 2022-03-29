@@ -52,17 +52,17 @@ export default {
   <section class="py-8 bg-gray-200">
     <CheckStep active="1" />
     <div class="container">
-      <div class="flex flex-wrap lg:flex-nowrap
-      justify-between gap-4">
-        <div class="flex flex-col justify-between
-        pb-4 lg:pt-14 lg:pb-20 border-b border-secondary-500
-        lg:border-0
-        w-full md:w-2/3 flex-auto">
-          <h1 class="py-4 text-center font-medium text-2xl">訂單內容</h1>
-          <ul id="list" class="space-y-4 overflow-y-auto max-h-[50vh]">
+      <div class="flex flex-wrap gap-4
+      justify-between lg:flex-nowrap">
+        <div class="flex flex-col flex-auto
+        justify-between pb-4 w-full border-b border-secondary-500
+        md:w-2/3
+        lg:pt-14 lg:pb-20 lg:border-0">
+          <h1 class="py-4 text-2xl font-medium text-center">訂單內容</h1>
+          <ul id="list" class="overflow-y-auto space-y-4 max-h-[50vh]">
             <li v-for="cart in cartList" :key="cart.id"
-            class="flex justify-between gap-4 px-4
-            items-center border-b pb-4 border-secondary-200">
+            class="flex gap-4 justify-between items-center
+            px-4 pb-4 border-b border-secondary-200">
               <div class="flex gap-4">
                 <img
                   class="object-cover w-20 h-20"
@@ -71,7 +71,7 @@ export default {
                 />
                 <div class="space-y-4">
                   <h3 class="text-xl font-medium">{{ cart.product.title }}</h3>
-                  <span class="font-mono block tracking-wider">數量：{{ cart.qty }}</span>
+                  <span class="block font-mono tracking-wider">數量：{{ cart.qty }}</span>
                 </div>
               </div>
               <span class="font-mono tracking-widest">
@@ -79,15 +79,15 @@ export default {
               </span>
             </li>
           </ul>
-          <div class="text-right pt-4">
+          <div class="pt-4 text-right">
             <p v-if="cartList.length === 0"
-            class="text-center text-2xl text-secondary-500">
+            class="text-2xl text-center text-secondary-500">
               您的購物車是空的
             </p>
             <p class="text-2xl font-medium tracking-widest" v-show="cartList.length > 0">
               總金額
             </p>
-            <p class="text-xl font-mono font-extralight" v-show="cartList.length > 0">
+            <p class="font-mono text-xl font-extralight" v-show="cartList.length > 0">
               NT${{ cartFinalPrice }}
             </p>
           </div>

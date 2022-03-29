@@ -126,7 +126,7 @@ export default {
                 <div class="flex gap-4 items-center pt-1">
                   <p class="text-base font-medium
                   text-secondary-800">{{ cart.product.title }}</p>
-                  <div class="ml-auto flex gap-1 items-center">
+                  <div class="flex gap-1 items-center ml-auto">
                     <button class="btn btn-sm btn-outline btn-square"
                     @click="cart.qty += 1; handleUpdateCart(cart.id, cart.qty)">
                       <svg

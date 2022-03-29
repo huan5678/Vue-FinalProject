@@ -39,7 +39,6 @@ export default {
     watch(() => scroll.current, (newVal, oldVal) => {
       if (route.name !== 'home' && window.innerWidth > 540) {
         header.value.classList.add('bg-secondary-900');
-        return;
       }
       if (scroll.current !== 0) {
         if (oldVal < newVal) {
@@ -107,7 +106,11 @@ export default {
         header.value.classList.remove('top-0');
         header.value.classList.remove('left-0');
         header.value.classList.add('bg-secondary-900');
-        return;
+      } else {
+        header.value.classList.add('bg-secondary-900/80');
+        header.value.classList.add('fixed');
+        header.value.classList.add('top-0');
+        header.value.classList.add('left-0');
       }
       handleGetCart();
     });
@@ -125,8 +128,8 @@ export default {
 };
 </script>
 <template>
-  <section ref="header" class="
-  w-full z-10 transition-all duration-500"
+  <section id="header" ref="header" class="
+  z-10 w-full transition-all duration-500"
   :class="scroll.showHeader ? 'translate-y-0' : '-translate-y-full' "
   >
     <nav class="container flex justify-between items-center p-3">
@@ -153,9 +156,6 @@ export default {
             </i>
           </button>
         </li>
-        <!-- <li>
-          <AppLink to="http://google.com">Google</AppLink>
-        </li> -->
       </ul>
       <div class="flex gap-4 justify-center items-center" v-if="route.name === 'dashboard'">
         <button

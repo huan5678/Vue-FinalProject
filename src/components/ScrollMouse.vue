@@ -7,7 +7,7 @@
     font-thin text-center text-primary-500
     animate-pulse -translate-x-1/2
     -translate-y-[150%]
-    "><i class="bi bi-arrow-down-short text-2xl" /></span>
+    "><i class="text-2xl bi bi-arrow-down-short" /></span>
   </div>
 </template>
 <style lang="scss" scoped>

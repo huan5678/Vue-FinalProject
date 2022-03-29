@@ -64,9 +64,9 @@ export default {
       @submit="handleSubmit"
       :validation-schema="schema"
     >
-      <div class="flex justify-between items-start
-      flex-wrap lg:flex-nowrap
-      gap-6 mb-6">
+      <div class="flex flex-wrap gap-6
+      justify-between items-start
+      mb-6 lg:flex-nowrap">
         <InputField
           name="userName"
           type="text"
@@ -123,9 +123,9 @@ export default {
       <div class="pt-12">
         <button
           type="submit"
-          class="btn w-full text-xl font-medium border-none
-          text-white bg-secondary-700 hover:bg-primary-700
-          rounded transition duration-300 ease-in-out"
+          class="w-full text-xl font-medium text-white bg-secondary-700
+          hover:bg-primary-700 rounded border-none
+          transition duration-300 ease-in-out btn"
           :class="{
             'opacity-30 cursor-not-allowed': cartListLength === 0,
           }"
