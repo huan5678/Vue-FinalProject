@@ -1,21 +1,28 @@
 <script>
-import { computed, watch } from 'vue';
+import {
+  computed,
+  watch,
+  onMounted,
+  ref,
+} from 'vue';
 import { useRouter } from 'vue-router';
 import useStore from '@/stores';
 
 export default {
   emits: ['handleCart'],
   setup(props, context) {
-    const { cartStore } = useStore();
+    const { cartStore, couponStore } = useStore();
     const {
       cartData,
       handleGetCart,
       handleDeleteCart,
       handleClearCart,
       handleUpdateCart,
+      handleSetResult,
     } = cartStore;
     const router = useRouter();
     const cart = {};
+    const { couponData } = couponStore;
 
     function moneyFormat(num, qty) {
       let number = num;
@@ -32,8 +39,6 @@ export default {
       },
     );
 
-    const cartFinalPrice = computed(() => moneyFormat(cartData.totalPrice));
-
     function handleCloseCart(event) {
       if (event.target.id === 'checkout') {
         context.attrs.handle(false);
@@ -44,6 +49,35 @@ export default {
       context.attrs.handle(false);
       router.push('/checkout');
     }
+
+    const checkCoupon = ref('');
+    const couponList = computed(() => couponData.couponList);
+    const coupon = localStorage.getItem('coupon');
+
+    onMounted(() => {
+      // console.log(coupon);
+      // console.log(couponList.value.filter((item) => item.code === coupon));
+      if (coupon !== null) {
+        [checkCoupon.value] = couponList.value.filter((item) => item.code === coupon);
+      }
+      // console.log(checkCoupon.value);
+    });
+
+    const cartFinalPrice = computed(() => {
+      let resultPrice = 0;
+      if (coupon !== null) {
+        [checkCoupon.value] = couponList.value.filter((item) => item.code === coupon);
+        if (checkCoupon.value.rules === 'minus') {
+          resultPrice = cartData.totalPrice - checkCoupon.value.price;
+        } else {
+          resultPrice = cartData.totalPrice * checkCoupon.value.price;
+        }
+      } else {
+        resultPrice = cartData.totalPrice;
+      }
+      handleSetResult(resultPrice);
+      return moneyFormat(resultPrice);
+    });
 
     return {
       windowWidth: window.innerWidth,
@@ -59,6 +93,7 @@ export default {
       handleCloseCart,
       isLoading: computed(() => cartStore.isLoading),
       handleCheckout,
+      checkCoupon,
     };
   },
 };
@@ -86,7 +121,7 @@ export default {
           id="scroll"
         >
           <div class="flex justify-between items-center">
-            <h2 class="pt-3 text-3xl font-medium text-secondary-800 lg:text-4xl">購物車內容</h2>
+            <h2 class="pt-3 font-medium text-secondary-800 rfs:text-4xl">購物車內容</h2>
             <button class="btn btn-ghost"
             @click="$emit('handleCart', handleCart)" @keydown.esc="handleCart">
               <i class="text-2xl bi bi-x-lg"></i>
@@ -178,17 +213,6 @@ export default {
                       <i class="bi bi-dash-lg" :class="{ 'hidden' : isLoading === cart.id }" />
                     </button>
                   </div>
-                  <!-- <select
-                    aria-label="Select quantity"
-                    class="ml-auto w-1/4
-                    rounded border border-secondary-200 focus:outline-none"
-                    v-model="cart.qty"
-                    @change="handleUpdateCart(cart.id, cart.qty)"
-                  >
-                    <option v-for="num in 20" :value="num" :key="'項目' + num">
-                      {{ num }}
-                    </option>
-                  </select> -->
                 </div>
                 <ul class="pt-5 space-y-6">
                   <li class="flex justify-between items-center">
@@ -229,23 +253,24 @@ export default {
             lg:py-20 lg:px-8 lg:h-screen"
           >
             <div>
-              <h2 class="text-3xl font-medium leading-9 text-secondary-800 lg:text-4xl">合計</h2>
+              <h2 class="rfs:text-3xl font-medium leading-9 text-secondary-800 lg:text-4xl">合計</h2>
               <ul class="pt-12 space-y-6">
                 <li class="flex justify-between items-center">
-                  <p class="text-base leading-none text-secondary-800">小計</p>
-                  <p class="text-base leading-none text-secondary-800">${{ cartTotalPrice }}</p>
+                  <p class="rfs:text-base leading-none text-secondary-800">小計</p>
+                  <p class="rfs:text-base leading-none text-secondary-800">${{ cartTotalPrice }}</p>
                 </li>
                 <li class="flex justify-between items-center">
-                  <p class="text-base leading-none text-secondary-800">折價</p>
-                  <p class="text-base leading-none text-secondary-800">
+                  <p class="rfs:text-base leading-none text-secondary-800">優惠折價券</p>
+                  <p class="rfs:text-base leading-none text-secondary-800">
+                    {{checkCoupon.name ? checkCoupon.name : '您還未取得優惠券'}}
                   </p>
                 </li>
               </ul>
             </div>
             <div>
               <div class="flex justify-between items-center pt-20 pb-6 lg:pt-5">
-                <p class="text-2xl leading-normal text-secondary-800">總計</p>
-                <p class="text-2xl font-bold leading-normal text-right text-secondary-800">
+                <p class="rfs:text-2xl leading-normal text-secondary-800">總計</p>
+                <p class="rfs:text-2xl font-bold leading-normal text-right text-secondary-800">
                   ${{ cartFinalPrice }}
                 </p>
               </div>

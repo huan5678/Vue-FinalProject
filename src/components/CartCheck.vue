@@ -1,13 +1,20 @@
 <script>
 import useStore from '@/stores';
-import { onMounted, computed, watch } from 'vue';
+import {
+  onMounted,
+  computed,
+  watch,
+  ref,
+} from 'vue';
 import OrderForm from '@/components/OrderForm.vue';
 import CheckStep from '@/components/CheckStep.vue';
+import TheRecommend from '@/components/TheRecommend.vue';
 
 export default {
   components: {
     OrderForm,
     CheckStep,
+    TheRecommend,
   },
   setup() {
     const { cartStore } = useStore();
@@ -18,6 +25,7 @@ export default {
       handleClearCart,
       handleUpdateCart,
     } = cartStore;
+    const showRecommended = ref(false);
 
     function moneyFormat(num, qty) {
       let number = num;
@@ -39,10 +47,12 @@ export default {
       cartList: computed(() => cartData.list),
       cartTotalPrice: computed(() => moneyFormat(cartData.totalPrice)),
       cartFinalPrice: computed(() => moneyFormat(cartData.finalPrice)),
+      cartResultPrice: computed(() => cartData.resultPrice),
       handleDeleteCart,
       handleClearCart,
       handleUpdateCart,
       moneyFormat,
+      showRecommended,
     };
   },
 };
@@ -51,6 +61,13 @@ export default {
 <template>
   <section class="py-8 bg-gray-200">
     <CheckStep active="1" />
+    <div class="flex justify-start items-center p-4">
+      <label class="label cursor-pointer gap-2">
+        <span class="text-lg">還想加購點什麼</span>
+        <input type="checkbox" class="toggle" v-model="showRecommended">
+      </label>
+    </div>
+    <TheRecommend v-if="showRecommended" title="還有些好貨" />
     <div class="container">
       <div class="flex flex-wrap gap-4
       justify-between lg:flex-nowrap">
@@ -88,7 +105,7 @@ export default {
               總金額
             </p>
             <p class="font-mono text-xl font-extralight" v-show="cartList.length > 0">
-              NT${{ cartFinalPrice }}
+              NT${{ cartResultPrice }}
             </p>
           </div>
         </div>

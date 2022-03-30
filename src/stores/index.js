@@ -3,6 +3,7 @@ import { useAdminDataStore } from './adminData';
 import { useProductStore } from './product';
 import { useOrderStore } from './order';
 import { useCartStore } from './cart';
+import { useCouponStore } from './coupon';
 
 export default function useStore() {
   const adminStore = useAdminStore();
@@ -10,6 +11,7 @@ export default function useStore() {
   const productStore = useProductStore();
   const orderStore = useOrderStore();
   const cartStore = useCartStore();
+  const couponStore = useCouponStore();
 
   return {
     adminStore,
@@ -17,5 +19,6 @@ export default function useStore() {
     productStore,
     orderStore,
     cartStore,
+    couponStore,
   };
 }

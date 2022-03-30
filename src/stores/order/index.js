@@ -18,6 +18,12 @@ export const useOrderStore = defineStore('order', () => {
     pagination: {},
     message: [],
   });
+  const orderData = reactive({
+    success: false,
+    order: {},
+    total: 0,
+    user: {},
+  });
 
   function handleSendOrder(data) {
     axios
@@ -39,10 +45,27 @@ export const useOrderStore = defineStore('order', () => {
         orderResult.total = res.data.total;
         orderResult.create_at = res.data.create_at;
         orderResult.orderId = res.data.orderId;
+        localStorage.setItem('order_id', res.data.orderId);
         return res.data.success;
       })
       .catch((err) => {
         console.dir(err);
+      });
+  }
+
+  function handleGetOrderData(id) {
+    axios
+      .get(`${baseUrl}api/${apiPath}/order/${id}`)
+      .then((res) => {
+        orderData.success = res.data.success;
+        orderData.order = res.data.order;
+        orderData.total = res.data.total;
+        orderData.user = res.data.user;
+        return res.data.success;
+      })
+      .catch((err) => {
+        console.dir(err);
+        return err.response.success;
       });
   }
 
@@ -64,8 +87,10 @@ export const useOrderStore = defineStore('order', () => {
   return {
     orderResult,
     orderList,
+    orderData,
     handleSendOrder,
     handleGetOrderList,
+    handleGetOrderData,
   };
 });
 export default useOrderStore;

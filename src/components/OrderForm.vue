@@ -1,6 +1,5 @@
 <script>
 import { computed, ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { Form } from 'vee-validate';
 import * as Yup from 'yup';
 import useStore from '@/stores';
@@ -13,7 +12,7 @@ export default {
   },
   setup() {
     const { orderStore, cartStore } = useStore();
-    const { orderResult, orderList, handleSendOrder } = orderStore;
+    const { handleSendOrder } = orderStore;
     const { cartData } = cartStore;
     const userRemark = ref('');
     const phoneRegex = /09\d{2}-?\d{3}-?\d{3}/;
@@ -26,10 +25,8 @@ export default {
       userAddress: Yup.string().required('請輸入寄件地址'),
     });
 
-    const router = useRouter();
-
     function handleSubmit(data) {
-      console.log(data);
+      // console.log(data);
       const orderData = {
         name: data.userName,
         email: data.userEmail,
@@ -37,14 +34,9 @@ export default {
         address: data.userAddress,
         message: userRemark.value,
       };
-      const toggle = handleSendOrder(orderData);
-      if (toggle) {
-        router.push('checkout/:id');
-      }
+      handleSendOrder(orderData);
     }
     return {
-      orderResult: computed(() => orderResult),
-      orderList: computed(() => orderList),
       handleSubmit,
       schema,
       userRemark,
@@ -113,9 +105,9 @@ export default {
           id="userRemark"
           name="userRemark"
           class="w-full form-style"
-          v-model="userRemark"
           rows="4"
           placeholder="想要告訴我們什麼？"
+          v-model="userRemark"
           :disabled="cartListLength === 0"
           :class="{ 'opacity-30 cursor-not-allowed': cartListLength === 0 }"
         ></textarea>
@@ -124,7 +116,8 @@ export default {
         <button
           type="submit"
           class="w-full text-xl font-medium text-white bg-secondary-700
-          hover:bg-primary-700 rounded border-none
+          hover:bg-primary-600 rounded border-none
+          active:bg-primary-500
           transition duration-300 ease-in-out btn"
           :class="{
             'opacity-30 cursor-not-allowed': cartListLength === 0,

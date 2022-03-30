@@ -11,7 +11,8 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  setup() {
+  props: ['title'],
+  setup(props) {
     const { productStore } = useStore();
     const {
       productList, productCategory, handleGetProductAll, isLoading,
@@ -28,6 +29,7 @@ export default {
       productCategory: computed(() => productCategory),
       isLoading: computed(() => isLoading),
       modules: [Autoplay],
+      titles: props.title,
     };
   },
 };
@@ -36,7 +38,7 @@ export default {
 <template>
   <section class="container pb-6">
     <AppTitle level="2" class="mb-12">
-      推薦給您
+      {{ titles }}
     </AppTitle>
     <swiper
       class="select-none"

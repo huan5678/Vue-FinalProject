@@ -31,6 +31,8 @@ export default {
       showHeader: true,
     });
 
+    const isHome = ref(true);
+
     const openDropdown = ref(false);
 
     window.onscroll = () => {
@@ -95,6 +97,11 @@ export default {
 
     onMounted(() => {
       handleGetCart();
+      if (route.name === 'home') {
+        isHome.value = true;
+      } else {
+        isHome.value = false;
+      }
     });
 
     return {
@@ -106,15 +113,20 @@ export default {
       scroll,
       header,
       openDropdown,
+      isHome,
     };
   },
 };
 </script>
 <template>
   <section id="header" ref="header"
-  class="sticky top-0 bg-secondary-900/70
-  z-30 w-full transition-all duration-500"
-  :class="scroll.showHeader ? 'translate-y-0' : '-translate-y-full' "
+  class="z-30 w-full transition-all duration-500"
+  :class="{
+    'sticky top-0 bg-secondary-900/70': isHome,
+    'bg-secondary-700': !isHome,
+    'translate-y-0': scroll.showHeader,
+    '-translate-y-full': !scroll.showHeader,
+  }"
   >
     <nav class="container relative md:static
     flex justify-between items-center p-2 px-1 md:p-3">
@@ -147,8 +159,9 @@ export default {
           v-if="route.name !== 'dashboard'">
             <AppLink to="about"> 關於我們 </AppLink>
           </li>
+          <li v-if="route.name === 'dashboard' || route.name === 'confirm'"></li>
           <li class="relative w-full md:w-auto md:flex-auto"
-          v-if="route.name !== 'dashboard'">
+          v-else>
             <span class="absolute top-0 right-0 rfs:text-xs
             text-primary-50 bg-primary-500 badge
             " v-show="cartList.length > 0">{{ cartList.length }}</span>

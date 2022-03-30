@@ -12,9 +12,19 @@ export const useCartStore = defineStore('cart', () => {
     totalPrice: 0,
     finalPrice: 0,
     isOpenCart: false,
+    resultPrice: 0,
+    checkoutStep: 1,
   });
 
   const isLoading = ref('');
+
+  function handleSetResult(val) {
+    cartData.resultPrice = val;
+  }
+
+  function handleSetCheckoutStep(val) {
+    cartData.checkoutStep = val;
+  }
 
   function handleGetCart() {
     axios
@@ -110,6 +120,8 @@ export const useCartStore = defineStore('cart', () => {
     handleDeleteCart,
     handleUpdateCart,
     handleClearCart,
+    handleSetResult,
+    handleSetCheckoutStep,
   };
 });
 export default useCartStore;

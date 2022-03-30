@@ -15,7 +15,7 @@ export default {
   setup() {
     const { productStore } = useStore();
     const {
-      productList, handleGetProductList, productCategory, handleGetProductAll, isLoading,
+      productList, handleGetProductList, productCategory, isLoading,
     } = productStore;
 
     const baseUrl = process.env.VUE_APP_API_URL;
@@ -36,19 +36,21 @@ export default {
     }
 
     onMounted(() => {
-      if (productList.selectCategory === '') {
-        handleGetProductAll();
-      }
       handleGetArticleAll();
+      handleGetProductList(productList.selectCategory);
     });
 
     function handleCategoryChange(value) {
       selectCategory.value = value;
-      if (value === 'All') {
-        handleGetProductAll();
-      } else {
-        handleGetProductList(value);
-      }
+      handleGetProductList(value, productList.currentPage);
+    }
+
+    function handlePaginationAction(val) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+      handleGetProductList(productList.selectCategory, val);
     }
 
     return {
@@ -57,6 +59,8 @@ export default {
       productCategory: computed(() => productCategory),
       handleCategoryChange,
       isLoading: computed(() => isLoading),
+      pagination: computed(() => productList.pagination),
+      handlePaginationAction,
       articles,
     };
   },
@@ -111,13 +115,63 @@ export default {
         </div>
       </div>
     </template>
-    <ul class="grid grid-cols-4 gap-4">
+    <ul class="grid grid-cols-4 gap-4 mb-4 pb-4 border-b">
       <li
         class=""
         v-for="product in productList"
         :key="product.id"
       >
         <ProductCard :product="product" />
+      </li>
+    </ul>
+    <!-- 分頁 -->
+    <ul v-if="selectCategory === 'All' || selectCategory === ''"
+    class="flex gap-4 justify-center items-center pb-12 mx-auto">
+      <li>
+        <button
+          type="button"
+          class="py-1 px-2 text-secondary-300 disabled:text-secondary-300 disabled:bg-secondary-100
+          rounded border
+          border-secondary-300 disabled:border-secondary-100"
+          :class="!pagination?.has_pre ?
+          '' : 'hover:bg-secondary-400 hover:border-secondary-400 hover:text-white' "
+          :disabled="!pagination?.has_pre"
+          @click="handlePaginationAction(pagination?.current_page - 1)"
+        >
+          <i class="bi bi-arrow-left"></i>
+        </button>
+      </li>
+      <li
+      v-for="page in pagination?.total_pages"
+      :key="page + new Date().getMilliseconds()">
+        <button
+          type="button"
+          class="py-1 px-3 rounded"
+          :class="
+            page === pagination?.current_page ?
+            `border-secondary-600 text-secondary-500
+            border` :
+            `text-secondary-300 hover:text-secondary-600
+            `
+          "
+          @click="handlePaginationAction(page)"
+        >
+          {{ page }}
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="py-1 px-2 text-secondary-300 disabled:text-secondary-300 disabled:bg-secondary-100
+          rounded border
+          border-secondary-300 disabled:border-secondary-100"
+          :class="!pagination?.has_next ?
+          '' : 'hover:bg-secondary-400 hover:border-secondary-400 hover:text-white' "
+          :disabled="!pagination?.has_next"
+          @click="handlePaginationAction(pagination?.current_page + 1)"
+        >
+          <i class="bi bi-arrow-right"></i>
+        </button>
       </li>
     </ul>
   </section>

@@ -34,10 +34,10 @@ export default {
   <div class="container">
     <ul class="flex gap-4 justify-between">
       <li v-for="(item, idx) in data" :key="item.title"
-      class="flex-grow p-2 rfs:text-base font-light text-center md:rfs:text-lg"
+      class="flex-grow p-1 rfs:text-base font-light text-center md:rfs:text-lg"
       :class="action === String(idx + 1) ?
       `bg-secondary-500 text-primary-300` : `border-secondary-700 text-secondary-400`">
-      <span class="block py-2 px-4 border lg:py-4 lg:px-10"
+      <span class="block py-2 border lg:py-2"
       :class="action === String(idx + 1) ?
       `border-primary-300` : `border-secondary-400`"
       >

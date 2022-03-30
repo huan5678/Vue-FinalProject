@@ -63,7 +63,7 @@ export const useProductStore = defineStore('product', () => {
 
   function handleGetProductList(category = '', page = productList.currentPage) {
     let selectCategory = category;
-    if (category === 'all') {
+    if (category === 'All') {
       selectCategory = '';
     }
     console.log(selectCategory);

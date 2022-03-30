@@ -47,11 +47,11 @@ const routes = [
         },
       },
       {
-        path: 'checkout/:id',
-        name: 'checkout',
-        component: () => import('@/views/frontEnd/CheckoutView.vue'),
+        path: 'confirm',
+        name: 'order-confirm',
+        component: () => import('@/views/frontEnd/OrderConfirmView.vue'),
         meta: {
-          title: 'ChillBar秋吧 - 建立結帳',
+          title: 'ChillBar秋吧 - 建立訂單',
         },
       },
       {
@@ -92,6 +92,11 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+  scrollBehavior() {
+    return {
+      top: 0,
+    };
+  },
 });
 
 export default router;
