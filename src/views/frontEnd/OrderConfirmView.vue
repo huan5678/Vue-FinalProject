@@ -43,7 +43,7 @@ export default {
       },
     );
 
-    function handlePayment(id) {
+    function handlePayment(id = localStorage.getItem('order_id')) {
       axios.post(`${baseUrl}api/${apiPath}/pay/${id}`)
         .then((res) => {
           paymentData.success = res.data.success;
