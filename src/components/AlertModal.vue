@@ -3,6 +3,7 @@ export default {
   name: 'AlertModal',
   inheritAttrs: false,
   emits: ['handleCloseModal'],
+  props: ['closeButton'],
 };
 </script>
 
@@ -15,7 +16,8 @@ export default {
   >
     <span class="block relative p-4 text-secondary-100 bg-secondary-700">
       <slot name="title"></slot>
-      <button class="absolute top-0 right-0 p-2" @click="handleCloseModal">
+      <button class="absolute top-0 right-0 p-2"
+      @click="$emit('handleCloseModal', handleCloseModal)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -33,7 +35,7 @@ export default {
     <div class="p-4">
       <slot :params="params"></slot>
     </div>
-    <div class="flex justify-center items-center p-4">
+    <div class="flex justify-center items-center p-4" v-if="closeButton">
       <button class="py-2 px-4 w-1/3 text-secondary-50 bg-secondary-700 rounded"
       @click="$emit('handleCloseModal', handleCloseModal)">確定</button>
     </div>

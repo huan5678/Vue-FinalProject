@@ -79,6 +79,14 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    component: () => import('@/views/frontEnd/The404View.vue'),
+    meta: {
+      title: 'ChillBar秋吧',
+    },
+  },
 ];
 
 const router = createRouter({

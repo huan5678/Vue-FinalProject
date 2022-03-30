@@ -1,5 +1,7 @@
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import useStore from '@/stores';
 
 import featureImg01 from '@/assets/featureImg01.jpg';
 import featureImg02 from '@/assets/featureImg02.jpg';
@@ -51,16 +53,34 @@ export default {
         imageUrl: featureImg06,
       },
     ];
+
+    const { productStore } = useStore();
+    const { productList, handleGetProductList } = productStore;
+    const router = useRouter();
+
+    function handleGoProducts(category) {
+      router.push('/product');
+      productList.selectCategory = category;
+      handleGetProductList(category);
+    }
+
+    onMounted(() => {
+      const header = document.getElementById('header');
+      const feature = document.getElementById('feature');
+      feature.style.marginTop = `${-header.offsetHeight}px`;
+    });
+
     return {
       data,
       isHovering,
+      handleGoProducts,
     };
   },
 };
 </script>
 
 <template>
-  <section class="container py-9">
+  <section id="feature" class="container py-9">
     <AppTitle level="2" class="mb-12">
       六大基酒
     </AppTitle>
@@ -72,6 +92,8 @@ export default {
       :class="{
         'group-hover:bg-secondary-100/40': isHovering === idx
       }"
+      @click="handleGoProducts(item.category)"
+      @keypress="handleGoProducts(item.category)"
       @mouseover="isHovering = idx"
       @mouseout="isHovering = null"
       @focus="isHovering"

@@ -6,7 +6,7 @@ import heroBanner03 from '@/assets/heroBanner03.jpg';
 import heroBanner04 from '@/assets/heroBanner04.jpg';
 import ScrollMouse from '@/components/ScrollMouse.vue';
 
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 export default {
   components: {
@@ -24,27 +24,24 @@ export default {
     const active = ref(0);
     const preActive = ref(0);
 
-    if (route.name !== 'home') {
-      window.addEventListener('scroll', () => {
-        const hero = document.getElementById('hero');
-        const header = document.getElementById('header');
-        scroll.value = (window.scrollY > 0);
-        if (window.scrollY === 0) {
-          hero.style.transform = 'translateY(0px)';
-        } else if (window.scrollY < header.offsetHeight) {
-          hero.style.transform = `translateY(-${header.offsetHeight}px)`;
-        } else {
-          hero.style.transform = 'translateY(0px)';
-        }
-      });
-    }
-
     const handleAnimateCtrl = function (img) {
       return {
         backgroundImage: `url(${img})`,
         animationDuration: `${animationDuration}s`,
       };
     };
+
+    onMounted(() => {
+      if (route.name === 'home') {
+        const hero = document.getElementById('hero');
+        const header = document.getElementById('header');
+        hero.style.height = `${hero.offsetHeight + header.offsetHeight}px`;
+        hero.style.transform = `translateY(-${header.offsetHeight}px)`;
+        window.addEventListener('scroll', () => {
+          scroll.value = (window.scrollY > (hero.offsetHeight / 4));
+        });
+      }
+    });
 
     setInterval(() => {
       preActive.value = active.value;
@@ -68,8 +65,8 @@ export default {
 </script>
 
 <template>
-  <section id="hero" class="relative transition-all duration-500
-  min-h-screen bg-secondary-900">
+  <section id="hero" class="relative min-h-screen bg-secondary-900
+  transition-all duration-500">
     <div class="before:block absolute before:absolute
     w-full before:w-full h-full before:h-full
     bg-center bg-no-repeat before:bg-gradient-to-b
@@ -93,8 +90,8 @@ export default {
       hover:text-secondary-800 hover:bg-primary-400 border border-primary-300
       transition-all duration-300"
       @click="handleGoProducts">發現更多美好</button>
-      <div
-      :class="{'hidden' : scroll}">
+      <div class="transition-all duration-500"
+      :class="{'opacity-0' : scroll}">
         <ScrollMouse />
       </div>
     </div>

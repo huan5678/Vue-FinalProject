@@ -1,9 +1,12 @@
 <script>
-import { ref } from 'vue';
+import { ref, onMounted, inject } from 'vue';
 
 export default {
   setup() {
+    const Swal = inject('$swal');
     const wheel = ref(null);
+    const showTip = ref(false);
+    const showWheel = ref(true);
     const openModal = ref(false);
     const handleCloseModal = function () {
       openModal.value = false;
@@ -58,7 +61,35 @@ export default {
     function wheelEndedCallback(resultItem) {
       result.value = resultItem;
       console.log(resultItem);
+      showWheel.value = false;
+      openModal.value = false;
+      localStorage.setItem('coupon', resultItem.code);
+      Swal.fire({
+        title: '恭喜您!',
+        html: `
+        獲得禮券
+        <br>【${resultItem.htmlContent}】
+        <br>已幫您加入結帳項目`,
+        icon: 'success',
+        iconColor: '#fbd9a1',
+        showClass: {
+          popup: 'animate__animated animate__bounceIn animate__faster',
+        },
+        hideClass: {
+          popup: 'animate__animated animate__bounceOut animate__faster',
+        },
+      });
     }
+
+    onMounted(() => {
+      const localCoupon = localStorage.getItem('coupon');
+      console.log(localCoupon);
+      if (localCoupon !== null) {
+        showWheel.value = false;
+      } else {
+        showWheel.value = true;
+      }
+    });
 
     return {
       items,
@@ -68,21 +99,33 @@ export default {
       openModal,
       wheelStartedCallback,
       wheelEndedCallback,
+      showTip,
+      showWheel,
     };
   },
 };
 </script>
 
 <template>
-  <div class="fixed right-0 bottom-0 z-30
-  translate-x-1/4 -translate-y-1/4 tooltip" data-tip="驚喜大轉盤"
+  <div class="fixed right-0 bottom-0 z-30 cursor-pointer
+  transition-all duration-500 scale-50 active:scale-75
+    ease-[cubic-bezier(0.18,0.89,0.32,1.28)]
+  translate-x-1/4 -translate-y-1/4" v-if="showWheel"
+  @mouseenter="showTip = true" @focus="showTip"
+  @mouseleave="showTip = false" @blur="showTip"
   @click="openModal = true" @keydown="openModal = true">
-    <SvgLoader
-    name="Roulette"
-    class="transition-all duration-500
-    ease-[cubic-bezier(0.18,0.89,0.32,1.28)] scale-50 active:scale-75" />
+    <div class="indicator">
+      <span class="indicator-item indicator-bottom indicator-center
+      bg-secondary-700 text-secondary-100 text-3xl
+      transition-all duration-500 p-4 rounded w-max
+      " :class="{'opacity-0': showTip === false}"
+      >驚喜大轉盤</span>
+      <SvgLoader
+      name="Roulette" />
+    </div>
   </div>
-  <AlertModal class=" select-none" v-model="openModal" @handleCloseModal="handleCloseModal">
+  <AlertModal class=" select-none" v-model="openModal"
+  @handleCloseModal="handleCloseModal" :closeButton="false">
     <template v-slot:title>驚喜大轉盤</template>
     <div class="relative">
       <AppRoulette ref="wheel" :items="items"

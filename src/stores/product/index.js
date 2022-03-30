@@ -10,6 +10,7 @@ export const useProductStore = defineStore('product', () => {
     pagination: {},
     currentPage: 1,
     productDetail: {},
+    selectCategory: '',
   });
   const isLoading = ref('');
   const productCategory = ref([

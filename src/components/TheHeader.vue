@@ -31,31 +31,24 @@ export default {
       showHeader: true,
     });
 
+    const openDropdown = ref(false);
+
     window.onscroll = () => {
       scroll.current = window.scrollY;
     };
 
     const header = ref(null);
     watch(() => scroll.current, (newVal, oldVal) => {
-      if (route.name !== 'home' && window.innerWidth > 540) {
-        header.value.classList.add('bg-secondary-900');
-        return;
-      }
-      if (scroll.current !== 0) {
-        if (oldVal < newVal) {
-          // console.log('header out');
-          header.value.classList.remove('bg-secondary-900');
-          scroll.showHeader = false;
-        } else if (oldVal > newVal) {
-          // console.log('header in');
+      if (route.name === 'home') {
+        if (scroll.current !== 0) {
+          if (oldVal < newVal) {
+            scroll.showHeader = false;
+          } else if (oldVal > newVal) {
+            scroll.showHeader = true;
+          }
+        } else {
           scroll.showHeader = true;
-          header.value.classList.add('bg-secondary-900/80');
         }
-      } else {
-        // console.log('scroll = 0');
-        scroll.showHeader = true;
-        header.value.classList.remove('bg-secondary-900/80');
-        header.value.classList.add('bg-secondary-900');
       }
     });
 
@@ -101,18 +94,6 @@ export default {
     );
 
     onMounted(() => {
-      if (route.name !== 'home') {
-        header.value.classList.remove('bg-secondary-900/80');
-        header.value.classList.remove('fixed');
-        header.value.classList.remove('top-0');
-        header.value.classList.remove('left-0');
-        header.value.classList.add('bg-secondary-900');
-      } else {
-        header.value.classList.add('bg-secondary-900/80');
-        header.value.classList.add('absolute');
-        header.value.classList.add('top-0');
-        header.value.classList.add('left-0');
-      }
       handleGetCart();
     });
 
@@ -124,40 +105,61 @@ export default {
       handleCart,
       scroll,
       header,
+      openDropdown,
     };
   },
 };
 </script>
 <template>
-  <section id="header" ref="header" class="
-  z-10 w-full transition-all duration-500"
+  <section id="header" ref="header"
+  class="sticky top-0 bg-secondary-900/70
+  z-30 w-full transition-all duration-500"
   :class="scroll.showHeader ? 'translate-y-0' : '-translate-y-full' "
   >
-    <nav class="container flex justify-between items-center p-3">
+    <nav class="container relative md:static
+    flex justify-between items-center p-2 px-1 md:p-3">
       <a href="/">
         <SvgLoader name="bannerLogo"
           class="w-full h-9 text-primary-500" />
         <h2 class="hidden text-primary-500">ChillBar秋吧</h2>
       </a>
-      <ul class="flex gap-4 justify-between items-center"
-      v-if="route.name !== 'product-detail'">
-        <li v-if="route.name !== 'dashboard'">
-          <AppLink to="product"> 產品列表 </AppLink>
-        </li>
-        <li v-if="route.name !== 'dashboard'">
-          <AppLink to="about"> 關於我們 </AppLink>
-        </li>
-        <li class="relative" v-if="route.name !== 'dashboard'">
-          <span class="absolute top-0 right-0 rfs:text-xs
-          text-primary-50 bg-primary-500 badge
-          " v-show="cartList.length > 0">{{ cartList.length }}</span>
-          <button class="btn btn-md btn-ghost" type="button"
-          @click="handleCart(true)" @keydown="true">
-            <i class="text-xl text-secondary-300 bi bi-bag-heart">
-            </i>
-          </button>
-        </li>
-      </ul>
+        <label for="menuBtn"
+        class="btn swap swap-rotate
+        md:hidden">
+          <input type="checkbox" id="menuBtn" v-model="openDropdown">
+          <i class="bi bi-list swap-off"></i>
+          <i class="bi bi-x-lg swap-on"></i>
+        </label>
+        <ul class="absolute w-full top-full left-0
+        bg-secondary-900/70 rounded space-y-4
+        transition-all duration-500
+        md:static md:w-auto md:top-auto md:left-auto md:rounded-none
+        md:space-y-0 md:translate-x-0 md:bg-transparent
+        flex flex-col md:flex-row flex-wrap md:flex-nowrap
+        gap-4 justify-center items-center"
+        :class="{'translate-x-[-250%]': !openDropdown}"
+        v-if="route.name !== 'product-detail'">
+          <li class="w-full md:w-auto md:flex-auto"
+          v-if="route.name !== 'dashboard'">
+            <AppLink to="product"> 產品列表 </AppLink>
+          </li>
+          <li class="w-full md:w-auto md:flex-auto"
+          v-if="route.name !== 'dashboard'">
+            <AppLink to="about"> 關於我們 </AppLink>
+          </li>
+          <li class="relative w-full md:w-auto md:flex-auto"
+          v-if="route.name !== 'dashboard'">
+            <span class="absolute top-0 right-0 rfs:text-xs
+            text-primary-50 bg-primary-500 badge
+            " v-show="cartList.length > 0">{{ cartList.length }}</span>
+            <button class="btn btn-md btn-ghost" type="button"
+            @click="handleCart(true)" @keydown="true">
+              <span class="block md:hidden text-secondary-300">查看購物車</span>
+              <i class="text-xl text-secondary-300 bi bi-bag-heart hidden md:block">
+              </i>
+            </button>
+          </li>
+        </ul>
       <div class="flex gap-4 justify-center items-center" v-if="route.name === 'dashboard'">
         <button
           class="gap-2 rfs:text-base font-normal bg-primary-400 hover:bg-primary-600

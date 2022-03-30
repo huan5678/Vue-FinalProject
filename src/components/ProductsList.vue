@@ -22,7 +22,10 @@ export default {
     const apiPath = process.env.VUE_APP_API_PATH;
 
     const articles = ref([]);
-    const selectCategory = ref('All');
+    const selectCategory = computed({
+      get() { return productList.selectCategory; },
+      set(val) { productList.selectCategory = val; },
+    });
 
     const axios = inject('axios');
 
@@ -33,7 +36,9 @@ export default {
     }
 
     onMounted(() => {
-      handleGetProductAll();
+      if (productList.selectCategory === '') {
+        handleGetProductAll();
+      }
       handleGetArticleAll();
     });
 
@@ -63,7 +68,7 @@ export default {
     <AppTitle level="1">
       產品列表
     </AppTitle>
-    <div class="flex justify-start items-center">
+    <div class="flex justify-center items-center">
       <div class="tabs">
         <a class="transition-all duration-500 tab tab-lifted
         "
