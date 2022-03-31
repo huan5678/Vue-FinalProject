@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router';
 
 export default {
   setup() {
-    const { router } = useRouter();
+    const router = useRouter();
 
     function handleToProduct() {
       router.push('product');

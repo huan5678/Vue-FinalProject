@@ -6,6 +6,7 @@ import {
   inject,
   ref,
 } from 'vue';
+import { useRouter } from 'vue-router';
 import useStore from '@/stores';
 import CheckStep from '@/components/CheckStep.vue';
 
@@ -14,14 +15,16 @@ export default {
     CheckStep,
   },
   setup() {
+    const router = useRouter();
     const {
       orderStore,
     } = useStore();
     const {
-      orderResult,
       orderData,
+      orderResult,
       handleGetOrderData,
     } = orderStore;
+
     const axios = inject('axios');
     const baseUrl = process.env.VUE_APP_API_URL;
     const apiPath = process.env.VUE_APP_API_PATH;
@@ -40,10 +43,13 @@ export default {
         order: {},
         total: 0,
         user: {},
+        is_paid: false,
       },
     );
 
-    function handlePayment(id = localStorage.getItem('order_id')) {
+    const orderId = localStorage.getItem('order_id');
+
+    function handlePayment(id) {
       axios.post(`${baseUrl}api/${apiPath}/pay/${id}`)
         .then((res) => {
           paymentData.success = res.data.success;
@@ -56,8 +62,11 @@ export default {
         .catch((err) => console.dir(err));
     }
 
+    function handleToProduct() {
+      router.push('product');
+    }
+
     onMounted(() => {
-      const orderId = localStorage.getItem('order_id');
       if (orderResult.orderId) {
         handleGetOrderData(orderResult.orderId);
       } else {
@@ -70,17 +79,21 @@ export default {
       handlePayment,
       paymentData,
       confirmData: computed(() => orderData),
+      orderId,
+      handleToProduct,
+      success: computed(() => paymentData.success),
     };
   },
 };
 </script>
 
 <template>
-  <section class="py-8 bg-gray-200">
+  <section class="py-8 bg-gray-200 min-h-[80vh]">
     <CheckStep :active="`${steps}`" />
     <div class="container pt-4">
       <div class="flex flex-wrap gap-4
-      justify-between lg:flex-nowrap">
+      justify-between lg:flex-nowrap"
+      v-if="confirmData.order !== null">
         <div class="flex flex-col flex-auto
         justify-between pb-4 w-full border-b border-secondary-500
         md:w-2/3
@@ -106,47 +119,47 @@ export default {
               </span>
             </li>
           </ul>
-          <ul class="pt-4 text-right space-y-2">
+          <ul class="pt-4 space-y-2 text-right">
             <li class="text-xl font-medium tracking-widest">
               總金額
             </li>
-            <li class="font-mono text-2xl font-extralight
-            border-b border-secondary-200 pb-2">
-              NT${{ confirmData.order.total }}
+            <li class="pb-2 font-mono text-2xl
+            font-extralight border-b border-secondary-200">
+              NT${{ confirmData?.order?.total }}
             </li>
             <li class="text-lg font-medium tracking-widest">
               訂單是否完成付款
             </li>
             <li class="text-xl font-medium tracking-widest">
-              {{ paymentData.is_paid ? '已完成付款' : '未完成付款' }}
+              {{ success ? '已完成付款' : '未完成付款' }}
             </li>
           </ul>
         </div>
         <div class="lg:divider lg:divider-horizontal"></div>
         <div class="w-full md:w-1/2 lg:w-1/3">
           <h1 class="py-4 text-2xl font-medium text-center">訂購資訊</h1>
-          <ul class="space-y-2 mb-4">
-            <li class="flex justify-between items-center gap-2">
+          <ul class="mb-4 space-y-2">
+            <li class="flex gap-2 justify-between items-center">
               <span>訂購人姓名</span>
-              <span>{{ confirmData.order.user.name }}</span>
+              <span>{{ confirmData.order.user?.name }}</span>
             </li>
-            <li class="flex justify-between items-center gap-2">
+            <li class="flex gap-2 justify-between items-center">
               <span>訂購人電話</span>
-              <span>{{ confirmData.order.user.tel }}</span>
+              <span>{{ confirmData.order.user?.tel }}</span>
             </li>
-            <li class="flex justify-between items-center gap-2">
+            <li class="flex gap-2 justify-between items-center">
               <span>訂購人Email</span>
-              <span>{{ confirmData.order.user.email }}</span>
+              <span>{{ confirmData.order.user?.email }}</span>
             </li>
-            <li class="flex justify-between items-center gap-2">
+            <li class="flex gap-2 justify-between items-center">
               <span>寄件地址</span>
-              <span>{{ confirmData.order.user.address }}</span>
+              <span>{{ confirmData.order.user?.address }}</span>
             </li>
           </ul>
           <button type="button"
-          class="btn btn-outline w-full rounded
-          border-secondary-700 text-secondary-700
-          hover:bg-secondary-700 hover:text-secondary-100
+          class="w-full text-secondary-700 hover:text-secondary-100 hover:bg-secondary-700
+          rounded border-secondary-700
+          btn btn-outline
           " :class="{
             'disabled': paymentData.success,
             'cursor-not-allowed': paymentData.success,
@@ -154,6 +167,17 @@ export default {
             }"
           @click="handlePayment">信用卡付款</button>
         </div>
+      </div>
+      <div v-else class="flex flex-col min-h-[50vh]
+      justify-center items-center space-y-8">
+        <h1 class="text-secondary-700 rfs:text-2xl font-medium
+        ">目前沒有訂單</h1>
+        <button type="button" @click="handleToProduct"
+        class="btn btn-lg btn-wide btn-outline text-xl
+        text-primary-600 hover:border-primary-600
+        hover:text-primary-100 hover:bg-primary-600 font-normal">
+          看看其他商品吧
+        </button>
       </div>
     </div>
   </section>

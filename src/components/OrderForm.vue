@@ -116,8 +116,8 @@ export default {
         <button
           type="submit"
           class="w-full text-xl font-medium text-white bg-secondary-700
-          hover:bg-primary-600 rounded border-none
-          active:bg-primary-500
+          hover:bg-primary-600 active:bg-primary-500 rounded
+          border-none
           transition duration-300 ease-in-out btn"
           :class="{
             'opacity-30 cursor-not-allowed': cartListLength === 0,

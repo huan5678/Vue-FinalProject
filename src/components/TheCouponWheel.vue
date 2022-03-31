@@ -50,7 +50,7 @@ export default {
     const result = ref(null);
 
     function launchWheel() {
-      console.log(wheel.value);
+      // console.log(wheel.value);
       wheel.value.launchWheel();
     }
 
@@ -107,17 +107,17 @@ export default {
 </script>
 
 <template>
-  <div class="fixed right-0 bottom-0 z-30 cursor-pointer
-  transition-all duration-500 scale-50 active:scale-75
-    ease-[cubic-bezier(0.18,0.89,0.32,1.28)]
-  translate-x-1/4 -translate-y-1/4" v-if="showWheel"
+  <div class="fixed right-0 bottom-0 z-30 transition-all
+  duration-500 ease-[cubic-bezier(0.18,0.89,0.32,1.28)] scale-50 active:scale-75
+    translate-x-1/4
+  -translate-y-1/4 cursor-pointer" v-if="showWheel"
   @mouseenter="showTip = true" @focus="showTip"
   @mouseleave="showTip = false" @blur="showTip"
   @click="openModal = true" @keydown="openModal = true">
     <div class="indicator">
-      <span class="indicator-item indicator-bottom indicator-center
-      bg-secondary-700 text-secondary-100 text-3xl
-      transition-all duration-500 p-4 rounded w-max
+      <span class="p-4 w-max text-3xl
+      text-secondary-100 bg-secondary-700 rounded
+      transition-all duration-500 indicator-item indicator-bottom indicator-center
       " :class="{'opacity-0': showTip === false}"
       >驚喜大轉盤</span>
       <SvgLoader

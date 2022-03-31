@@ -115,7 +115,7 @@ export default {
         </div>
       </div>
     </template>
-    <ul class="grid grid-cols-4 gap-4 mb-4 pb-4 border-b">
+    <ul class="grid grid-cols-4 gap-4 pb-4 mb-4 border-b">
       <li
         class=""
         v-for="product in productList"

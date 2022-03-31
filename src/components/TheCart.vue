@@ -68,7 +68,7 @@ export default {
       if (coupon !== null) {
         [checkCoupon.value] = couponList.value.filter((item) => item.code === coupon);
         if (checkCoupon.value.rules === 'minus') {
-          resultPrice = cartData.totalPrice - checkCoupon.value.price;
+          resultPrice = cartData.totalPrice + checkCoupon.value.price;
         } else {
           resultPrice = cartData.totalPrice * checkCoupon.value.price;
         }
@@ -121,7 +121,7 @@ export default {
           id="scroll"
         >
           <div class="flex justify-between items-center">
-            <h2 class="pt-3 font-medium text-secondary-800 rfs:text-4xl">購物車內容</h2>
+            <h2 class="pt-3 rfs:text-4xl font-medium text-secondary-800">購物車內容</h2>
             <button class="btn btn-ghost"
             @click="$emit('handleCart', handleCart)" @keydown.esc="handleCart">
               <i class="text-2xl bi bi-x-lg"></i>

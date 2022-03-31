@@ -27,7 +27,7 @@ export default {
       handleClearCart,
       handleUpdateCart,
     } = cartStore;
-    const { couponData } = couponStore;
+    const { couponData, handleUseCoupon } = couponStore;
     const { orderResult } = storeToRefs(orderStore);
     const showRecommended = ref(false);
     const router = useRouter();
@@ -67,6 +67,7 @@ export default {
     onMounted(() => {
       handleGetCart();
       if (coupon !== null) {
+        handleUseCoupon(coupon);
         [checkCoupon.value] = couponList.value.filter((item) => item.code === coupon);
       }
     });
@@ -91,7 +92,7 @@ export default {
   <section class="py-8 bg-gray-200">
     <CheckStep active="1" />
     <div class="flex justify-start items-center p-4">
-      <label class="label cursor-pointer gap-2">
+      <label class="gap-2 cursor-pointer label">
         <span class="text-lg">還想加購點什麼</span>
         <input type="checkbox" class="toggle" v-model="showRecommended">
       </label>
@@ -130,7 +131,7 @@ export default {
             class="text-2xl text-center text-secondary-500">
               您的購物車是空的
             </p>
-            <p class="rfs:text-lg font-medium mb-2" v-if="checkCoupon?.name">
+            <p class="mb-2 rfs:text-lg font-medium" v-if="checkCoupon?.name">
               已套用折價券<br />
               <span class="rfs:text-xl font-light">{{ checkCoupon?.name }}</span>
             </p>
