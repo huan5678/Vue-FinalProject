@@ -69,7 +69,7 @@ export default {
     onMounted(() => {
       if (orderResult.orderId) {
         handleGetOrderData(orderResult.orderId);
-      } else {
+      } else if (orderId !== null) {
         handleGetOrderData(orderId);
       }
     });
@@ -93,7 +93,7 @@ export default {
     <div class="container pt-4">
       <div class="flex flex-wrap gap-4
       justify-between lg:flex-nowrap"
-      v-if="confirmData.order !== null">
+      v-if="confirmData.total !== 0">
         <div class="flex flex-col flex-auto
         justify-between pb-4 w-full border-b border-secondary-500
         md:w-2/3
@@ -157,15 +157,17 @@ export default {
             </li>
           </ul>
           <button type="button"
-          class="w-full text-secondary-700 hover:text-secondary-100 hover:bg-secondary-700
+          class="w-full text-secondary-700
           rounded border-secondary-700
           btn btn-outline
           " :class="{
             'disabled': paymentData.success,
             'cursor-not-allowed': paymentData.success,
             'opacity-30': paymentData.success,
+            'hover:bg-secondary-700': !paymentData.success,
+            'hover:text-secondary-100': !paymentData.success,
             }"
-          @click="handlePayment">信用卡付款</button>
+          @click="handlePayment(confirmData.orderId)">信用卡付款</button>
         </div>
       </div>
       <div v-else class="flex flex-col min-h-[50vh]

@@ -127,7 +127,13 @@ export default {
               <i class="text-2xl bi bi-x-lg"></i>
             </button>
           </div>
-          <ul class="py-8 space-y-4
+          <div v-if="cartList.length === 0">
+            <h3 class="text-xl font-light pt-12">
+              您的購物車還沒有商品<br />
+              來加入一些你想要的東西吧...
+              </h3>
+          </div>
+          <ul v-else class="py-8 space-y-4
           border-t border-secondary-50">
             <li v-for="cart in cartList" :key="cart.id"
             class="flex gap-4 justify-between items-center pb-4 border-b">
