@@ -85,7 +85,9 @@ export default {
       六大基酒
     </AppTitle>
     <ul class="group">
-      <li class="flex overflow-hidden odd:flex-row-reverse
+      <li
+      data-aos="fade-up"
+      class="flex overflow-hidden odd:flex-row-reverse
       flex-wrap justify-between odd:text-right bg-secondary-100/20
       odd:bg-secondary-50/10
       border-b cursor-pointer md:flex-nowrap"

@@ -4,6 +4,7 @@ import heroBanner01 from '@/assets/heroBanner01.jpg';
 import heroBanner02 from '@/assets/heroBanner02.jpg';
 import heroBanner03 from '@/assets/heroBanner03.jpg';
 import heroBanner04 from '@/assets/heroBanner04.jpg';
+import heroBanner05 from '@/assets/heroBanner05.jpg';
 import ScrollMouse from '@/components/ScrollMouse.vue';
 
 import { ref, onMounted } from 'vue';
@@ -16,9 +17,9 @@ export default {
     const router = useRouter();
     const route = useRoute();
     const Banners = ref([
-      heroBanner01, heroBanner02, heroBanner03, heroBanner04,
+      heroBanner01, heroBanner02, heroBanner03, heroBanner04, heroBanner05,
     ]);
-    const animationDuration = 10;
+    const animationDuration = 8;
 
     const scroll = ref(false);
     const active = ref(0);
@@ -73,9 +74,11 @@ export default {
     from-secondary-900/50 to-secondary-900/90 opacity-0
     "
     v-for="(img, idx) in Banners" :key="img"
-    :class="{ heroAnimate: active === idx || preActive === idx-1 }"
+    :class="{ heroAnimate: active === idx+1 || preActive === idx-1 }"
     :style="handleAnimateCtrl(img)" />
-    <div class="container flex relative flex-col justify-center items-center h-screen">
+    <div data-aos="fade-zoom-in" data-aos-easing="ease-in-back"
+    data-aos-delay="300" data-aos-duration="1000" data-aos-once="true"
+    class="container flex relative flex-col justify-center items-center h-screen">
       <SvgLoader name="bannerLogo"
       class="
       text-primary-500 scale-50 md:scale-75

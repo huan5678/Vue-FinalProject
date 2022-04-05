@@ -6,6 +6,7 @@ import VueAxios from 'vue-axios';
 import VueSweetalert2 from 'vue-sweetalert2';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import { Roulette } from 'vue3-roulette';
+import AOS from 'aos';
 
 import App from '@/App.vue';
 import router from '@/router';
@@ -13,6 +14,7 @@ import svgLoader from '@/utils/SvgLoader.vue';
 import AlertModal from '@/components/AlertModal.vue';
 import AppTitle from '@/utils/AppTitle.vue';
 
+import 'aos/dist/aos.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './style.scss';
@@ -30,6 +32,7 @@ app.use(pinia);
 app.use(router);
 app.use(vfmPlugin);
 app.use(CKEditor);
+app.AOS = new AOS.init({ disable: 'phone' });
 
 const requireAll = (requireContext) => requireContext.keys().forEach(requireContext);
 const req = require.context('@/assets/svg', true, /\.svg$/);
