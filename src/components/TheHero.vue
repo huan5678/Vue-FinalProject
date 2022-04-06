@@ -1,10 +1,10 @@
 <script>
 import { useRoute, useRouter } from 'vue-router';
-import heroBanner01 from '@/assets/heroBanner01.jpg';
-import heroBanner02 from '@/assets/heroBanner02.jpg';
-import heroBanner03 from '@/assets/heroBanner03.jpg';
-import heroBanner04 from '@/assets/heroBanner04.jpg';
-import heroBanner05 from '@/assets/heroBanner05.jpg';
+import heroBanner01 from '@/assets/images/heroBanner01.jpg';
+import heroBanner02 from '@/assets/images/heroBanner02.jpg';
+import heroBanner03 from '@/assets/images/heroBanner03.jpg';
+import heroBanner04 from '@/assets/images/heroBanner04.jpg';
+import heroBanner05 from '@/assets/images/heroBanner05.jpg';
 import ScrollMouse from '@/components/ScrollMouse.vue';
 
 import { ref, onMounted } from 'vue';

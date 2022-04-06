@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
+const title = 'ChillBar秋吧';
+
 const routes = [
   {
     path: '/',
@@ -11,7 +13,7 @@ const routes = [
         name: 'home',
         component: () => import('@/views/frontEnd/HomeView.vue'),
         meta: {
-          title: 'ChillBar秋吧 - 首頁',
+          title: `${title} - 首頁`,
         },
       },
       {
@@ -19,7 +21,7 @@ const routes = [
         name: 'product',
         component: () => import('@/views/frontEnd/ProductView.vue'),
         meta: {
-          title: 'ChillBar秋吧 - 產品頁',
+          title: `${title} - 產品頁`,
         },
       },
       {
@@ -27,7 +29,15 @@ const routes = [
         name: 'product-detail',
         component: () => import('@/views/frontEnd/ProductDetailView.vue'),
         meta: {
-          title: 'ChillBar秋吧 - 產品詳細頁',
+          title: `${title} - 產品詳細頁`,
+        },
+      },
+      {
+        path: 'booking',
+        name: 'booking',
+        component: () => import('@/views/frontEnd/BookingView.vue'),
+        meta: {
+          title: `${title} - 預訂畫位`,
         },
       },
       {
@@ -35,7 +45,7 @@ const routes = [
         name: 'login',
         component: () => import('@/views/frontEnd/LoginView.vue'),
         meta: {
-          title: 'ChillBar秋吧 - 管理者登入',
+          title: `${title} - 管理者登入`,
         },
       },
       {
@@ -43,7 +53,7 @@ const routes = [
         name: 'check-order',
         component: () => import('@/views/frontEnd/CheckOrderView.vue'),
         meta: {
-          title: 'ChillBar秋吧 - 確認訂單',
+          title: `${title} - 確認訂單`,
         },
       },
       {
@@ -51,7 +61,7 @@ const routes = [
         name: 'order-confirm',
         component: () => import('@/views/frontEnd/OrderConfirmView.vue'),
         meta: {
-          title: 'ChillBar秋吧 - 建立訂單',
+          title: `${title} - 建立訂單`,
         },
       },
       {
@@ -59,7 +69,7 @@ const routes = [
         name: 'about',
         component: () => import('@/views/frontEnd/AboutUsView.vue'),
         meta: {
-          title: 'ChillBar秋吧 - 關於我們',
+          title: `${title} - 關於我們`,
         },
       },
     ],
@@ -74,7 +84,7 @@ const routes = [
         name: 'dashboard',
         component: () => import('@/views/backEnd/DashboardView.vue'),
         meta: {
-          title: 'ChillBar秋吧 - 管理者後台',
+          title: `${title} - 管理者後台`,
         },
       },
     ],
@@ -84,7 +94,7 @@ const routes = [
     name: '404',
     component: () => import('@/views/frontEnd/The404View.vue'),
     meta: {
-      title: 'ChillBar秋吧',
+      title,
     },
   },
 ];

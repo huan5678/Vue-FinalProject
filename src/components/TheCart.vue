@@ -128,7 +128,7 @@ export default {
             </button>
           </div>
           <div v-if="cartList.length === 0">
-            <h3 class="text-xl font-light pt-12">
+            <h3 class="pt-12 text-xl font-light">
               您的購物車還沒有商品<br />
               來加入一些你想要的東西吧...
               </h3>

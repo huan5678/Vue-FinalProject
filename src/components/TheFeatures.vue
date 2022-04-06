@@ -3,12 +3,12 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import useStore from '@/stores';
 
-import featureImg01 from '@/assets/featureImg01.jpg';
-import featureImg02 from '@/assets/featureImg02.jpg';
-import featureImg03 from '@/assets/featureImg03.jpg';
-import featureImg04 from '@/assets/featureImg04.jpg';
-import featureImg05 from '@/assets/featureImg05.jpg';
-import featureImg06 from '@/assets/featureImg06.jpg';
+import featureImg01 from '@/assets/images/featureImg01.jpg';
+import featureImg02 from '@/assets/images/featureImg02.jpg';
+import featureImg03 from '@/assets/images/featureImg03.jpg';
+import featureImg04 from '@/assets/images/featureImg04.jpg';
+import featureImg05 from '@/assets/images/featureImg05.jpg';
+import featureImg06 from '@/assets/images/featureImg06.jpg';
 
 export default {
   setup() {

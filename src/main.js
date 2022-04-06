@@ -35,7 +35,7 @@ app.use(CKEditor);
 app.AOS = new AOS.init({ disable: 'phone' });
 
 const requireAll = (requireContext) => requireContext.keys().forEach(requireContext);
-const req = require.context('@/assets/svg', true, /\.svg$/);
+const req = require.context('@/assets/images/svg', true, /\.svg$/);
 requireAll(req);
 
 app.component('SvgLoader', svgLoader);

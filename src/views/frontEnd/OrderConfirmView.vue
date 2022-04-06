@@ -88,7 +88,7 @@ export default {
 </script>
 
 <template>
-  <section class="py-8 bg-gray-200 min-h-[80vh]">
+  <section class="py-8 min-h-[80vh] bg-gray-200">
     <CheckStep :active="`${steps}`" />
     <div class="container pt-4">
       <div class="flex flex-wrap gap-4
@@ -170,14 +170,14 @@ export default {
           @click="handlePayment(confirmData.orderId)">信用卡付款</button>
         </div>
       </div>
-      <div v-else class="flex flex-col min-h-[50vh]
-      justify-center items-center space-y-8">
-        <h1 class="text-secondary-700 rfs:text-2xl font-medium
+      <div v-else class="flex flex-col justify-center
+      items-center space-y-8 min-h-[50vh]">
+        <h1 class="rfs:text-2xl font-medium text-secondary-700
         ">目前沒有訂單</h1>
         <button type="button" @click="handleToProduct"
-        class="btn btn-lg btn-wide btn-outline text-xl
-        text-primary-600 hover:border-primary-600
-        hover:text-primary-100 hover:bg-primary-600 font-normal">
+        class="text-xl font-normal text-primary-600 hover:text-primary-100 hover:bg-primary-600
+        hover:border-primary-600 btn
+        btn-lg btn-wide btn-outline">
           看看其他商品吧
         </button>
       </div>

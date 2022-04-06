@@ -3,8 +3,8 @@ import { onMounted, inject, ref } from 'vue';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import InputField from '@/utils/InputField.vue';
-import aboutImg01 from '@/assets/aboutImg01.jpg';
-import aboutImg02 from '@/assets/aboutImg02.jpg';
+import aboutImg01 from '@/assets/images/aboutImg01.jpg';
+import aboutImg02 from '@/assets/images/aboutImg02.jpg';
 
 export default {
   components: {
