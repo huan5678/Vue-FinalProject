@@ -12,12 +12,12 @@ export default {
 </script>
 <template>
     <TheHeader />
-      <router-view v-slot="{ Component }">
+      <RouterView v-slot="{ Component }">
         <transition name="fade">
-          <keep-alive>
+          <KeepAlive>
             <component :is="Component" />
-          </keep-alive>
+          </KeepAlive>
         </transition>
-      </router-view>
+      </RouterView>
     <TheFooter />
 </template>

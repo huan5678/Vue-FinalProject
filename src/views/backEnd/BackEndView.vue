@@ -1,11 +1,12 @@
 <script>
 import TheHeader from '@/components/TheHeader.vue';
+import TheFooter from '@/components/TheFooter.vue';
 import { onMounted } from 'vue';
 import useStore from '@/stores';
 
 export default {
   name: 'BackEndView',
-  components: { TheHeader },
+  components: { TheHeader, TheFooter },
   setup() {
     const { adminStore } = useStore();
     const { handleCheckUser, handleGetToken } = adminStore;
@@ -19,9 +20,10 @@ export default {
 </script>
 <template>
   <TheHeader />
-    <router-view v-slot="{ Component }">
+    <RouterView v-slot="{ Component }">
       <transition name="fade">
           <component :is="Component" />
       </transition>
-    </router-view>
+    </RouterView>
+  <TheFooter />
 </template>

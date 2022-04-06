@@ -86,7 +86,6 @@ export default {
     </AppTitle>
     <ul class="group">
       <li
-      data-aos="fade-up"
       class="flex overflow-hidden odd:flex-row-reverse
       flex-wrap justify-between odd:text-right bg-secondary-100/20
       odd:bg-secondary-50/10
@@ -152,9 +151,9 @@ export default {
   </section>
 </template>
 <style scoped>
-  .group-hover-btn {
-    @apply group-hover:cursor-pointer
-    group-hover:text-primary-500 group-hover:border
-    group-hover:border-primary-500 group-hover:shadow-sm
-  }
+.group-hover-btn {
+  @apply group-hover:cursor-pointer
+  group-hover:text-primary-500 group-hover:border
+  group-hover:border-primary-500 group-hover:shadow-sm
+}
 </style>

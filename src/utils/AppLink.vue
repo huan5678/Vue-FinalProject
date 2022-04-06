@@ -32,7 +32,7 @@ export default {
   >
     <slot />
   </a>
-  <router-link
+  <RouterLink
     v-else
     v-bind="$props"
     class="py-2 px-3 font-normal border-b
@@ -45,5 +45,5 @@ export default {
     "
   >
     <slot />
-  </router-link>
+  </RouterLink>
 </template>

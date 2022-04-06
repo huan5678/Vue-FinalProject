@@ -185,12 +185,12 @@ export default {
   </section>
 </template>
 <style lang="scss" scoped>
-  .divider-horizontal {
-    &:before {
-      width: 1px;
-    }
-    &:after {
-      width: 1px;
-    }
+.divider-horizontal {
+  &:before {
+    width: 1px;
   }
+  &:after {
+    width: 1px;
+  }
+}
 </style>

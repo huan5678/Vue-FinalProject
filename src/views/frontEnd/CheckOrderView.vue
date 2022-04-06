@@ -143,19 +143,19 @@ export default {
             </p>
           </div>
         </div>
-        <div class="lg:divider lg:divider-horizontal"></div>
+        <div class="lg:divider lg:divider-horizontal" />
         <OrderForm />
       </div>
     </div>
   </section>
 </template>
 <style lang="scss" scoped>
-  .divider-horizontal {
-    &:before {
-      width: 1px;
-    }
-    &:after {
-      width: 1px;
-    }
+.divider-horizontal {
+  &:before {
+    width: 1px;
   }
+  &:after {
+    width: 1px;
+  }
+}
 </style>

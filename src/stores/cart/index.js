@@ -1,8 +1,8 @@
-import { reactive, ref, inject } from 'vue';
+import { reactive, ref } from 'vue';
 import { defineStore } from 'pinia';
+import axios from 'axios';
 
 export const useCartStore = defineStore('cart', () => {
-  const axios = inject('axios');
   const baseUrl = process.env.VUE_APP_API_URL;
   const apiPath = process.env.VUE_APP_API_PATH;
   const cartData = reactive({
@@ -30,7 +30,6 @@ export const useCartStore = defineStore('cart', () => {
     axios
       .get(`${baseUrl}api/${apiPath}/cart`)
       .then((res) => {
-        // console.log(res.data);
         cartData.list = res.data.data.carts;
         cartData.totalPrice = res.data.data.total;
         cartData.finalPrice = res.data.data.final_total;

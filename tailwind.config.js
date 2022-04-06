@@ -1,4 +1,6 @@
 const { fontFamily } = require('tailwindcss/defaultTheme');
+const tailwindcssRfs = require('tailwindcss-rfs');
+const daisyui = require('daisyui');
 
 module.exports = {
   content: ['./public/index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
@@ -74,10 +76,9 @@ module.exports = {
     darkTheme: 'dark',
   },
   plugins: [
-    // require('@tailwindcss/forms'),
-    require('tailwindcss-rfs'),
-    require('daisyui'),
-    function ({ addComponents }) {
+    tailwindcssRfs,
+    daisyui,
+    ({ addComponents }) => {
       addComponents({
         '.container': {
           maxWidth: '100%',

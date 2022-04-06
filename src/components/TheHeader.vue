@@ -157,6 +157,10 @@ export default {
           </li>
           <li class="w-full md:flex-auto md:w-auto"
           v-if="route.name !== 'dashboard'">
+            <AppLink to="about"> 預約訂位 </AppLink>
+          </li>
+          <li class="w-full md:flex-auto md:w-auto"
+          v-if="route.name !== 'dashboard'">
             <AppLink to="about"> 關於我們 </AppLink>
           </li>
           <li v-if="route.name === 'dashboard' || route.name === 'confirm'"></li>
@@ -174,7 +178,7 @@ export default {
           </li>
         </ul>
       <div class="flex gap-4 justify-center items-center" v-if="route.name === 'dashboard'">
-        <button
+        <button type="button"
           class="gap-2 rfs:text-base font-normal bg-primary-400 hover:bg-primary-600
           transition duration-300 btn
           btn-xs sm:btn-sm md:btn-md"

@@ -5,7 +5,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/' : '/chill-bar/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/chill-bar/' : '/',
   pluginOptions: {
     svgSpriteLoader: {
       // directory

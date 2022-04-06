@@ -1,9 +1,9 @@
-import { reactive, inject } from 'vue';
+import { reactive } from 'vue';
 import { defineStore } from 'pinia';
 import { useAdminStore } from '@/stores/admin';
+import axios from 'axios';
 
 export const useAdminDataStore = defineStore('adminData', () => {
-  const axios = inject('axios');
   const baseUrl = process.env.VUE_APP_API_URL;
   const apiPath = process.env.VUE_APP_API_PATH;
 

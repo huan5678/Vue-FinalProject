@@ -1,12 +1,3 @@
-<script>
-
-export default {
-  setup() {
-    return {
-    };
-  },
-};
-</script>
 <template>
   <section class="py-4 bg-secondary-900">
     <nav class="container">

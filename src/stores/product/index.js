@@ -1,8 +1,8 @@
-import { reactive, ref, inject } from 'vue';
+import { reactive, ref } from 'vue';
 import { defineStore } from 'pinia';
+import axios from 'axios';
 
 export const useProductStore = defineStore('product', () => {
-  const axios = inject('axios');
   const baseUrl = process.env.VUE_APP_API_URL;
   const apiPath = process.env.VUE_APP_API_PATH;
   const productList = reactive({

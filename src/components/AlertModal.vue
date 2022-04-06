@@ -8,7 +8,7 @@ export default {
 </script>
 
 <template>
-  <vue-final-modal
+  <VueFinalModal
   v-slot="{ params, handleCloseModal }"
   v-bind="$attrs"
   classes="flex justify-center items-center bg-opacity-50 backdrop-blur-[2px]"
@@ -39,5 +39,5 @@ export default {
       <button class="py-2 px-4 w-1/3 text-secondary-50 bg-secondary-700 rounded"
       @click="$emit('handleCloseModal', handleCloseModal)">確定</button>
     </div>
-  </vue-final-modal>
+  </VueFinalModal>
 </template>

@@ -25,15 +25,15 @@ export default {
     <div class="flex justify-between p-4">
       <div class="p-2 divide-y">
         <span class="block text-sm">訂購人姓名</span>
-        <h2 class="text-2xl font-medium">{{targetProduct?.user.name}}</h2>
+        <h2 class="text-2xl font-medium">{{ targetProduct?.user.name }}</h2>
       </div>
       <div class="p-2 divide-y">
         <span class="block text-sm">聯絡電話</span>
-        <h2 class="text-2xl font-medium">{{targetProduct?.user.tel}}</h2>
+        <h2 class="text-2xl font-medium">{{ targetProduct?.user.tel }}</h2>
       </div>
       <div class="p-2 divide-y">
         <span class="block text-sm">出貨地址</span>
-        <h2 class="text-2xl font-medium">{{targetProduct?.user.address}}</h2>
+        <h2 class="text-2xl font-medium">{{ targetProduct?.user.address }}</h2>
       </div>
     </div>
     <div class="flex flex-wrap gap-2 justify-around p-2">

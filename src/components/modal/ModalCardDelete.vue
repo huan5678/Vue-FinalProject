@@ -43,7 +43,7 @@ export default {
       selectType === 'coupon' ? '優惠券 : ' : '文章 : '}}
       {{ selectType === 'product'? productData.title :
       selectType === 'order' ? productData.id :
-      selectType === 'coupon' ? productData.title : productData.id}}
+      selectType === 'coupon' ? productData.title : productData.id }}
     </p>
     <div class="container flex gap-4 justify-between p-4">
       <button

@@ -19,7 +19,7 @@ export default {
     const Banners = ref([
       heroBanner01, heroBanner02, heroBanner03, heroBanner04, heroBanner05,
     ]);
-    const animationDuration = 8;
+    const animationDuration = 12;
 
     const scroll = ref(false);
     const active = ref(0);
@@ -47,7 +47,7 @@ export default {
     setInterval(() => {
       preActive.value = active.value;
       active.value = (active.value + 1 + Banners.value.length) % Banners.value.length;
-    }, (animationDuration / 2) * 1000);
+    }, (animationDuration / 3) * 1000);
 
     function handleGoProducts() {
       router.push('/product');
@@ -74,7 +74,7 @@ export default {
     from-secondary-900/50 to-secondary-900/90 opacity-0
     "
     v-for="(img, idx) in Banners" :key="img"
-    :class="{ heroAnimate: active === idx+1 || preActive === idx-1 }"
+    :class="{ heroAnimate: active === idx || preActive === idx }"
     :style="handleAnimateCtrl(img)" />
     <div data-aos="fade-zoom-in" data-aos-easing="ease-in-back"
     data-aos-delay="300" data-aos-duration="1000" data-aos-once="true"
@@ -100,3 +100,46 @@ export default {
     </div>
   </section>
 </template>
+
+<style lang="scss" scoped>
+.heroAnimate {
+  animation-name: heroAnimation;
+}
+@media screen and (orientation: landscape) {
+  @keyframes heroAnimation {
+    0% {
+      opacity: 0;
+      background-size: 150% auto;
+    }
+    25% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      background-size: 120% auto;
+    }
+  }
+}
+
+@media screen and (orientation: portrait) {
+  @keyframes heroAnimation {
+    0% {
+      opacity: 0;
+      background-size: auto 150%;
+    }
+    25% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      background-size: auto 120%;
+    }
+  }
+}
+</style>

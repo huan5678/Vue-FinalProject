@@ -172,7 +172,7 @@ linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${abo
             </li>
             <li class="flex justify-between text-lg font-light">
               <span class="block">聯絡電話 :</span>
-              <span class="block">0912-345678</span>
+              <a href="tel:+886-912345678" class="block">0912-345678</a>
             </li>
             <li id="map" class="max-w-screen-lg h-64"></li>
           </ul>

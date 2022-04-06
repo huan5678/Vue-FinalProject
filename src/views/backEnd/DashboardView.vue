@@ -107,7 +107,7 @@ export default {
     <!-- <button @click="handleSweetAlert" class="btn btn-outline">open sweetalert2</button> -->
     <div class="container">
       <DashboardTable />
-      <vue-final-modal
+      <VueFinalModal
         v-model="isOpenModal"
         id="adminModal"
         classes="flex justify-center items-center bg-opacity-50 backdrop-blur-[2px]"
@@ -135,7 +135,7 @@ export default {
         :handleOpenModal="handleOpenModal" />
         <ModalArticleAddition v-if="modalState === 'articleEdit' || modalState === 'articleCreate'"
         :handleOpenModal="handleOpenModal" />
-      </vue-final-modal>
+      </VueFinalModal>
     </div>
   </main>
 </template>

@@ -1,4 +1,4 @@
-const getDate = function (timestamp = 0) {
+const getDate = (timestamp = 0) => {
   let times = null;
   if (timestamp.toString().length < 13) {
     times = timestamp * 1000;

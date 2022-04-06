@@ -1,10 +1,9 @@
-import { ref, inject } from 'vue';
+import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
 export const useAdminStore = defineStore('admin', () => {
-  const vueAxios = inject('axios');
   const baseUrl = process.env.VUE_APP_API_URL;
   const token = ref('');
   const expired = ref('');
@@ -24,7 +23,7 @@ export const useAdminStore = defineStore('admin', () => {
   const handleCheckUser = function () {
     if (token.value) {
       axios.defaults.headers.common.Authorization = token.value;
-      vueAxios
+      axios
         .post(`${baseUrl}api/user/check`)
         .then((res) => {
           isLoggedIn.value = res.data.success;
@@ -52,7 +51,7 @@ export const useAdminStore = defineStore('admin', () => {
     isLoggedIn.value = false;
     token.value = '';
     expired.value = '';
-    vueAxios.post(`${baseUrl}api/user/logout`);
+    axios.post(`${baseUrl}api/user/logout`);
   }
 
   function handleClearToken() {
