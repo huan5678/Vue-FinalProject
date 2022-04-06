@@ -1,6 +1,7 @@
 const { fontFamily } = require('tailwindcss/defaultTheme');
 const tailwindcssRfs = require('tailwindcss-rfs');
 const daisyui = require('daisyui');
+const tailwindcssLineClamp = require('@tailwindcss/line-clamp');
 
 module.exports = {
   content: ['./public/index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
@@ -77,6 +78,7 @@ module.exports = {
   },
   plugins: [
     tailwindcssRfs,
+    tailwindcssLineClamp,
     daisyui,
     ({ addComponents }) => {
       addComponents({
