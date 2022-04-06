@@ -53,7 +53,7 @@ export default {
         });
     }
 
-    const handleCloseModal = function () {
+    function handleCloseModal() {
       openModal.value = false;
     };
 
