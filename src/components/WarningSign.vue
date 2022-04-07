@@ -52,7 +52,12 @@ p{
   animation: marquee 8s linear infinite;
 }
 @keyframes marquee {
-    0%   { transform: translate(0%, 0); }
-    100% { transform: translate(-100%, 0); }
+  0%   {
+    transform: translate(0%, 0);
+  }
+
+  100% {
+    transform: translate(-100%, 0);
+  }
 }
 </style>

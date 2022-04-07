@@ -37,7 +37,7 @@ const routes = [
         name: 'booking',
         component: () => import('@/views/frontEnd/BookingView.vue'),
         meta: {
-          title: `${title} - 預訂畫位`,
+          title: `${title} - 預約訂位`,
         },
       },
       {

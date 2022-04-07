@@ -69,9 +69,9 @@ export default {
 <template>
 <section class="relative py-12 min-h-screen
 bg-fixed bg-center bg-no-repeat bg-cover
-" :style="{backgroundImage: `
+" :style="{ backgroundImage: `
 linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${aboutImg01})
-`}">
+` }">
   <div class="container z-10">
     <div class="mx-auto md:w-[80vw] card bg-base-100">
       <article class="card-body">

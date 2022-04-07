@@ -157,7 +157,7 @@ export default {
           </li>
           <li class="w-full md:flex-auto md:w-auto"
           v-if="route.name !== 'dashboard'">
-            <AppLink to="about"> 預約訂位 </AppLink>
+            <AppLink to="booking"> 預約訂位 </AppLink>
           </li>
           <li class="w-full md:flex-auto md:w-auto"
           v-if="route.name !== 'dashboard'">

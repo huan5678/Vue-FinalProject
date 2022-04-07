@@ -97,12 +97,9 @@ export default {
 
     function handleGetImageUrl() {
       const file = imageFile.value.files[0];
-      console.log(imageFile);
-      console.log(file);
       handleImageUpload(file)
         .then((res) => {
           articleData.value.image = res.data.imageUrl;
-          console.log(res.data);
         })
         .catch((err) => {
           console.dir(err);

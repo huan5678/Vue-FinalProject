@@ -1,17 +1,16 @@
 <script>
 import {
   ref,
-  inject,
   reactive,
   onBeforeMount,
 } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 import useStore from '@/stores';
 
 export default {
   setup() {
     const baseUrl = process.env.VUE_APP_API_URL;
-    const axios = inject('axios');
     const { adminStore } = useStore();
     const {
       handleSetLogin, handleCheckUser, handleGetToken,
@@ -45,7 +44,6 @@ export default {
           }, 3000);
         })
         .catch((err) => {
-          console.dir(err);
           modalMessage.message = err.response.data.message;
           modalMessage.detail = err.response.data.error.message;
           modalMessage.title = '登入失敗';
@@ -55,7 +53,7 @@ export default {
 
     function handleCloseModal() {
       openModal.value = false;
-    };
+    }
 
     onBeforeMount(() => {
       handleGetToken();

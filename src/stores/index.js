@@ -4,6 +4,7 @@ import { useProductStore } from './product';
 import { useOrderStore } from './order';
 import { useCartStore } from './cart';
 import { useCouponStore } from './coupon';
+import { useBookingDateStore } from './dates';
 
 export default function useStore() {
   const adminStore = useAdminStore();
@@ -12,6 +13,7 @@ export default function useStore() {
   const orderStore = useOrderStore();
   const cartStore = useCartStore();
   const couponStore = useCouponStore();
+  const bookingStore = useBookingDateStore();
 
   return {
     adminStore,
@@ -20,5 +22,6 @@ export default function useStore() {
     orderStore,
     cartStore,
     couponStore,
+    bookingStore,
   };
 }

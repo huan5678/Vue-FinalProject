@@ -11,11 +11,8 @@ module.exports = {
     parser: '@babel/eslint-parser',
   },
   rules: {
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'new-cap': ['error', { properties: false }],
     'tailwindcss/classnames-order': 'warn',
     'tailwindcss/no-custom-classname': 'warn',
-    'tailwindcss/no-contradicting-classname': 'error',
     'vuejs-accessibility/label-has-for': 'off',
   },
   plugins: ['vue', 'tailwindcss'],

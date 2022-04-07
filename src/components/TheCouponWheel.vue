@@ -50,17 +50,11 @@ export default {
     const result = ref(null);
 
     function launchWheel() {
-      // console.log(wheel.value);
       wheel.value.launchWheel();
-    }
-
-    function wheelStartedCallback() {
-      console.log('wheel started !');
     }
 
     function wheelEndedCallback(resultItem) {
       result.value = resultItem;
-      console.log(resultItem);
       showWheel.value = false;
       openModal.value = false;
       localStorage.setItem('coupon', resultItem.code);
@@ -97,7 +91,6 @@ export default {
       launchWheel,
       handleCloseModal,
       openModal,
-      wheelStartedCallback,
       wheelEndedCallback,
       showTip,
       showWheel,

@@ -10,11 +10,11 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 
 import { Roulette } from 'vue3-roulette';
 
-import AOS from 'aos';
-
 import router from '@/router';
 
 import SvgLoader from '@/utils/SvgLoader.vue';
+
+import AppLoader from '@/utils/AppLoader.vue';
 
 import AlertModal from '@/components/AlertModal.vue';
 
@@ -38,8 +38,6 @@ const requireAll = (requireContext) => requireContext.keys().forEach(requireCont
 
 const req = require.context('@/assets/images/svg', true, /\.svg$/);
 
-app.AOS = new AOS.init({ disable: 'phone' });
-
 requireAll(req);
 
 app.provide('Swal', app.config.globalProperties.$swal);
@@ -61,5 +59,7 @@ app.component('AlertModal', AlertModal);
 app.component('AppTitle', AppTitle);
 
 app.component('AppRoulette', Roulette);
+
+app.component('AppLoading', AppLoader);
 
 app.mount('#app');

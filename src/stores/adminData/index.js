@@ -16,6 +16,7 @@ export const useAdminDataStore = defineStore('adminData', () => {
     category: null,
     tempProduct: {},
     isOpenModal: false,
+    errorMessage: '',
   });
 
   const functionSelected = reactive({
@@ -36,13 +37,6 @@ export const useAdminDataStore = defineStore('adminData', () => {
   }
 
   const adminStore = useAdminStore();
-
-  /*
-  GET products/all, products, orders, coupons, articles, article/{id}
-  POST product, order/{id}, coupon, article
-  PUT product/{id}, order/{id}, coupon/{id}, article/{id}
-  DELETE product/{id}, orders/all, coupons/{id}, article/{id}
-  */
 
   function handleGetDataAll() {
     let target = adminData.selectedTarget;
@@ -68,16 +62,14 @@ export const useAdminDataStore = defineStore('adminData', () => {
         token: adminStore.token,
       })
       .then((res) => {
-        // console.log(res.data);
         adminData.dataList = res.data[`${target}`];
       })
       .catch((err) => {
-        console.dir(err);
+        adminData.errorMessage = `產生錯誤: ${err}`;
       });
   }
-  // GET products/all, products, orders, coupons, articles, article/{id}
+
   function handleGetDataList(page, category) {
-    console.log(`getDataList page=${page}, category=${category}`);
     let target = adminData.selectedTarget;
     switch (target) {
       case 'product':
@@ -109,12 +101,11 @@ export const useAdminDataStore = defineStore('adminData', () => {
         token: adminStore.token,
       })
       .then((res) => {
-        // console.log(res.data);
         adminData.dataList = res.data[`${target}`];
         adminData.pagination = res.data.pagination;
       })
       .catch((err) => {
-        console.dir(err);
+        adminData.errorMessage = `產生錯誤: ${err}`;
       });
   }
 
@@ -127,7 +118,7 @@ export const useAdminDataStore = defineStore('adminData', () => {
         handleGetDataList(adminData.currentPage, adminData.category);
       })
       .catch((err) => {
-        console.dir(err);
+        adminData.errorMessage = `產生錯誤: ${err}`;
       });
   }
 
@@ -150,7 +141,7 @@ export const useAdminDataStore = defineStore('adminData', () => {
         handleGetDataList(adminData.currentPage, adminData.category);
       })
       .catch((err) => {
-        console.dir(err);
+        adminData.errorMessage = `產生錯誤: ${err}`;
       });
   }
 
