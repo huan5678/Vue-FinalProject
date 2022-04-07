@@ -129,10 +129,10 @@ export default {
   }"
   >
     <nav class="container flex relative
-    justify-between items-center p-2 px-1 md:static md:p-3">
+    justify-between items-center py-2 md:static md:py-3">
       <a href="/">
         <SvgLoader name="bannerLogo"
-          class="w-full h-9 text-primary-500" />
+          class="h-8 w-28 text-primary-500" />
         <h2 class="hidden text-primary-500">ChillBar秋吧</h2>
       </a>
         <label for="menuBtn"

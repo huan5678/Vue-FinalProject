@@ -11,7 +11,6 @@
     "@ckeditor/ckeditor5-build-classic": "^33.0.0",
     "@ckeditor/ckeditor5-vue": "^3.0.0",
     "@tailwindcss/line-clamp": "^0.3.1",
-    "@vuepic/vue-datepicker": "^3.0.0",
     "aos": "^3.0.0-beta.6",
     "autoprefixer": "^10.4.2",
     "axios": "^0.26.0",
@@ -39,6 +38,7 @@
     "vue-loading-overlay": "^5.0.3",
     "vue-router": "^4.0.0-0",
     "vue-sweetalert2": "^5.0.2",
+    "vue3-datepicker": "^0.3.2",
     "vue3-roulette": "^0.2.0",
     "yup": "^0.32.11"
   },

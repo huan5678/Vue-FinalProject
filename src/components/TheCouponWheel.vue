@@ -77,7 +77,6 @@ export default {
 
     onMounted(() => {
       const localCoupon = localStorage.getItem('coupon');
-      console.log(localCoupon);
       if (localCoupon !== null) {
         showWheel.value = false;
       } else {
@@ -117,7 +116,7 @@ export default {
       name="Roulette" />
     </div>
   </div>
-  <AlertModal class=" select-none" v-model="openModal"
+  <AlertModal class="select-none" v-model="openModal"
   @handleCloseModal="handleCloseModal" :closeButton="false">
     <template v-slot:title>驚喜大轉盤</template>
     <div class="relative">
@@ -130,7 +129,6 @@ export default {
       indicator-position="top"
       :base-display="true"
       :base-size="120"
-      @wheel-start="wheelStartedCallback"
       @wheel-end="wheelEndedCallback"
       base-background="#fde7c4"
       >

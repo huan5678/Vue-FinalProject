@@ -26,7 +26,7 @@ export default {
             {{ productData.title }}
           </h3>
           <p class="mt-1 rfs:text-base font-extralight
-          text-secondary-400 dark:text-secondary-300">
+          text-secondary-400 dark:text-secondary-300 line-clamp-1">
             {{ productData.content }}</p>
       </div>
 

@@ -66,7 +66,7 @@ export default {
       }"
     >
     <swiper-slide
-    class="items-stretch h-auto"
+    class="items-stretch"
     v-for="product in productList"
     :key="product.id"
     >

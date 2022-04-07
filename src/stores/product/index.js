@@ -11,6 +11,7 @@ export const useProductStore = defineStore('product', () => {
     currentPage: 1,
     productDetail: {},
     selectCategory: '',
+    errorMessage: '',
   });
   const isLoading = ref('');
   const productCategory = ref([
@@ -48,16 +49,10 @@ export const useProductStore = defineStore('product', () => {
     axios
       .get(`${baseUrl}api/${apiPath}/products/all`)
       .then((res) => {
-        // console.log(res.data);
         productList.products = res.data.products;
-        // res.data.products.forEach((product) => {
-        //   if (!productCategory.value.includes(product.category)) {
-        //     productCategory.value.push(product.category);
-        //   }
-        // });
       })
       .catch((err) => {
-        console.dir(err);
+        productList.errorMessage = `產生錯誤: ${err}`;
       });
   }
 
@@ -66,16 +61,14 @@ export const useProductStore = defineStore('product', () => {
     if (category === 'All') {
       selectCategory = '';
     }
-    console.log(selectCategory);
     axios
       .get(`${baseUrl}api/${apiPath}/products?page=${page}&category=${selectCategory}`)
       .then((res) => {
-        // console.log(res.data);
         productList.products = res.data.products;
         productList.pagination = res.data.pagination;
       })
       .catch((err) => {
-        console.dir(err);
+        productList.errorMessage = `產生錯誤: ${err}`;
       });
   }
 
@@ -83,12 +76,11 @@ export const useProductStore = defineStore('product', () => {
     isLoading.value = id;
     axios(`${baseUrl}api/${apiPath}/product/${id}`)
       .then((res) => {
-        // console.log(res.data);
         isLoading.value = '';
         productList.productDetail = res.data.product;
       })
       .catch((err) => {
-        console.dir(err);
+        productList.errorMessage = `產生錯誤: ${err}`;
         isLoading.value = '';
       });
   }

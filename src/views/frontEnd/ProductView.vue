@@ -1,11 +1,11 @@
 <script>
-import useStore from '@/stores';
 import {
   onMounted,
   computed,
   ref,
-  inject,
 } from 'vue';
+import axios from 'axios';
+import useStore from '@/stores';
 import ProductCard from '@/components/ProductCard.vue';
 
 export default {
@@ -26,8 +26,6 @@ export default {
       get() { return productList.selectCategory; },
       set(val) { productList.selectCategory = val; },
     });
-
-    const axios = inject('axios');
 
     function handleGetArticleAll() {
       axios.get(`${baseUrl}api/${apiPath}/articles`)

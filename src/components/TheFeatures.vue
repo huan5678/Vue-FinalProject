@@ -1,6 +1,7 @@
 <script>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 import useStore from '@/stores';
 
 import featureImg01 from '@/assets/images/featureImg01.jpg';
@@ -12,43 +13,39 @@ import featureImg06 from '@/assets/images/featureImg06.jpg';
 
 export default {
   setup() {
-    const isHovering = ref(0);
+    const baseUrl = process.env.VUE_APP_API_URL;
+    const apiPath = process.env.VUE_APP_API_PATH;
+
+    const isHovering = ref();
+    const articles = ref();
     const data = [
       {
         title: '伏特加 VODKA',
-        description: '伏特加是一種蒸餾白酒，Vodka 在拉丁文的語意有著「生命之水」的意思 ...',
         category: 'vodka',
         imageUrl: featureImg01,
       },
       {
         title: '琴酒 GIN',
-        description: '琴酒的原料是杜松子，Gin 就是緣自於杜松子法語 ( Geninever ) 的發音 ...',
         category: 'gin',
         imageUrl: featureImg02,
       },
       {
         title: '威士忌 WHISKY',
-        description: `威士忌主要原料有大麥、裸麥、小麥、玉米，經發酵、
-        蒸餾後，儲存於木桶中熟成，不同產區在原料上有所差異 ...`,
         category: 'whisky',
         imageUrl: featureImg03,
       },
       {
         title: '龍舌蘭 TEQUILA',
-        description: `最廣為人知的龍舌蘭酒就屬 Tequila 了，
-        被視為是墨西哥靈魂的龍舌蘭酒，原料龍舌蘭草是一種長得非常像巨大鳳梨的植物 ...`,
         category: 'tequila',
         imageUrl: featureImg04,
       },
       {
         title: '蘭姆酒 RUM',
-        description: '蘭姆酒早期是運用煉糖剩下的糖渣，加水稀釋之後再加入酵母發酵而成 ...',
         category: 'rum',
         imageUrl: featureImg05,
       },
       {
         title: '白蘭地 BRANDY',
-        description: '一般我們說的白蘭地是指使用葡萄酒蒸餾而成的，因此帶有葡萄的果香風味 ...',
         category: 'brandy',
         imageUrl: featureImg06,
       },
@@ -64,16 +61,23 @@ export default {
       handleGetProductList(category);
     }
 
+    function handleGetArticleAll() {
+      axios.get(`${baseUrl}api/${apiPath}/articles`)
+        .then((res) => { articles.value = res.data.articles; });
+    }
+
     onMounted(() => {
       const header = document.getElementById('header');
       const feature = document.getElementById('feature');
       feature.style.marginTop = `${-header.offsetHeight}px`;
+      handleGetArticleAll();
     });
 
     return {
       data,
       isHovering,
       handleGoProducts,
+      articles,
     };
   },
 };
@@ -111,15 +115,18 @@ export default {
             >
               {{ item.title }}
             </h2>
-            <p class="rfs:text-base
-            font-light tracking-wider text-secondary-400/70
-            transition duration-150 ease-in-out"
-            :class="{
-              'group-hover:text-secondary-400': isHovering === idx
-            }"
-            >
-              {{ item.description }}
-            </p>
+            <template v-for="article in articles" :key="article.id">
+              <p class="rfs:text-base
+              font-light tracking-wider text-secondary-400/70
+              line-clamp-2 overflow-clip
+              transition duration-150 ease-in-out"
+              :class="{
+                'group-hover:text-secondary-400': isHovering === idx
+              }"
+              v-if="article.tag[0] === item.category"
+              v-html="article.description"
+              />
+            </template>
             <div class="lg:flex-shrink-0 lg:mt-0">
                 <div class="inline-flex mt-12 rounded-md">
                     <button type="button" class="py-4 px-12
