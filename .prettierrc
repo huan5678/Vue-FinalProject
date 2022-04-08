@@ -1,5 +1,9 @@
 {
   "printWidth": 100,
   "htmlWhitespaceSensitivity": "css",
-  "singleQuote": true
+  "singleQuote": true,
+  "bracketSpacing": true,
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "arrowParens": "avoid"
 }

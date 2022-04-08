@@ -10,6 +10,8 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 
 import { Roulette } from 'vue3-roulette';
 
+import { SetupCalendar } from 'v-calendar';
+
 import router from '@/router';
 
 import SvgLoader from '@/utils/SvgLoader.vue';
@@ -21,6 +23,8 @@ import AlertModal from '@/components/AlertModal.vue';
 import AppTitle from '@/utils/AppTitle.vue';
 
 import App from '@/App.vue';
+
+import 'v-calendar/dist/style.css';
 
 import 'aos/dist/aos.css';
 
@@ -51,6 +55,8 @@ app.use(router);
 app.use(vfmPlugin);
 
 app.use(CKEditor);
+
+app.use(SetupCalendar, {});
 
 app.component('SvgLoader', SvgLoader);
 

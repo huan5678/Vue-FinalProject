@@ -132,7 +132,7 @@ export default {
     justify-between items-center py-2 md:static md:py-3">
       <a href="/">
         <SvgLoader name="bannerLogo"
-          class="h-8 w-28 text-primary-500" />
+          class="w-28 h-8 text-primary-500" />
         <h2 class="hidden text-primary-500">ChillBar秋吧</h2>
       </a>
         <label for="menuBtn"

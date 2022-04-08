@@ -73,7 +73,7 @@ bg-fixed bg-center bg-no-repeat bg-cover
 linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${aboutImg01})
 ` }">
   <div class="container z-10">
-    <div class="mx-auto md:w-[80vw] card bg-base-100">
+    <div class="mx-auto card bg-base-100">
       <article class="card-body">
         <AppTitle class="mb-6" level="1">
           關於秋吧

@@ -116,10 +116,10 @@ export default {
               {{ item.title }}
             </h2>
             <template v-for="article in articles" :key="article.id">
-              <p class="rfs:text-base
-              font-light tracking-wider text-secondary-400/70
-              line-clamp-2 overflow-clip
-              transition duration-150 ease-in-out"
+              <p class="overflow-clip
+              rfs:text-base font-light tracking-wider
+              text-secondary-400/70 transition
+              duration-150 ease-in-out line-clamp-2"
               :class="{
                 'group-hover:text-secondary-400': isHovering === idx
               }"
