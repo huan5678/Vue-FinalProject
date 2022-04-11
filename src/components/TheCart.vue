@@ -50,17 +50,21 @@ export default {
       router.push('/checkout');
     }
 
+    function handleCountQty(qty) {
+      if (qty <= 1) {
+        return 1;
+      }
+      return qty;
+    }
+
     const checkCoupon = ref('');
     const couponList = computed(() => couponData.couponList);
     const coupon = localStorage.getItem('coupon');
 
     onMounted(() => {
-      // console.log(coupon);
-      // console.log(couponList.value.filter((item) => item.code === coupon));
       if (coupon !== null) {
         [checkCoupon.value] = couponList.value.filter((item) => item.code === coupon);
       }
-      // console.log(checkCoupon.value);
     });
 
     const cartFinalPrice = computed(() => {
@@ -85,6 +89,7 @@ export default {
       isOpenCart: computed(() => cartData.isOpenCart),
       cartTotalPrice,
       cartFinalPrice,
+      handleCountQty,
       handleDeleteCart,
       handleClearCart,
       handleUpdateCart,
@@ -192,7 +197,9 @@ export default {
                     </button>
                     <span class="p-4">{{ cart.qty }}</span>
                     <button class="btn btn-sm btn-outline btn-square"
-                    @click="cart.qty -= 1; handleUpdateCart(cart.id, cart.qty)">
+                    @click="
+                    cart.qty = handleCountQty(cart.qty -= 1);
+                    handleUpdateCart(cart.id, cart.qty)">
                       <svg
                         class="w-5 h-5 text-gray-300 animate-spin"
                         :class="isLoading === cart.id ? '' : 'hidden'"

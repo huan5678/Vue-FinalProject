@@ -14,6 +14,7 @@ export const useCartStore = defineStore('cart', () => {
     isOpenCart: false,
     resultPrice: 0,
     checkoutStep: 1,
+    errorMessage: '',
   });
 
   const isLoading = ref('');
@@ -35,7 +36,7 @@ export const useCartStore = defineStore('cart', () => {
         cartData.finalPrice = res.data.data.final_total;
       })
       .catch((err) => {
-        console.dir(err);
+        cartData.errorMessage = err.data.message;
       });
   }
 
@@ -49,14 +50,13 @@ export const useCartStore = defineStore('cart', () => {
         },
       })
       .then((res) => {
-        // console.log(res.data);
         cartData.data = res.data.data;
         cartData.message = res.data.message;
         isLoading.value = '';
         handleGetCart();
       })
       .catch((err) => {
-        console.dir(err);
+        cartData.errorMessage = err.data.message;
         isLoading.value = '';
       });
   }
@@ -66,13 +66,12 @@ export const useCartStore = defineStore('cart', () => {
     axios
       .delete(`${baseUrl}api/${apiPath}/cart/${id}`)
       .then((res) => {
-        // console.log(res.data);
         cartData.message = res.data.message;
         isLoading.value = '';
         handleGetCart();
       })
       .catch((err) => {
-        console.dir(err);
+        cartData.errorMessage = err.data.message;
         isLoading.value = '';
       });
   }
@@ -87,13 +86,12 @@ export const useCartStore = defineStore('cart', () => {
         },
       })
       .then((res) => {
-        // console.log(res.data);
         cartData.message = res.data.message;
         isLoading.value = '';
         handleGetCart();
       })
       .catch((err) => {
-        console.dir(err);
+        cartData.errorMessage = err.data.message;
         isLoading.value = '';
       });
   }
@@ -102,12 +100,11 @@ export const useCartStore = defineStore('cart', () => {
     axios
       .delete(`${baseUrl}api/${apiPath}/carts`)
       .then((res) => {
-        // console.log(res.data);
         cartData.message = res.data.message;
         handleGetCart();
       })
       .catch((err) => {
-        console.dir(err);
+        cartData.errorMessage = err.data.message;
       });
   }
 

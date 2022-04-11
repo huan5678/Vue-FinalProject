@@ -1,18 +1,16 @@
 <script>
-import { ref, onMounted, inject } from 'vue';
+import { ref, onMounted } from 'vue';
+import { Roulette } from 'vue3-roulette';
+import Swal from 'sweetalert2';
 
 export default {
+  components: { Roulette },
   setup() {
-    const Swal = inject('$swal');
     const wheel = ref(null);
     const showTip = ref(false);
     const showWheel = ref(true);
-    const openModal = ref(false);
-    const handleCloseModal = function () {
-      openModal.value = false;
-    };
 
-    const items = [
+    const giving = [
       {
         id: 1,
         name: 'freeOne',
@@ -56,7 +54,6 @@ export default {
     function wheelEndedCallback(resultItem) {
       result.value = resultItem;
       showWheel.value = false;
-      openModal.value = false;
       localStorage.setItem('coupon', resultItem.code);
       Swal.fire({
         title: '恭喜您!',
@@ -75,6 +72,12 @@ export default {
       });
     }
 
+    function handleOpenModal() {
+      Swal.fire({
+        template: '#roulette-modal',
+      });
+    }
+
     onMounted(() => {
       const localCoupon = localStorage.getItem('coupon');
       if (localCoupon !== null) {
@@ -85,11 +88,10 @@ export default {
     });
 
     return {
-      items,
+      giving,
       wheel,
       launchWheel,
-      handleCloseModal,
-      openModal,
+      handleOpenModal,
       wheelEndedCallback,
       showTip,
       showWheel,
@@ -105,7 +107,7 @@ export default {
   -translate-y-1/4 cursor-pointer" v-if="showWheel"
   @mouseenter="showTip = true" @focus="showTip"
   @mouseleave="showTip = false" @blur="showTip"
-  @click="openModal = true" @keydown="openModal = true">
+  @keydown="openModal = true" @click="handleOpenModal">
     <div class="indicator">
       <span class="p-4 w-max text-3xl
       text-secondary-100 bg-secondary-700 rounded
@@ -115,45 +117,49 @@ export default {
       <SvgLoader
       name="Roulette" />
     </div>
+    <template id="roulette-modal">
+      <swalHtml>
+        <swalTitle>
+          驚喜大轉盤
+        </swalTitle>
+        <h2 class="text-center text-2xl">驚喜大轉盤</h2>
+        <div class="relative">
+          <Roulette ref="wheel" :items="giving"
+          easing="bounce"
+          @click="launchWheel"
+          :display-border="true"
+          :display-shadow="true"
+          :centered-indicator="true"
+          indicator-position="top"
+          :base-display="true"
+          :base-size="120"
+          @wheel-end="wheelEndedCallback"
+          base-background="#fde7c4"
+          >
+          <template #baseContent>
+            <span class="font-mono text-4xl">GO</span>
+          </template>
+          </Roulette>
+          <svg class="absolute top-0 left-0 translate-x-[10%] translate-y-[-8%]">
+            <g class="text-primary-200">
+              <path fill="currentColor"
+              d="M122.65,7.06v22.27c0,0.17,0.04,0.34,0.12,0.49l3.48,
+              6.62c1,1.9,3.7,1.96,4.78,0.1l3.89-6.71
+                c0.09-0.16,0.14-0.35,0.14-0.53V7.06c0-0.59-0.48-1.06-1.06-1.06h-10.28C123.13,
+                6,122.65,6.48,122.65,7.06z"/>
+            </g>
+            <g class="text-secondary-700">
+              <path fill="currentColor" d="M128.7,39.9c0,0-0.1,0-0.1,0c-1.7,
+              0-3.3-1-4.1-2.5l-3.5-6.6c-0.2-0.4-0.3-0.9-0.3-1.4V7.1
+              c0-1.7,1.4-3.1,3.1-3.1H134c1.7,0,3.1,1.4,3.1,3.1v22.2c0,
+              0.5-0.1,1.1-0.4,1.5l-3.9,6.7C131.9,39,130.4,39.9,128.7,39.9z
+              M124.7,29.1l3.4,6.4c0.2,0.3,0.5,0.4,0.6,0.4c0.2,0,0.5,0,
+              0.6-0.4l3.8-6.5V8h-8.4C124.7,8,124.7,29.1,124.7,29.1z M133.2,28.8
+              C133.2,28.8,133.2,28.8,133.2,28.8L133.2,28.8z M134,8L134,8L134,8z"/>
+            </g>
+          </svg>
+        </div>
+      </swalHtml>
+    </template>
   </div>
-  <AlertModal class="select-none" v-model="openModal"
-  @handleCloseModal="handleCloseModal" :closeButton="false">
-    <template v-slot:title>驚喜大轉盤</template>
-    <div class="relative">
-      <AppRoulette ref="wheel" :items="items"
-      easing="bounce"
-      @click="launchWheel"
-      :display-border="true"
-      :display-shadow="true"
-      :centered-indicator="true"
-      indicator-position="top"
-      :base-display="true"
-      :base-size="120"
-      @wheel-end="wheelEndedCallback"
-      base-background="#fde7c4"
-      >
-      <template #baseContent>
-        <span class="font-mono text-4xl">GO</span>
-      </template>
-      </AppRoulette>
-      <svg class="absolute top-0 left-0 translate-x-[10%] translate-y-[-8%]">
-        <g class="text-primary-200">
-          <path fill="currentColor"
-          d="M122.65,7.06v22.27c0,0.17,0.04,0.34,0.12,0.49l3.48,
-          6.62c1,1.9,3.7,1.96,4.78,0.1l3.89-6.71
-            c0.09-0.16,0.14-0.35,0.14-0.53V7.06c0-0.59-0.48-1.06-1.06-1.06h-10.28C123.13,
-            6,122.65,6.48,122.65,7.06z"/>
-        </g>
-        <g class="text-secondary-700">
-          <path fill="currentColor" d="M128.7,39.9c0,0-0.1,0-0.1,0c-1.7,
-          0-3.3-1-4.1-2.5l-3.5-6.6c-0.2-0.4-0.3-0.9-0.3-1.4V7.1
-          c0-1.7,1.4-3.1,3.1-3.1H134c1.7,0,3.1,1.4,3.1,3.1v22.2c0,
-          0.5-0.1,1.1-0.4,1.5l-3.9,6.7C131.9,39,130.4,39.9,128.7,39.9z
-          M124.7,29.1l3.4,6.4c0.2,0.3,0.5,0.4,0.6,0.4c0.2,0,0.5,0,
-          0.6-0.4l3.8-6.5V8h-8.4C124.7,8,124.7,29.1,124.7,29.1z M133.2,28.8
-          C133.2,28.8,133.2,28.8,133.2,28.8L133.2,28.8z M134,8L134,8L134,8z"/>
-        </g>
-      </svg>
-    </div>
-  </AlertModal>
 </template>

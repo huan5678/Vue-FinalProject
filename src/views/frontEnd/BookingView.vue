@@ -1,8 +1,10 @@
 <script>
 import { reactive, ref } from 'vue';
-import { DatePicker } from 'v-calendar';
 import { Form } from 'vee-validate';
 import * as Yup from 'yup';
+import VueCal from 'vue-cal';
+import 'vue-cal/dist/i18n/zh-hk';
+import 'vue-cal/dist/vuecal.css';
 
 import InputField from '@/utils/InputField.vue';
 import useStore from '@/stores';
@@ -12,9 +14,9 @@ import useHelper from '@/helpers';
 
 export default {
   components: {
-    DatePicker,
     InputField,
     Form,
+    VueCal,
   },
   setup() {
     const { handleSweetAlert, closeToast } = useHelper();
@@ -30,7 +32,7 @@ export default {
         .required('請輸入電話號碼'),
     });
 
-    const bookingDate = ref();
+    const bookingDate = ref([]);
     const userRemark = ref('');
 
     const message = reactive({
@@ -40,7 +42,6 @@ export default {
     });
 
     function handleSubmit(data) {
-      // console.log(data);
       const bookingData = {
         name: data.userName,
         email: data.userEmail,
@@ -145,34 +146,20 @@ export default {
               </button>
             </Form>
             <div class="flex-auto space-y-2 w-full max-w-screen-md md:order-none order-0">
-              <DatePicker
-                v-model="bookingDate"
-                mode="multiple"
-                :minDate="new Date()"
-                isExpanded
-                isDark
-                titlePosition="left"
-                inputFormat="MM月dd日E"
-                :style="dateStye"
+              <vue-cal
+              activeView="month"
+              xsmall
+              locale="zh-hk"
+              :time="false"
+              :disableViews="['years', 'year', 'day']"
+              :minDate="new Date()"
               >
-                <template v-slot="{ inputValue, inputEvents }">
-                  <input
-                    class="py-1 px-2 bg-white rounded border"
-                    :value="inputValue"
-                    v-on="inputEvents"
-                  />
-                </template>
-                <template #dayPopover="{ day, format, masks }">
-                  <div class="text-xs font-semibold text-center text-gray-300">
-                    {{ format(day.date, masks.dayPopover) }}
-                  </div>
-                  <p>本日已達額滿人數</p>
-                </template>
-              </DatePicker>
+              </vue-cal>
             </div>
           </div>
         </div>
         <button type="button" class="btn" @click="handleOpenLoading">Click Toast</button>
+        <button type="button" @click="handleModal" class="btn">Click Modal</button>
       </div>
     </div>
   </section>

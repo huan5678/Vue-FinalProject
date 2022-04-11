@@ -100,22 +100,22 @@ export default {
         lg:pt-14 lg:pb-20 lg:border-0">
           <h2 class="py-4 text-2xl font-medium text-center">訂單內容</h2>
           <ul id="list" class="overflow-y-auto space-y-4 max-h-[50vh]">
-            <li v-for="item in confirmData?.order?.products" :key="item.id"
+            <li v-for="data in confirmData?.order?.products" :key="data.id"
             class="flex gap-4 justify-between items-center
             px-4 pb-4 border-b border-secondary-200">
               <div class="flex gap-4">
                 <img
                   class="object-cover w-20 h-20"
-                  :src="item.product.imageUrl"
-                  :alt="item.product.title"
+                  :src="data.product.imageUrl"
+                  :alt="data.product.title"
                 />
                 <div class="space-y-4">
-                  <h3 class="text-xl font-medium">{{ item.product.title }}</h3>
-                  <span class="block font-mono tracking-wider">數量：{{ item.product.qty }}</span>
+                  <h3 class="text-xl font-medium">{{ data.product.title }}</h3>
+                  <span class="block font-mono tracking-wider">數量：{{ data.product.qty }}</span>
                 </div>
               </div>
               <span class="font-mono tracking-widest">
-                NT${{ moneyFormat(item.product.price, item.product.qty) }}
+                NT${{ moneyFormat(data.product.price, data.product.qty) }}
               </span>
             </li>
           </ul>
