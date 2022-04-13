@@ -17,9 +17,9 @@ export default {
 };
 </script>
 <template>
-  <div class="justify-between h-full bg-secondary-100
-  dark:bg-secondary-800 rounded shadow card">
-      <div class="py-2 px-4">
+  <div class="justify-between h-full rounded shadow card">
+      <div class="py-2 px-4 bg-secondary-100
+  dark:bg-secondary-800">
           <h3 class="font-serif text-3xl font-bold
           text-secondary-700
           dark:text-secondary-100 uppercase">

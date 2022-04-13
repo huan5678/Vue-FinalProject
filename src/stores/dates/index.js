@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 
 export const useBookingDateStore = defineStore('bookingDates', () => {
+  const crosUrl = 'https://esc-cros-anywhere.herokuapp.com/';
   const baseUrl = 'https://chill-bar-sp.herokuapp.com';
   const apiPath = 'api/v1';
 
@@ -10,6 +11,7 @@ export const useBookingDateStore = defineStore('bookingDates', () => {
     bookingList: [],
     bookingData: {},
     tempData: {},
+    isLoading: false,
     errorMessage: '',
   });
 
@@ -19,7 +21,7 @@ export const useBookingDateStore = defineStore('bookingDates', () => {
 
   function handleGetBookingDataAll() {
     axios
-      .get(`${baseUrl}/${apiPath}/`)
+      .get(`${crosUrl}${baseUrl}/${apiPath}/dates`)
       .then((res) => {
         datesData.bookingList = res.data;
       })
@@ -30,7 +32,7 @@ export const useBookingDateStore = defineStore('bookingDates', () => {
 
   function handleGetBookingData(id) {
     axios
-      .get(`${baseUrl}/${apiPath}/${id}`)
+      .get(`${crosUrl}${baseUrl}/${apiPath}/date/${id}`)
       .then((res) => {
         datesData.bookingData = res.data.order;
       })
@@ -41,7 +43,7 @@ export const useBookingDateStore = defineStore('bookingDates', () => {
 
   function handleEditBookingData(id, item) {
     axios
-      .put(`${baseUrl}/${apiPath}/${id}`, item)
+      .put(`${crosUrl}${baseUrl}/${apiPath}/date/${id}`, item)
       .then(() => {
         handleGetBookingDataAll();
       })
@@ -52,7 +54,7 @@ export const useBookingDateStore = defineStore('bookingDates', () => {
 
   function handleDeleteBookingData(id = null) {
     axios
-      .delete(`${baseUrl}/${apiPath}/${id}`)
+      .delete(`${crosUrl}${baseUrl}/${apiPath}/date/${id}`)
       .then(() => {
         handleGetBookingDataAll();
       })
@@ -62,10 +64,12 @@ export const useBookingDateStore = defineStore('bookingDates', () => {
   }
 
   function handleCreateBookingData(data) {
+    datesData.isLoading = true;
     axios
-      .post(`${baseUrl}api/${apiPath}/`, data)
+      .post(`${crosUrl}${baseUrl}/${apiPath}/date`, data)
       .then(() => {
         handleGetBookingDataAll();
+        datesData.isLoading = false;
       })
       .catch((err) => {
         datesData.errorMessage = `產生錯誤: ${err}`;

@@ -10,7 +10,7 @@ export default {
   },
 };
 </script>
-<template>
+<template class="bg-secondary-700">
     <TheHeader />
       <RouterView v-slot="{ Component }">
         <transition name="fade">

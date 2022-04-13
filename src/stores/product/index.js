@@ -45,11 +45,16 @@ export const useProductStore = defineStore('product', () => {
     },
   ]);
 
+  function checkImage(productArray) {
+    const result = productArray.filter((product) => product.imageUrl !== '');
+    return result;
+  }
+
   function handleGetProductAll() {
     axios
       .get(`${baseUrl}api/${apiPath}/products/all`)
       .then((res) => {
-        productList.products = res.data.products;
+        productList.products = checkImage(res.data.products);
       })
       .catch((err) => {
         productList.errorMessage = `產生錯誤: ${err}`;
@@ -64,7 +69,7 @@ export const useProductStore = defineStore('product', () => {
     axios
       .get(`${baseUrl}api/${apiPath}/products?page=${page}&category=${selectCategory}`)
       .then((res) => {
-        productList.products = res.data.products;
+        productList.products = checkImage(res.data.products);
         productList.pagination = res.data.pagination;
       })
       .catch((err) => {

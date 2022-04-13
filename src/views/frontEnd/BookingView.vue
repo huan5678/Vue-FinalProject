@@ -1,5 +1,11 @@
 <script>
-import { reactive, ref } from 'vue';
+import {
+  reactive,
+  ref,
+  onMounted,
+  computed,
+  watch,
+} from 'vue';
 import { Form } from 'vee-validate';
 import * as Yup from 'yup';
 import VueCal from 'vue-cal';
@@ -21,8 +27,12 @@ export default {
   setup() {
     const { handleSweetAlert, closeToast } = useHelper();
     const { bookingStore } = useStore();
-    const { handleCreateBookingData } = bookingStore;
-    const isOpenLoading = ref(false);
+    const {
+      datesData,
+      handleGetBookingDataAll,
+      handleCreateBookingData,
+    } = bookingStore;
+    const isOpenLoading = computed(() => datesData.isLoading);
     const phoneRegex = /09\d{2}-?\d{3}-?\d{3}/;
     const schema = Yup.object().shape({
       userName: Yup.string().trim().required('請輸入姓名'),
@@ -32,8 +42,9 @@ export default {
         .required('請輸入電話號碼'),
     });
 
-    const bookingDate = ref([]);
+    const bookingDate = ref({});
     const userRemark = ref('');
+    const selectedDate = ref();
 
     const message = reactive({
       title: '成功',
@@ -41,25 +52,53 @@ export default {
       icon: 'info',
     });
 
-    function handleSubmit(data) {
-      const bookingData = {
-        name: data.userName,
-        email: data.userEmail,
-        tel: data.userPhone,
-        address: data.userAddress,
-        message: userRemark.value,
-      };
-      handleCreateBookingData(bookingData);
+    const selectedDates = ref([]);
+
+    function handleDateSet(date, Fn) {
+      let time = date;
+      if (Fn === 'Add') {
+        time = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+      }
+      const idx = selectedDates.value.findIndex((dates) => dates === time);
+      if (idx === -1) {
+        if (Fn === 'Add') {
+          selectedDates.value.push(time);
+        }
+      }
+      if (Fn === 'Remove') {
+        selectedDates.value.splice(idx, 1);
+      }
     }
 
-    function handleOpenLoading() {
-      handleSweetAlert(message);
-      isOpenLoading.value = true;
-      setTimeout(() => {
-        isOpenLoading.value = false;
-        closeToast();
-      }, 5000);
+    watch(isOpenLoading, (newVal) => {
+      if (newVal) {
+        handleSweetAlert(message);
+      } else {
+        setTimeout(() => {
+          closeToast();
+        }, 5000);
+      }
+    });
+
+    function handleSubmit(data, actions) {
+      const bookingData = {
+        data: {
+          name: data.userName,
+          email: data.userEmail,
+          tel: data.userPhone,
+          address: data.userAddress,
+          message: userRemark.value,
+          dates: selectedDates,
+        },
+      };
+      handleCreateBookingData(bookingData);
+      userRemark.value = '';
+      actions.resetForm();
     }
+
+    onMounted(() => {
+      handleGetBookingDataAll();
+    });
 
     return {
       bookingImage01,
@@ -67,9 +106,11 @@ export default {
       handleSubmit,
       schema,
       userRemark,
-      handleOpenLoading,
-      isOpenLoading,
       bookingDate,
+      selectedDate,
+      selectedDates,
+      handleDateSet,
+      dateList: computed(() => datesData.bookingList),
     };
   },
 };
@@ -93,10 +134,9 @@ export default {
           </p>
           <div class="flex flex-col gap-6 justify-between md:flex-row">
             <Form
-              action
+              :validationSchema="schema"
+              class="space-y-2 font-light order-1 md:order-none md:w-2/3 form-control h-full"
               @submit="handleSubmit"
-              :validation-schema="schema"
-              class="order-1 space-y-2 font-light md:order-none md:w-2/3 form-control"
             >
               <legend>
                 <h3 class="text-lg font-normal text-center">請填寫預約資料</h3>
@@ -131,7 +171,7 @@ export default {
               <textarea
                 id="userRemark"
                 name="userRemark"
-                class="w-full form-style input"
+                class="form-style textarea w-full"
                 v-model="userRemark"
                 rows="4"
                 placeholder="是否有其他需求"
@@ -141,27 +181,103 @@ export default {
                 class="w-full text-xl font-normal text-secondary-50
                 bg-secondary-300 hover:bg-primary-700
                 rounded border-none btn"
+                :class="
+                selectedDates.length === 0 ?
+                'opacity-30 cursor-not-allowed hover:bg-secondary-300': ''"
+                :disable="selectedDates.length === 0"
               >
                 送出預約
               </button>
             </Form>
-            <div class="flex-auto space-y-2 w-full max-w-screen-md md:order-none order-0">
+            <div class="flex-auto space-y-2 w-full h-full
+            max-w-screen-md md:order-none order-0">
+              <h3 :class="selectedDates.length === 0 ? 'opacity-0': 'opacity-100'"
+                class="text-lg font-normal text-center
+            transition-all duration-500">選擇預定日期</h3>
+              <div class="flex gap-2 flex-wrap">
+                <button v-for="date in selectedDates"
+                :key="date"
+                type="button"
+                class="btn gap-4"
+                @click="handleDateSet(date, 'Remove')">
+                {{ date }}
+                <i class="bi bi-x-lg text-xl" />
+                </button>
+              </div>
               <vue-cal
               activeView="month"
               xsmall
+              :selectedDate="selectedDate"
+              today-button
               locale="zh-hk"
               :time="false"
               :disableViews="['years', 'year', 'day']"
               :minDate="new Date()"
+              @cellClick="selectedDate = $event; handleDateSet($event, 'Add')"
               >
+              <template v-slot:arrow-prev>
+                <div class="tooltip tooltip-right" data-tip="上個月">
+                  <i aria-hidden="true"
+                  class="bi bi-arrow-left-square-fill
+                  text-2xl text-primary-400 hover:text-primary-600
+                  transition duration-500" />
+                </div>
+              </template>
+              <template v-slot:arrow-next>
+                <div class="tooltip tooltip-left" data-tip="下個月">
+                  <i aria-hidden="true"
+                  class="bi bi-arrow-right-square-fill
+                  text-2xl text-primary-400 hover:text-primary-600
+                  transition duration-500" />
+                </div>
+              </template>
+              <template v-slot:today-button>
+                <div class="tooltip" data-tip="返回今天">
+                  <button type="button"
+                  class="btn btn-square btn-ghost
+                  hover:bg-transparent
+                  ">
+                    <i class="bi bi-at text-2xl" />
+                  </button>
+                </div>
+              </template>
               </vue-cal>
             </div>
           </div>
         </div>
         <button type="button" class="btn" @click="handleOpenLoading">Click Toast</button>
-        <button type="button" @click="handleModal" class="btn">Click Modal</button>
       </div>
     </div>
   </section>
-  <AppLoading :openLoading="isOpenLoading" />
 </template>
+<style lang="scss">
+.vuecal {
+  @apply border-none rounded overflow-hidden
+}
+.vuecal__cell-content {
+  @apply p-2
+}
+.vuecal__menu, .vuecal__cell-events-count {
+  @apply bg-primary-400 text-primary-100
+}
+.vuecal__title-bar {
+  @apply bg-primary-200
+}
+.vuecal__cell--today, .vuecal__cell--current {
+  @apply bg-primary-500 text-primary-50
+}
+.vuecal:not(.vuecal--day-view) .vuecal__cell--selected {
+  @apply bg-primary-200
+}
+.vuecal__cell--selected:before {
+  @apply border-primary-500
+}
+.vuecal__event-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 4px 0 8px;
+}
+.vuecal__no-event {
+  @apply text-secondary-700
+}
+</style>

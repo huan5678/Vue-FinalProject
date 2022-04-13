@@ -95,13 +95,21 @@ export default {
       },
     );
 
-    onMounted(() => {
-      handleGetCart();
-      if (route.name === 'home') {
+    function checkRoute(routeName) {
+      if (routeName === 'home') {
         isHome.value = true;
       } else {
         isHome.value = false;
       }
+    }
+
+    watch(route, (newValue) => {
+      checkRoute(newValue.name);
+    });
+
+    onMounted(() => {
+      handleGetCart();
+      checkRoute(route.name);
     });
 
     return {

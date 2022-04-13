@@ -25,7 +25,7 @@ export default {
       userAddress: Yup.string().required('請輸入寄件地址'),
     });
 
-    function handleSubmit(data) {
+    function handleSubmit(data, actions) {
       // console.log(data);
       const orderData = {
         name: data.userName,
@@ -35,6 +35,8 @@ export default {
         message: userRemark.value,
       };
       handleSendOrder(orderData);
+      userRemark.value = '';
+      actions.resetForm();
     }
     return {
       handleSubmit,

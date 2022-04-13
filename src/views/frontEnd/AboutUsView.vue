@@ -1,5 +1,7 @@
 <script>
-import { onMounted, inject, ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import InputField from '@/utils/InputField.vue';
@@ -11,9 +13,6 @@ export default {
     InputField,
   },
   setup() {
-    const vueAxios = inject('axios');
-    const Swal = inject('$swal');
-
     onMounted(() => {
       mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_TOKEN;
       const map = new mapboxgl.Map({
@@ -42,7 +41,7 @@ export default {
       const googleUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSeW8xDki0525stZP18uyb-bgY2Dc0uZpvPk1QjWEKweSQP3CQ/formResponse';
       const formEl = formElement.value;
       const formData = new FormData(formEl);
-      vueAxios.post(`${crosUrl + googleUrl}`, formData)
+      axios.post(`${crosUrl + googleUrl}`, formData)
         .then(() => {
           Swal.fire({
             title: '您已成功送出訊息',
@@ -144,7 +143,7 @@ linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${abo
               <textarea
                 id="userMessage"
                 name="entry.1064200367"
-                class="w-full input form-style"
+                class="w-full form-style"
                 rows="4"
                 required
                 placeholder="想要告訴我們什麼？"

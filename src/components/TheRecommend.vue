@@ -36,42 +36,44 @@ export default {
 </script>
 
 <template>
-  <section class="container pb-6">
-    <AppTitle level="2" class="mb-12">
-      {{ titles }}
-    </AppTitle>
-    <swiper
-      class="select-none"
-      :loop="true"
-      :breakpoints="{
-        '640': {
-          slidesPerView: 2,
-          spaceBetween: 15,
-        },
-        '768': {
-          slidesPerView: 3,
-          spaceBetween: 20,
-        },
-        '1280': {
-          slidesPerView: 4,
-          spaceBetween: 30,
-        },
-      }"
-      :loopFillGroupWithBlank="true"
-      :grabCursor="true"
-      :modules="modules"
-      :autoplay="{
-        delay: 3000,
-        disableOnInteraction: false,
-      }"
-    >
-    <swiper-slide
-    class="items-stretch"
-    v-for="product in productList"
-    :key="product.id"
-    >
-      <CollectionCard :product="product" />
-    </swiper-slide>
-    </swiper>
+  <section class="bg-secondary-700">
+    <div class="container py-12">
+      <AppTitle level="2" class="mb-12 text-secondary-100">
+        {{ titles }}
+      </AppTitle>
+      <swiper
+        class="select-none"
+        :loop="true"
+        :breakpoints="{
+          '640': {
+            slidesPerView: 2,
+            spaceBetween: 15,
+          },
+          '768': {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          '1280': {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+        }"
+        :loopFillGroupWithBlank="true"
+        :grabCursor="true"
+        :modules="modules"
+        :autoplay="{
+          delay: 3000,
+          disableOnInteraction: false,
+        }"
+      >
+      <swiper-slide
+      class="items-stretch"
+      v-for="product in productList"
+      :key="product.id"
+      >
+        <CollectionCard :product="product" />
+      </swiper-slide>
+      </swiper>
+    </div>
   </section>
 </template>

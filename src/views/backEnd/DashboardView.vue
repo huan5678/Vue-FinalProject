@@ -45,25 +45,6 @@ export default {
 
     const Swal = inject('$swal');
 
-    function handleSweetAlert() {
-      Swal.fire({
-        toast: true,
-        position: 'top-end',
-        title: 'Error!',
-        showConfirmButton: false,
-        timer: 3000,
-        text: 'Do you want to continue',
-        icon: 'success',
-        iconColor: 'black',
-        showClass: {
-          popup: 'animate__animated animate__fadeInRight animate__faster',
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutRight animate__faster',
-        },
-      });
-    }
-
     const isOpenModal = toRef(adminData, 'isOpenModal');
 
     onBeforeMount(() => {
@@ -96,7 +77,6 @@ export default {
       handleOpenModal,
       isOpenModal,
       modalState: computed(() => functionSelected.selected),
-      handleSweetAlert,
     };
   },
 };
@@ -104,7 +84,6 @@ export default {
 
 <template>
   <main class="bg-gray-100">
-    <!-- <button @click="handleSweetAlert" class="btn btn-outline">open sweetalert2</button> -->
     <div class="container">
       <DashboardTable />
       <VueFinalModal
