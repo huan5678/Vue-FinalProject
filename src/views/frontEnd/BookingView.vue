@@ -54,15 +54,20 @@ export default {
 
     const selectedDates = ref([]);
 
+    const timestamps = ref([]);
+    const bookedTimestamps = ref([]);
+    const bookedDate = ref([]);
+
     function handleDateSet(date, Fn) {
       let time = date;
       if (Fn === 'Add') {
-        time = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+        time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
       }
       const idx = selectedDates.value.findIndex((dates) => dates === time);
       if (idx === -1) {
         if (Fn === 'Add') {
           selectedDates.value.push(time);
+          timestamps.value.push(date.getTime());
         }
       }
       if (Fn === 'Remove') {
@@ -88,16 +93,44 @@ export default {
           tel: data.userPhone,
           address: data.userAddress,
           message: userRemark.value,
-          dates: selectedDates,
+          dates: selectedDates.value,
+          timestamps: timestamps.value,
         },
       };
       handleCreateBookingData(bookingData);
       userRemark.value = '';
+      selectedDates.value = [];
+      timestamps.value = [];
       actions.resetForm();
     }
 
+    /* eslint no-underscore-dangle: 0 */
     onMounted(() => {
       handleGetBookingDataAll();
+    });
+
+    const dateList = computed(() => datesData.bookingList);
+
+    watch(dateList, (newVal) => {
+      newVal.dates.forEach((booking) => {
+        console.log(booking.dates);
+      });
+      newVal.dates.forEach((booking) => {
+        booking.dates.forEach((date) => {
+          const data = {
+            start: date,
+            end: date,
+            title: '已被預約',
+            content: '<i class="bi bi-calendar2-check text-2xl"></i>',
+            allDay: true,
+            deletable: true,
+          };
+          bookedDate.value.push(data);
+        });
+        booking.timestamps.forEach((time) => {
+          bookedTimestamps.value.push(time);
+        });
+      });
     });
 
     return {
@@ -110,7 +143,9 @@ export default {
       selectedDate,
       selectedDates,
       handleDateSet,
-      dateList: computed(() => datesData.bookingList),
+      dateList,
+      bookedDate,
+      bookedTimestamps,
     };
   },
 };
@@ -135,7 +170,7 @@ export default {
           <div class="flex flex-col gap-6 justify-between md:flex-row">
             <Form
               :validationSchema="schema"
-              class="space-y-2 font-light order-1 md:order-none md:w-2/3 form-control h-full"
+              class="order-1 space-y-2 h-full font-light md:order-none md:w-2/3 form-control"
               @submit="handleSubmit"
             >
               <legend>
@@ -171,7 +206,7 @@ export default {
               <textarea
                 id="userRemark"
                 name="userRemark"
-                class="form-style textarea w-full"
+                class="w-full form-style textarea"
                 v-model="userRemark"
                 rows="4"
                 placeholder="是否有其他需求"
@@ -189,57 +224,73 @@ export default {
                 送出預約
               </button>
             </Form>
-            <div class="flex-auto space-y-2 w-full h-full
-            max-w-screen-md md:order-none order-0">
+            <div class="flex-auto space-y-2 w-full max-w-screen-md
+            h-full md:order-none order-0">
               <h3 :class="selectedDates.length === 0 ? 'opacity-0': 'opacity-100'"
                 class="text-lg font-normal text-center
             transition-all duration-500">選擇預定日期</h3>
-              <div class="flex gap-2 flex-wrap">
+              <div class="flex flex-wrap gap-2">
                 <button v-for="date in selectedDates"
                 :key="date"
                 type="button"
-                class="btn gap-4"
+                class="gap-4 btn"
                 @click="handleDateSet(date, 'Remove')">
                 {{ date }}
-                <i class="bi bi-x-lg text-xl" />
+                <i class="text-xl bi bi-x-lg" />
                 </button>
               </div>
               <vue-cal
               activeView="month"
-              xsmall
               :selectedDate="selectedDate"
-              today-button
+              todayButton
               locale="zh-hk"
               :time="false"
               :disableViews="['years', 'year', 'day']"
+              :maxDate="new Date().addDays(30)"
               :minDate="new Date()"
-              @cellClick="selectedDate = $event; handleDateSet($event, 'Add')"
+              :disableDays="bookedTimestamps"
+              :events="bookedDate"
+              @cellClick="handleDateSet($event, 'Add')"
               >
               <template v-slot:arrow-prev>
                 <div class="tooltip tooltip-right" data-tip="上個月">
                   <i aria-hidden="true"
-                  class="bi bi-arrow-left-square-fill
-                  text-2xl text-primary-400 hover:text-primary-600
-                  transition duration-500" />
+                  class="text-2xl text-primary-400
+                  hover:text-primary-600 transition duration-500
+                  bi bi-arrow-left-square-fill" />
                 </div>
               </template>
               <template v-slot:arrow-next>
                 <div class="tooltip tooltip-left" data-tip="下個月">
                   <i aria-hidden="true"
-                  class="bi bi-arrow-right-square-fill
-                  text-2xl text-primary-400 hover:text-primary-600
-                  transition duration-500" />
+                  class="text-2xl text-primary-400
+                  hover:text-primary-600 transition duration-500
+                  bi bi-arrow-right-square-fill" />
                 </div>
               </template>
               <template v-slot:today-button>
                 <div class="tooltip" data-tip="返回今天">
                   <button type="button"
-                  class="btn btn-square btn-ghost
-                  hover:bg-transparent
+                  class="hover:bg-transparent btn btn-square
+                  btn-ghost
                   ">
-                    <i class="bi bi-at text-2xl" />
+                    <i class="text-2xl bi bi-at" />
                   </button>
                 </div>
+              </template>
+              <template v-slot:cell-content="{ cell, view, events }">
+                <span class="vuecal__cell-date"
+                :class="view.id" v-if="view.id === 'day'">
+                  {{ cell.date.getDate() }}
+                </span>
+                <span class="vuecal__cell-events-count"
+                v-if="view.id === 'month' && events.length">
+                  {{ events.length }}
+                </span>
+                <span class="vuecal__no-event"
+                v-if="['week', 'day'].includes(view.id) && !events.length">
+                  還可預約 👌
+                </span>
               </template>
               </vue-cal>
             </div>
@@ -273,11 +324,28 @@ export default {
   @apply border-primary-500
 }
 .vuecal__event-title {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin: 4px 0 8px;
+  @apply text-lg font-medium
 }
 .vuecal__no-event {
   @apply text-secondary-700
 }
+
+.vuecal__cell-events-count {
+  @apply hidden;
+}
+
+.vuecal__cell--has-events {
+  @apply bg-primary-50
+}
+
+.vuecal__cell--disabled {
+  @apply bg-secondary-50
+}
+.vuecal__cell--before-min {
+  @apply text-primary-200
+}
+.vuecal__cell--after-max {
+  @apply text-primary-300
+}
+
 </style>
