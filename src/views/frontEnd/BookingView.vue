@@ -57,6 +57,7 @@ export default {
     const timestamps = ref([]);
     const bookedTimestamps = ref([]);
     const bookedDate = ref([]);
+    const timeNow = ref(new Date());
 
     function handleDateSet(date, Fn) {
       let time = date;
@@ -66,8 +67,16 @@ export default {
       const idx = selectedDates.value.findIndex((dates) => dates === time);
       if (idx === -1) {
         if (Fn === 'Add') {
-          selectedDates.value.push(time);
-          timestamps.value.push(date.getTime());
+          let haveBooked = false;
+          bookedDate.value.forEach((dates) => {
+            if (dates.start === time) {
+              haveBooked = true;
+            }
+          });
+          if (haveBooked === false) {
+            selectedDates.value.push(time);
+            timestamps.value.push(date.getTime());
+          }
         }
       }
       if (Fn === 'Remove') {
@@ -104,7 +113,6 @@ export default {
       actions.resetForm();
     }
 
-    /* eslint no-underscore-dangle: 0 */
     onMounted(() => {
       handleGetBookingDataAll();
     });
@@ -112,9 +120,6 @@ export default {
     const dateList = computed(() => datesData.bookingList);
 
     watch(dateList, (newVal) => {
-      newVal.dates.forEach((booking) => {
-        console.log(booking.dates);
-      });
       newVal.dates.forEach((booking) => {
         booking.dates.forEach((date) => {
           const data = {
@@ -146,6 +151,7 @@ export default {
       dateList,
       bookedDate,
       bookedTimestamps,
+      timeNow,
     };
   },
 };
@@ -245,9 +251,9 @@ export default {
               todayButton
               locale="zh-hk"
               :time="false"
-              :disableViews="['years', 'year', 'day']"
-              :maxDate="new Date().addDays(30)"
-              :minDate="new Date()"
+              :disableViews="['years', 'year', 'week' , 'day']"
+              :maxDate="timeNow.addDays(30)"
+              :minDate="timeNow"
               :disableDays="bookedTimestamps"
               :events="bookedDate"
               @cellClick="handleDateSet($event, 'Add')"
@@ -278,25 +284,10 @@ export default {
                   </button>
                 </div>
               </template>
-              <template v-slot:cell-content="{ cell, view, events }">
-                <span class="vuecal__cell-date"
-                :class="view.id" v-if="view.id === 'day'">
-                  {{ cell.date.getDate() }}
-                </span>
-                <span class="vuecal__cell-events-count"
-                v-if="view.id === 'month' && events.length">
-                  {{ events.length }}
-                </span>
-                <span class="vuecal__no-event"
-                v-if="['week', 'day'].includes(view.id) && !events.length">
-                  還可預約 👌
-                </span>
-              </template>
               </vue-cal>
             </div>
           </div>
         </div>
-        <button type="button" class="btn" @click="handleOpenLoading">Click Toast</button>
       </div>
     </div>
   </section>
@@ -335,7 +326,7 @@ export default {
 }
 
 .vuecal__cell--has-events {
-  @apply bg-primary-50
+  @apply bg-secondary-100 border border-secondary-300 cursor-not-allowed
 }
 
 .vuecal__cell--disabled {
@@ -346,6 +337,9 @@ export default {
 }
 .vuecal__cell--after-max {
   @apply text-primary-300
+}
+.vuecal__cell--has-events {
+  @apply text-secondary-400
 }
 
 </style>

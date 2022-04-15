@@ -1,6 +1,10 @@
 <script>
 import {
-  onMounted, computed, ref, watchEffect,
+  computed,
+  ref,
+  onMounted,
+  reactive,
+  onActivated,
 } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -13,26 +17,50 @@ export default {
     const { productStore, cartStore } = useStore();
     const { handleAddCart } = cartStore;
     const { productList, handleGetProductDetail } = productStore;
-    const params = useRoute();
+    const route = useRoute();
     const qty = ref(0);
-
-    onMounted(() => {
-      handleGetProductDetail(params.params.id);
+    const productImage = reactive({
+      mainImage: '',
+      imageArray: [],
     });
 
-    watchEffect(() => {
-      if (params.params.id !== undefined) handleGetProductDetail(params.params.id);
+    function handleImage(obj) {
+      productImage.mainImage = '';
+      productImage.imageArray.length = 0;
+      productImage.mainImage = obj.value.imageUrl;
+      if (obj.value.imagesUrl) {
+        obj.value.imagesUrl.forEach((url) => productImage.imageArray.push(url));
+      }
+    }
+
+    onMounted(() => {
+      handleGetProductDetail(route.params.id);
+      const products = computed(() => productList.productDetail);
+      handleImage(products);
+    });
+
+    onActivated(() => {
+      handleGetProductDetail(route.params.id);
+      const products = computed(() => productList.productDetail);
+      handleImage(products);
     });
 
     function handleUpdateCart(id, num) {
       handleAddCart(id, num);
     }
+
+    function handleImageCtrl(url) {
+      productImage.mainImage = url;
+    }
+
     return {
       qty,
       products: computed(() => productList.productDetail),
       handleAddCart,
       isLoading: computed(() => cartStore.isLoading),
       handleUpdateCart,
+      handleImageCtrl,
+      productImage,
     };
   },
 };
@@ -109,13 +137,13 @@ export default {
           <li>商品內容：{{ products.content }}</li>
           <li>
             {{ products.price }}
-            <span class="pl-1 text-gray-400 line-through">{{
-              products.origin_price
-            }}</span>
+            <span class="pl-1 text-gray-400 line-through">
+              {{ products.origin_price }}
+            </span>
             個 / 元
           </li>
           <li class="flex flex-col gap-4 justify-between">
-            <select v-model="qty" class="w-1/2">
+            <select v-model="qty" class="form-style w-1/2">
               <option value="0" selected disabled>請選擇訂購數量</option>
               <option v-for="i in 20" :value="i" :key="i + products.id">
                 {{ i }}
