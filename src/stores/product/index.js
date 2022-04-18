@@ -12,6 +12,8 @@ export const useProductStore = defineStore('product', () => {
     productDetail: {},
     selectCategory: '',
     errorMessage: '',
+    productMainImage: '',
+    productImages: [],
   });
   const isLoading = ref('');
   const productCategory = ref([
@@ -77,12 +79,19 @@ export const useProductStore = defineStore('product', () => {
       });
   }
 
+  function handleProductMainImage(img) {
+    productList.productMainImage = img;
+  }
+
   function handleGetProductDetail(id) {
     isLoading.value = id;
     axios(`${baseUrl}api/${apiPath}/product/${id}`)
       .then((res) => {
         isLoading.value = '';
         productList.productDetail = res.data.product;
+        productList.productMainImage = res.data.product.imageUrl;
+        productList.productImages = [...res.data.product.imagesUrl];
+        productList.productImages.push(res.data.product.imageUrl);
       })
       .catch((err) => {
         productList.errorMessage = `產生錯誤: ${err}`;
@@ -96,6 +105,7 @@ export const useProductStore = defineStore('product', () => {
     handleGetProductList,
     productCategory,
     handleGetProductDetail,
+    handleProductMainImage,
     isLoading,
   };
 });

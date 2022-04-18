@@ -3,9 +3,7 @@ import {
   computed,
   ref,
   onMounted,
-  reactive,
   onActivated,
-  onBeforeMount,
 } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -17,56 +15,20 @@ export default {
   setup() {
     const { productStore, cartStore } = useStore();
     const { handleAddCart } = cartStore;
-    const { productList, handleGetProductDetail } = productStore;
+    const { productList, handleGetProductDetail, handleProductMainImage } = productStore;
     const route = useRoute();
     const qty = ref(0);
-    const productImage = reactive({
-      mainImage: '',
-      imageArray: [],
-    });
-
-    function handleImage(obj) {
-      productImage.mainImage = '';
-      productImage.imageArray.length = 0;
-      productImage.mainImage = obj.value.imageUrl;
-      if (obj.value.imagesUrl) {
-        obj.value.imagesUrl.forEach((url) => productImage.imageArray.push(url));
-      }
-    }
-
-    onBeforeMount(() => {
-      handleGetProductDetail(route.params.id);
-      const products = computed(() => productList.productDetail);
-      console.log('before mount id=', route.params.id);
-      handleImage(products);
-      console.log('before mount =', products);
-      console.log(productImage);
-    });
 
     onMounted(() => {
-      // handleGetProductDetail(route.params.id);
-      const products = computed(() => productList.productDetail);
-      handleImage(products);
-      console.log('mounted = ', products);
-      console.log('mounted');
-      console.log(productImage);
+      handleGetProductDetail(route.params.id);
     });
 
     onActivated(() => {
       handleGetProductDetail(route.params.id);
-      const products = computed(() => productList.productDetail);
-      handleImage(products);
-      console.log('activated id=', route.params.id);
-      console.log('activated');
-      console.log(productImage);
     });
 
     function handleUpdateCart(id, num) {
       handleAddCart(id, num);
-    }
-
-    function handleImageCtrl(url) {
-      productImage.mainImage = url;
     }
 
     return {
@@ -75,8 +37,9 @@ export default {
       handleAddCart,
       isLoading: computed(() => cartStore.isLoading),
       handleUpdateCart,
-      handleImageCtrl,
-      productImage,
+      handleProductMainImage,
+      productMainImage: computed(() => productList.productMainImage),
+      productImages: computed(() => productList.productImages),
     };
   },
 };
@@ -95,28 +58,28 @@ export default {
       </svg>
     回上一頁
     </AppLink>
-    <div class="flex gap-8 p-4">
-      <div class="flex flex-col space-y-2 md:w-1/2">
-        <div class="flex gap-4">
+    <div class="flex py-4">
+      <div class="flex flex-col gap-2 pr-4 md:w-1/2">
+        <img
+          class="object-scale-down"
+          :src="productMainImage"
+          :alt="products.title"
+        />
+        <div class="grid grid-cols-5 gap-2">
           <img
-            class="object-scale-down w-3/4"
-            :src="productImage.mainImage ? productImage.mainImage : products.imageUrl"
+            v-for="img in productImages"
+            :key="img"
+            class="object-cover flex-auto cursor-pointer
+            transition duration-300"
+            :class="img === productMainImage ? '' : 'opacity-75 brightness-75'"
+            @mouseover="handleProductMainImage(img)"
+            @focus="handleProductMainImage(img)"
+            :src="img"
             :alt="products.title"
           />
-          <div class="flex flex-col gap-2">
-            <img
-              v-for="img in products.imagesUrl"
-              :key="img"
-              class="object-cover flex-auto max-h-[25%] cursor-pointer"
-              @click="handleImageCtrl(img)"
-              @keypress="handleImageCtrl(img)"
-              :src="img"
-              :alt="products.title"
-            />
-          </div>
         </div>
       </div>
-      <div class="space-y-8 flex-auto md:w-1/2">
+      <div class="space-y-8 pl-4 md:w-1/2">
         <div class="flex gap-4 items-center">
           <h2 class="mb-2 text-xl font-bold">
             {{ products.title }}
