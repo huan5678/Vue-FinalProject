@@ -49,22 +49,33 @@ export default {
 <template>
   <section class="pb-4 bg-gray-50">
     <div class="container flex flex-col space-y-4">
-      <div class="tabs">
-        <AppLink to="/product" class="tab gap-3">
-          <i class="bi bi-arrow-90deg-left" />
+      <div class="flex items-center gap-4 p-2 mx-auto whitespace-nowrap">
+        <AppLink to="/home">
+          <i class="bi bi-house-fill text-xl" />
+        </AppLink>
+        <i class="bi bi-chevron-right text-xl" />
+        <AppLink to="/product" class="flex items-center gap-3 text-lg">
+          <SvgLoader name="Wineglass" class="h-8 w-8" />
           產品列表
         </AppLink>
+        <i class="bi bi-chevron-right text-xl" />
+        <span class="text-lg">{{ products.title }}</span>
       </div>
+      <AppLink to="/product" class="gap-3 text-xl">
+        <i class="bi bi-arrow-90deg-left" />
+        產品列表
+      </AppLink>
       <div class="flex py-4">
         <div class="flex flex-col gap-2 pr-4 md:w-1/2">
           <div class="w-full min-h-[50vh] bg-no-repeat bg-cover bg-center
           " :style="{ backgroundImage: `url(${productMainImage})`, }" />
           <div class="grid grid-cols-5 gap-2">
-            <img v-for="img in productImages" :key="img"
-                class="flex-auto object-cover transition duration-300 cursor-pointer"
-                :class="img === productMainImage ? '' : 'opacity-75 brightness-75'"
+            <div v-for="img in productImages" :key="img"
+                class="flex-auto w-full aspect-square bg-cover bg-no-repeat bg-center
+                transition duration-300 cursor-pointer"
+                :class="img === productMainImage ? '' : 'opacity-75 grayscale-[75%]'"
                 @mouseover="handleProductMainImage(img)" @focus="handleProductMainImage(img)"
-                :src="img" :alt="products.title" />
+                :style="{ backgroundImage: `url(${img})`, }" />
           </div>
         </div>
         <div class="pl-4 space-y-8 md:w-1/2">

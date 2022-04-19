@@ -1,5 +1,21 @@
+<script>
+import { useRoute } from 'vue-router';
+
+export default {
+  setup() {
+    const route = useRoute();
+    return {
+      route,
+    };
+  },
+};
+</script>
 <template>
-  <section class="py-4 bg-secondary-900">
+  <footer id="footer" class="py-4 bg-secondary-700"
+  :class="{
+    'bg-secondary-900/70': isHome,
+    'bg-secondary-700': !isHome,
+  }">
     <nav class="container">
       <ul class="flex flex-col justify-between items-center space-y-4 md:flex-row md:space-y-0">
         <li>
@@ -22,5 +38,5 @@
         </li>
       </ul>
     </nav>
-  </section>
+  </footer>
 </template>
