@@ -87,7 +87,7 @@ export default {
     class="pb-4 bg-gray-50"
   >
   <div class="container flex flex-col space-y-4">
-    <AppLink to="/product" class="flex gap-3 items-center p-3 text-secondary-700">
+    <AppLink to="/product" class="flex items-center gap-3 p-3 text-secondary-700">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
         <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147
         2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1
@@ -116,12 +116,12 @@ export default {
           </div>
         </div>
       </div>
-      <div class="space-y-8 flex-auto md:w-1/2">
-        <div class="flex gap-4 items-center">
+      <div class="flex-auto space-y-8 md:w-1/2">
+        <div class="flex items-center gap-4">
           <h2 class="mb-2 text-xl font-bold">
             {{ products.title }}
             <span
-              class="py-1 px-2 ml-2 text-sm text-white bg-primary-400 rounded"
+              class="px-2 py-1 ml-2 text-sm text-white rounded bg-primary-400"
             >
               {{ products.category }}
             </span>
@@ -138,16 +138,15 @@ export default {
             </span>
             個 / 元
           </li>
-          <li class="flex flex-col gap-4 justify-between">
-            <select v-model="qty" class="form-style w-1/2">
+          <li class="flex flex-col justify-between gap-4">
+            <select v-model="qty" class="w-1/2 form-style">
               <option value="0" selected disabled>請選擇訂購數量</option>
               <option v-for="i in 20" :value="i" :key="i + products.id">
                 {{ i }}
               </option>
             </select>
             <button
-              class="flex justify-center items-center py-3 w-full rounded
-              border border-secondary-700 transition duration-300"
+              class="flex items-center justify-center w-full py-3 transition duration-300 border rounded border-secondary-700"
               @click="handleUpdateCart(products.id, qty)"
               :disabled="qty === 0"
               :class="
@@ -157,7 +156,7 @@ export default {
               "
             >
               <svg
-                class="mr-3 -ml-1 w-5 h-5 text-primary-50 animate-spin"
+                class="w-5 h-5 mr-3 -ml-1 text-primary-50 animate-spin"
                 :class="isLoading === products.id ? '' : 'hidden'"
                 :disabled="isLoading === products.id"
                 xmlns="http://www.w3.org/2000/svg"
