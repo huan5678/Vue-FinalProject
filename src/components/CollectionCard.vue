@@ -1,23 +1,39 @@
 <script>
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 import useStore from '@/stores';
 
 export default {
-  props: ['product'],
+  props: ['product', 'click'],
   setup(props) {
     const product = { ...props.product };
-    const { cartStore } = useStore();
+    const { cartStore, productStore } = useStore();
     const { handleAddCart } = cartStore;
+    const { handleGetProductDetail } = productStore;
+    const router = useRouter();
+
+    function handleOpenProductDetail(id) {
+      if (props.click) {
+        router.push({ path: `/detail/${id}` });
+        handleGetProductDetail(id);
+      }
+    }
     return {
       handleAddCart,
       productData: product,
       isLoading: computed(() => cartStore.isLoading),
+      clicked: props.click,
+      handleOpenProductDetail,
     };
   },
 };
 </script>
 <template>
   <div class="justify-between h-full rounded shadow card">
+    <div :class="clicked ? 'cursor-pointer': '' "
+    @click="handleOpenProductDetail(productData.id)"
+    @keypress="handleOpenProductDetail(productData.id)"
+    >
       <div class="py-2 px-4 bg-secondary-100
   dark:bg-secondary-800">
           <h3 class="font-serif text-3xl font-bold
@@ -33,7 +49,7 @@ export default {
       <img class="object-cover mt-auto w-full max-h-64"
       :src="productData.imageUrl"
       :alt="productData.title">
-
+    </div>
       <div class="flex justify-between items-center p-4 bg-secondary-900">
           <span class="font-mono text-xl font-light
           text-secondary-100">${{ productData.price }}</span>

@@ -5,7 +5,7 @@ const title = 'ChillBar秋吧';
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'index',
     component: () => import('@/views/frontEnd/FrontEndView.vue'),
     children: [
       {

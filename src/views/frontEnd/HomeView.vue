@@ -31,7 +31,7 @@ export default {
 <template>
   <TheHero />
   <TheFeatures />
-  <TheRecommend title="推薦給您" />
+  <TheRecommend title="推薦給您" class="text-secondary-100" />
   <TheContact />
   <WarningSign />
   <TheCouponWheel />

@@ -157,8 +157,7 @@ export default {
         duration-500 md:static md:top-auto
         md:left-auto md:flex-row md:flex-nowrap md:space-y-0 md:w-auto
         md:bg-transparent md:rounded-none md:translate-x-0"
-        :class="{'translate-x-[-250%]': !openDropdown}"
-        v-if="route.name !== 'product-detail'">
+        :class="{'translate-x-[-250%]': !openDropdown}">
           <li class="w-full md:flex-auto md:w-auto"
           v-if="route.name !== 'dashboard'">
             <AppLink to="product"> 產品列表 </AppLink>
@@ -171,9 +170,8 @@ export default {
           v-if="route.name !== 'dashboard'">
             <AppLink to="about"> 關於我們 </AppLink>
           </li>
-          <li v-if="route.name === 'dashboard' || route.name === 'confirm'"></li>
           <li class="relative w-full md:flex-auto md:w-auto"
-          v-else>
+          v-if="route.name !== 'dashboard' || route.name !== 'confirm'">
             <span class="absolute top-0 right-0 rfs:text-xs
             text-primary-50 bg-primary-500 badge
             " v-show="cartList.length > 0">{{ cartList.length }}</span>

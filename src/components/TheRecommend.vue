@@ -11,7 +11,7 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  props: ['title'],
+  props: ['title', 'limit', 'click'],
   setup(props) {
     const { productStore } = useStore();
     const {
@@ -24,12 +24,31 @@ export default {
     const recommendArr = computed(() => productList.products);
     const result = computed(() => recommendArr.value.filter((item) => item.recommend));
 
+    function handleRandomList(array) {
+      let currentIdx = array.length;
+      let tempValue;
+      let randomIndex;
+      const resultArray = array.slice(0);
+
+      while (currentIdx !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIdx);
+        currentIdx -= 1;
+        tempValue = resultArray[currentIdx];
+        resultArray[currentIdx] = resultArray[randomIndex];
+        resultArray[randomIndex] = tempValue;
+      }
+      return resultArray;
+    }
+
     return {
       productList: computed(() => result.value),
       productCategory: computed(() => productCategory),
       isLoading: computed(() => isLoading),
       modules: [Autoplay],
       titles: props.title,
+      limits: props.limit,
+      isClick: props.click,
+      handleRandomList,
     };
   },
 };
@@ -38,7 +57,7 @@ export default {
 <template>
   <section class="bg-secondary-700">
     <div class="container py-12">
-      <AppTitle level="2" class="mb-12 text-secondary-100">
+      <AppTitle level="2" class="mb-12">
         {{ titles }}
       </AppTitle>
       <swiper
@@ -68,10 +87,10 @@ export default {
       >
       <swiper-slide
       class="items-stretch"
-      v-for="product in productList"
+      v-for="product in handleRandomList(productList).splice(0, limits)"
       :key="product.id"
       >
-        <CollectionCard :product="product" />
+        <CollectionCard :click="isClick" :product="product" />
       </swiper-slide>
       </swiper>
     </div>
