@@ -71,8 +71,8 @@ export default {
       產品列表
     </AppTitle>
     <div class="flex justify-center items-center">
-      <div class="tabs">
-        <a class="transition-all duration-500 tab tab-lifted
+      <div class="tabs pb-4">
+        <a class="transition-all duration-500 tab gap-2
         "
         :class="{
           'hover:border-primary-600': selectCategory !== category.category,
@@ -84,14 +84,15 @@ export default {
         @keydown="category"
         v-for="category in productCategory"
         :key="category.title">
+        <SvgLoader :name="`icon-${category.category}`" class="h-8 w-8" />
           {{ category.title }}
         </a>
       </div>
     </div>
     <template v-for="article in articles" :key="article.id">
       <div class="p-4" :class="{'hidden': article.tag[0] !== selectCategory}"
-      v-show="selectCategory !== 'All' ">
-        <div v-show="article.tag[0] === selectCategory">
+      v-if="selectCategory !== 'All' ">
+        <div v-if="article.tag[0] === selectCategory">
           <div class="flex gap-4 justify-between">
             <article>
               <h2 class="mb-4 font-serif text-4xl

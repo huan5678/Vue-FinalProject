@@ -1,5 +1,11 @@
 <script>
-import { onMounted, computed } from 'vue';
+import {
+  computed,
+  watch,
+  onMounted,
+  ref,
+} from 'vue';
+import { useRoute } from 'vue-router';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay } from 'swiper';
 import useStore from '@/stores';
@@ -11,24 +17,41 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  props: ['title', 'limit', 'click'],
+  props: [
+    'title',
+    'limit',
+    'click',
+    'titleClass',
+  ],
   setup(props) {
-    const { productStore } = useStore();
+    const { productStore, cartStore } = useStore();
     const {
-      productList, productCategory, handleGetProductAll, isLoading,
+      productList, productCategory, isLoading, handleGetProductAll,
     } = productStore;
-    onMounted(() => {
-      handleGetProductAll();
-    });
+    const { cartData } = cartStore;
+    const route = useRoute();
 
     const recommendArr = computed(() => productList.products);
     const result = computed(() => recommendArr.value.filter((item) => item.recommend));
+    const productData = computed(() => result.value);
 
     function handleRandomList(array) {
-      let currentIdx = array.length;
+      const calculArray = [];
+      array.forEach((product) => {
+        cartData.list.forEach((cartProduct) => {
+          if (product.id !== cartProduct.id || product.id !== productList.productDetail.id) {
+            calculArray.push(product);
+          }
+        });
+      });
+      const set = new Set();
+      const resultCal = calculArray.filter((item) => (
+        !set.has(item.id) ? set.add(item.id) : false
+      ));
+      let currentIdx = resultCal.length;
       let tempValue;
       let randomIndex;
-      const resultArray = array.slice(0);
+      const resultArray = resultCal.slice(0);
 
       while (currentIdx !== 0) {
         randomIndex = Math.floor(Math.random() * currentIdx);
@@ -40,8 +63,34 @@ export default {
       return resultArray;
     }
 
+    const dataList = ref([]);
+
+    const URL = computed(() => route.path);
+
+    watch(URL, () => {
+      handleGetProductAll();
+      if (productData.value) {
+        dataList.value = handleRandomList(productData.value).splice(0, props.limit);
+      }
+    });
+
+    const produces = computed(() => productData.value);
+
+    const stopWatchProduct = watch(produces, () => { });
+
+    watch(produces, () => {
+      if (productData.value) {
+        dataList.value = handleRandomList(productData.value).splice(0, props.limit);
+        stopWatchProduct();
+      }
+    });
+
+    onMounted(() => {
+      handleGetProductAll();
+    });
+
     return {
-      productList: computed(() => result.value),
+      dataList,
       productCategory: computed(() => productCategory),
       isLoading: computed(() => isLoading),
       modules: [Autoplay],
@@ -49,6 +98,8 @@ export default {
       limits: props.limit,
       isClick: props.click,
       handleRandomList,
+      className: props.titleClass,
+      URL,
     };
   },
 };
@@ -57,7 +108,7 @@ export default {
 <template>
   <section class="bg-secondary-700">
     <div class="container py-12">
-      <AppTitle level="2" class="mb-12">
+      <AppTitle level="2" class="mb-12" :class="className">
         {{ titles }}
       </AppTitle>
       <swiper
@@ -85,13 +136,13 @@ export default {
           disableOnInteraction: false,
         }"
       >
-      <swiper-slide
-      class="items-stretch"
-      v-for="product in handleRandomList(productList).splice(0, limits)"
-      :key="product.id"
-      >
-        <CollectionCard :click="isClick" :product="product" />
-      </swiper-slide>
+        <swiper-slide
+        class="items-stretch"
+        v-for="product in dataList"
+        :key="product.id"
+        >
+          <CollectionCard :click="isClick" :product="product" />
+        </swiper-slide>
       </swiper>
     </div>
   </section>

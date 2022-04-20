@@ -4,9 +4,9 @@ import {
   onMounted,
   computed,
   toRef,
-  inject,
 } from 'vue';
 import { $vfm } from 'vue-final-modal';
+import Swal from 'sweetalert2';
 
 import useStore from '@/stores';
 import DashboardTable from '@/components/DashboardTable.vue';
@@ -42,8 +42,6 @@ export default {
       adminData.isOpenModal = boolean;
       $vfm.show('adminModal');
     }
-
-    const Swal = inject('$swal');
 
     const isOpenModal = toRef(adminData, 'isOpenModal');
 

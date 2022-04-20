@@ -22,17 +22,17 @@ export default {
 
 <template>
   <TheHeader />
-  <main class="relative bg-secondary-700 bg-center bg-cover
-  after:absolute after:inset-0 h-full min-h-[100vh]
+  <main class="relative after:absolute after:inset-0 h-full
+  min-h-[100vh] bg-secondary-700 bg-center bg-cover
   after:bg-gradient-to-t after:from-secondary-900/75 after:to-secondary-700/50"
   :style="{backgroundImage: `url(${bg404})`}">
-    <section class="absolute container h-full z-10 backdrop-blur-sm
-    flex flex-col justify-center items-center text-secondary-50">
+    <section class="container flex absolute z-10 flex-col
+    justify-center items-center h-full text-secondary-50 backdrop-blur-sm">
       <AppTitle level="1" class="mb-12 font-mono">
         404 ERROR NOT FOUND
       </AppTitle>
       <button type="button" @click="handleToProduct"
-      class="btn btn-outline bg-secondary-200 hover:border-secondary-100 text-xl">
+      class="text-xl bg-secondary-200 hover:border-secondary-100 btn btn-outline">
         瀏覽其他的東西吧 😂
       </button>
     </section>

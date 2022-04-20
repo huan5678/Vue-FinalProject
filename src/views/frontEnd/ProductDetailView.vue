@@ -49,29 +49,25 @@ export default {
 <template>
   <section class="pb-4 bg-gray-50">
     <div class="container flex flex-col space-y-4">
-      <div class="flex items-center gap-4 p-2 mx-auto whitespace-nowrap">
+      <div class="flex gap-4 items-center p-2 whitespace-nowrap">
         <AppLink to="/home">
-          <i class="bi bi-house-fill text-xl" />
+          <SvgLoader name="bar-building" class="h-8 w-8" />
         </AppLink>
-        <i class="bi bi-chevron-right text-xl" />
-        <AppLink to="/product" class="flex items-center gap-3 text-lg">
-          <SvgLoader name="Wineglass" class="h-8 w-8" />
+        <i class="text-xl bi bi-chevron-right" />
+        <AppLink to="/product" class="flex gap-3 items-center text-lg">
+          <SvgLoader name="bar" class="h-8 w-8" />
           產品列表
         </AppLink>
-        <i class="bi bi-chevron-right text-xl" />
+        <i class="text-xl bi bi-chevron-right" />
         <span class="text-lg">{{ products.title }}</span>
       </div>
-      <AppLink to="/product" class="gap-3 text-xl">
-        <i class="bi bi-arrow-90deg-left" />
-        產品列表
-      </AppLink>
       <div class="flex py-4">
         <div class="flex flex-col gap-2 pr-4 md:w-1/2">
-          <div class="w-full min-h-[50vh] bg-no-repeat bg-cover bg-center
+          <div class="w-full min-h-[50vh] bg-center bg-no-repeat bg-cover
           " :style="{ backgroundImage: `url(${productMainImage})`, }" />
           <div class="grid grid-cols-5 gap-2">
             <div v-for="img in productImages" :key="img"
-                class="flex-auto w-full aspect-square bg-cover bg-no-repeat bg-center
+                class="aspect-square flex-auto w-full bg-center bg-no-repeat bg-cover
                 transition duration-300 cursor-pointer"
                 :class="img === productMainImage ? '' : 'opacity-75 grayscale-[75%]'"
                 @mouseover="handleProductMainImage(img)" @focus="handleProductMainImage(img)"
@@ -79,40 +75,47 @@ export default {
           </div>
         </div>
         <div class="pl-4 space-y-8 md:w-1/2">
-          <div class="flex items-center gap-4">
+          <div class="flex gap-4 items-center">
             <h1 class="text-4xl font-bold">
               {{ products.title }}
             </h1>
-            <span class="rounded py-1 px-2 text-secondary-50 text-sm bg-primary-400">
+            <span class="py-1 px-2 text-sm text-secondary-50 bg-primary-400 rounded">
               {{ products.category }}
             </span>
           </div>
 
           <ul class="space-y-4">
-            <li>商品描述：{{ products.description }}</li>
-            <li>商品內容：{{ products.content }}</li>
-            <li>
-              {{ products.price }}
-              <span class="pl-1 text-gray-400 line-through">
-                {{ products.origin_price }}
-              </span>
-              個 / 元
+            <li class="flex justify-between">
+              <span class="w-1/4 font-semibold">商品描述：</span>
+              <span class="w-3/4">{{ products.description }}</span></li>
+            <li class="flex justify-between">
+              <span class="font-semibold">商品內容：</span>
+              <span>{{ products.content }}</span></li>
+            <li class="flex justify-between">
+              <span class="font-semibold">價格:</span>
+              <div class="rfs:text-3xl flex items-end gap-1">
+                {{ products.price }}
+                <span class="pl-1 text-gray-400 line-through rfs:text-base">
+                  {{ products.origin_price }}
+                </span>
+                <span class="rfs:text-base">杯 / 元</span>
+              </div>
             </li>
-            <li class="flex flex-col justify-between gap-4">
-              <select v-model="qty" class="w-1/2 form-style">
+            <li class="flex flex-col gap-4 justify-between">
+              <select v-model="qty" class="ml-auto w-1/2 form-style">
                 <option value="0" selected disabled>請選擇訂購數量</option>
                 <option v-for="i in 20" :value="i" :key="i + products.id">
                   {{ i }}
                 </option>
               </select>
-              <button class="flex items-center justify-center w-full py-3
-              transition duration-300 border rounded border-secondary-700"
+              <button class="flex justify-center items-center py-3 w-full
+              rounded border border-secondary-700 transition duration-300"
                       @click="handleUpdateCart(products.id, qty)" :disabled="qty === 0" :class="
                         qty === 0
                           ? 'bg-secondary-700 text-gray-50 opacity-40 cursor-not-allowed'
                           : 'bg-secondary-500 text-gray-50 hover:bg-secondary-700'
                       ">
-                <svg class="w-5 h-5 mr-3 -ml-1 text-primary-50 animate-spin"
+                <svg class="mr-3 -ml-1 w-5 h-5 text-primary-50 animate-spin"
                     :class="isLoading === products.id ? '' : 'hidden'"
                     :disabled="isLoading === products.id" xmlns="http://www.w3.org/2000/svg"
                     fill="none" viewBox="0 0 24 24">
@@ -130,7 +133,7 @@ export default {
         </div>
       </div>
     </div>
-    <TheRecommend title="你可能還想來點" :click="true"
-    class="bg-transparent text-secondary-700" limit="5" />
+    <TheRecommend title="你可能還想來點" :click="true" titleClass="rfs:text-2xl"
+    class="text-secondary-700 bg-transparent" limit="5" />
   </section>
 </template>

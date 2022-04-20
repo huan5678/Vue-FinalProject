@@ -170,8 +170,8 @@ export default {
           v-if="route.name !== 'dashboard'">
             <AppLink to="about"> 關於我們 </AppLink>
           </li>
-          <li class="relative w-full md:flex-auto md:w-auto"
-          v-if="route.name !== 'dashboard' || route.name !== 'confirm'">
+          <li v-if="route.name === 'dashboard' || route.name !== 'confirm'" />
+          <li class="relative w-full md:flex-auto md:w-auto" v-else>
             <span class="absolute top-0 right-0 rfs:text-xs
             text-primary-50 bg-primary-500 badge
             " v-show="cartList.length > 0">{{ cartList.length }}</span>
