@@ -66,112 +66,121 @@ export default {
 </script>
 
 <template>
-  <section class="container py-6 space-y-4">
-    <AppTitle level="1">
-      產品列表
-    </AppTitle>
-    <div class="flex justify-center items-center">
-      <div class="tabs pb-4">
-        <a class="transition-all duration-500 tab gap-2
-        "
-        :class="{
-          'hover:border-primary-600': selectCategory !== category.category,
-          'hover:text-primary-500': selectCategory !== category.category,
-          'tab-active': selectCategory === category.category,
-          'text-primary-600 hover:text-primary-500': selectCategory === category.category,
-        }"
-        @click="handleCategoryChange(category.category)"
-        @keydown="category"
-        v-for="category in productCategory"
-        :key="category.title">
-        <SvgLoader :name="`icon-${category.category}`" class="h-8 w-8" />
-          {{ category.title }}
-        </a>
-      </div>
-    </div>
-    <template v-for="article in articles" :key="article.id">
-      <div class="p-4" :class="{'hidden': article.tag[0] !== selectCategory}"
-      v-if="selectCategory !== 'All' ">
-        <div v-if="article.tag[0] === selectCategory">
-          <div class="flex gap-4 justify-between">
-            <article>
-              <h2 class="mb-4 font-serif text-4xl
-              font-medium text-primary-400
-              border-b">{{article.title}}</h2>
-              <div class="space-y-2 font-serif
-              text-lg font-light text-secondary-400"
-              v-html="article.description" />
-            </article>
-            <figure>
-              <img
-              class="aspect-square object-cover"
-              width="960"
-              height="540"
-              :src="article.image"
-              :alt="article.title">
-            </figure>
-          </div>
+  <section class="bg-secondary-50 py-6">
+    <div class="container space-y-4">
+      <AppTitle level="1" class="rfs:text-5xl">
+        產品列表
+      </AppTitle>
+      <div class="flex justify-center items-center">
+        <div class="md:tabs grid grid-cols-2 pb-4 gap-4">
+          <a class="transition-all duration-500 md:tab gap-2
+          w-full md:w-auto flex justify-center items-center
+          rfs:text-lg
+          "
+          :class="{
+            'hover:border-primary-600': selectCategory !== category.category,
+            'hover:text-primary-500': selectCategory !== category.category,
+            'tab-active': selectCategory === category.category,
+            'text-primary-600 hover:text-primary-500': selectCategory === category.category,
+            'col-span-2': idx === 0,
+          }"
+          @click="handleCategoryChange(category.category)"
+          @keydown="category"
+          v-for="(category ,idx) in productCategory"
+          :key="category.title">
+          <SvgLoader :name="`icon-${category.category}`" class="h-8 w-8" />
+            {{ category.title }}
+          </a>
         </div>
       </div>
-    </template>
-    <ul class="grid grid-cols-4 gap-4 pb-4 mb-4">
-      <li
-        class=""
-        v-for="product in productList"
-        :key="product.id"
+      <template v-for="article in articles" :key="article.id">
+        <div class="p-4" :class="{'hidden': article.tag[0] !== selectCategory}"
+        v-if="selectCategory !== 'All' ">
+          <div v-if="article.tag[0] === selectCategory">
+            <div class="flex flex-col md:flex-row gap-4 justify-between">
+              <article class="order-1 md:order-none">
+                <h2 class="mb-4 font-serif text-4xl
+                font-medium text-primary-400 text-center md:text-left
+                border-b">{{article.title}}</h2>
+                <div class="space-y-2 font-serif
+                text-lg font-light text-secondary-400"
+                v-html="article.description" />
+              </article>
+              <figure class="order-0 md:order-none">
+                <img
+                class="aspect-square object-cover"
+                width="960"
+                height="540"
+                :src="article.image"
+                :alt="article.title">
+              </figure>
+            </div>
+          </div>
+        </div>
+      </template>
+      <ul class="grid md:grid-cols-3 lg:grid-cols-4
+      gap-4 pb-4 mb-4"
+      :class="selectCategory === 'All'|| selectCategory === '' ?
+      'grid-cols-2': 'grid-cols-1'"
       >
-        <ProductCard :product="product" />
-      </li>
-    </ul>
-    <!-- 分頁 -->
-    <ul v-if="selectCategory === 'All' || selectCategory === ''"
-    class="flex gap-4 justify-center items-center pb-12 mx-auto">
-      <li>
-        <button
-          type="button"
-          class="py-1 px-2 text-secondary-300 disabled:text-secondary-300 disabled:bg-secondary-100
-          rounded border
-          border-secondary-300 disabled:border-secondary-100"
-          :class="!pagination?.has_pre ?
-          '' : 'hover:bg-secondary-400 hover:border-secondary-400 hover:text-white' "
-          :disabled="!pagination?.has_pre"
-          @click="handlePaginationAction(pagination?.current_page - 1)"
+        <li
+          class=""
+          v-for="product in productList"
+          :key="product.id"
         >
-          <i class="bi bi-arrow-left"></i>
-        </button>
-      </li>
-      <li
-      v-for="page in pagination?.total_pages"
-      :key="page + new Date().getMilliseconds()">
-        <button
-          type="button"
-          class="py-1 px-3 rounded"
-          :class="
-            page === pagination?.current_page ?
-            `border-secondary-600 text-secondary-500
-            border` :
-            `text-secondary-300 hover:text-secondary-600
-            `
-          "
-          @click="handlePaginationAction(page)"
-        >
-          {{ page }}
-        </button>
-      </li>
-      <li>
-        <button
-          type="button"
-          class="py-1 px-2 text-secondary-300 disabled:text-secondary-300 disabled:bg-secondary-100
-          rounded border
-          border-secondary-300 disabled:border-secondary-100"
-          :class="!pagination?.has_next ?
-          '' : 'hover:bg-secondary-400 hover:border-secondary-400 hover:text-white' "
-          :disabled="!pagination?.has_next"
-          @click="handlePaginationAction(pagination?.current_page + 1)"
-        >
-          <i class="bi bi-arrow-right"></i>
-        </button>
-      </li>
-    </ul>
+          <ProductCard :product="product" />
+        </li>
+      </ul>
+      <!-- 分頁 -->
+      <ul v-if="selectCategory === 'All' || selectCategory === ''"
+      class="flex gap-4 justify-center items-center pb-12 mx-auto">
+        <li>
+          <button
+            type="button"
+            class="py-1 px-2 text-secondary-300 rounded border
+            border-secondary-300 disabled:text-secondary-300
+            disabled:border-secondary-100 disabled:bg-secondary-100"
+            :class="!pagination?.has_pre ?
+            '' : 'hover:bg-secondary-400 hover:border-secondary-400 hover:text-white' "
+            :disabled="!pagination?.has_pre"
+            @click="handlePaginationAction(pagination?.current_page - 1)"
+          >
+            <i class="bi bi-arrow-left"></i>
+          </button>
+        </li>
+        <li
+        v-for="page in pagination?.total_pages"
+        :key="page + new Date().getMilliseconds()">
+          <button
+            type="button"
+            class="py-1 px-3 rounded"
+            :class="
+              page === pagination?.current_page ?
+              `border-secondary-600 text-secondary-500
+              border` :
+              `text-secondary-300 hover:text-secondary-600
+              `
+            "
+            @click="handlePaginationAction(page)"
+          >
+            {{ page }}
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="py-1 px-2 text-secondary-300 rounded border
+            disabled:text-secondary-300 disabled:bg-secondary-100
+            border-secondary-300 disabled:border-secondary-100"
+            :class="!pagination?.has_next ?
+            '' : 'hover:bg-secondary-400 hover:border-secondary-400 hover:text-white' "
+            :disabled="!pagination?.has_next"
+            @click="handlePaginationAction(pagination?.current_page + 1)"
+          >
+            <i class="bi bi-arrow-right"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
   </section>
 </template>

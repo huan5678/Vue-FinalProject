@@ -86,6 +86,7 @@ export default {
     function handleCart(boolean) {
       checkoutHandler(boolean);
       openCart.value = boolean;
+      openDropdown.value = false;
     }
 
     watch(
@@ -94,6 +95,15 @@ export default {
         if (newValue.length > 0) handleGetCart();
       },
     );
+
+    watch(() => openDropdown.value, (newVal) => {
+      const body = document.querySelector('body');
+      if (newVal === true) {
+        body.classList.add('overflow-hidden');
+      } else {
+        body.classList.remove('overflow-hidden');
+      }
+    });
 
     function checkRoute(routeName) {
       if (routeName === 'home') {
@@ -128,57 +138,47 @@ export default {
 </script>
 <template>
   <section id="header" ref="header"
-  class="z-30 w-full transition-all duration-500"
+  class="sticky top-0 bg-secondary-900/70
+  z-30 w-full transition-all duration-500"
   :class="{
-    'sticky top-0 bg-secondary-900/70': isHome,
     'bg-secondary-700': !isHome,
     'translate-y-0': scroll.showHeader,
     '-translate-y-full': !scroll.showHeader,
   }"
   >
-    <nav class="container flex relative
-    justify-between items-center py-2 md:static md:py-3">
+    <nav class="container flex
+    justify-between items-center static py-3">
       <a href="/">
         <SvgLoader name="bannerLogo"
           class="w-28 h-8 text-primary-500" />
         <h2 class="hidden text-primary-500">ChillBar秋吧</h2>
       </a>
-        <label for="menuBtn"
-        class="md:hidden btn swap
-        swap-rotate">
-          <input type="checkbox" id="menuBtn" v-model="openDropdown">
-          <i class="bi bi-list swap-off"></i>
-          <i class="bi bi-x-lg swap-on"></i>
-        </label>
-        <ul class="flex absolute top-full left-0
-        flex-col flex-wrap gap-4
-        justify-center items-center
-        space-y-4 w-full bg-secondary-900/70 rounded transition-all
-        duration-500 md:static md:top-auto
-        md:left-auto md:flex-row md:flex-nowrap md:space-y-0 md:w-auto
-        md:bg-transparent md:rounded-none md:translate-x-0"
-        :class="{'translate-x-[-250%]': !openDropdown}">
-          <li class="w-full md:flex-auto md:w-auto"
+      <label for="menuBtn"
+      class="md:hidden btn swap">
+        <input type="checkbox" id="menuBtn" v-model="openDropdown">
+        <i class="bi bi-list"></i>
+      </label>
+      <ul class="hidden md:flex transition-all duration-500 pt-2">
+          <li class="flex-auto px-2"
           v-if="route.name !== 'dashboard'">
             <AppLink to="product"> 產品列表 </AppLink>
           </li>
-          <li class="w-full md:flex-auto md:w-auto"
+          <li class="flex-auto px-2"
           v-if="route.name !== 'dashboard'">
             <AppLink to="booking"> 預約訂位 </AppLink>
           </li>
-          <li class="w-full md:flex-auto md:w-auto"
+          <li class="flex-auto px-2"
           v-if="route.name !== 'dashboard'">
             <AppLink to="about"> 關於我們 </AppLink>
           </li>
-          <li v-if="route.name === 'dashboard' || route.name !== 'confirm'" />
-          <li class="relative w-full md:flex-auto md:w-auto" v-else>
-            <span class="absolute top-0 right-0 rfs:text-xs
+          <li v-if="route.name === 'dashboard' || route.name === 'confirm'" />
+          <li class="indicator flex-auto" v-else>
+            <span class="indicator-item rfs:text-xs
             text-primary-50 bg-primary-500 badge
             " v-show="cartList.length > 0">{{ cartList.length }}</span>
-            <button class="btn btn-md btn-ghost" type="button"
+            <button class="btn btn-circle btn-ghost" type="button"
             @click="handleCart(true)" @keydown="true">
-              <span class="block text-secondary-300 md:hidden">查看購物車</span>
-              <i class="hidden text-xl text-secondary-300 md:block bi bi-bag-heart">
+              <i class="rfs:text-2xl text-secondary-300 bi bi-bag-heart">
               </i>
             </button>
           </li>
@@ -196,5 +196,31 @@ export default {
       </div>
     </nav>
   </section>
-  <TheCart v-model="openCart" @handleCart="handleCart" :handle="handleCart" />
+  <TheCart v-model="openCart" @handleCart="handleCart" :handleCart="handleCart" />
+  <Teleport to="body">
+    <Transition name="fade">
+      <div class="absolute inset-0 z-[9999] overflow-hidden transition-all duration-500
+      h-screen w-screen bg-secondary-900/80 backdrop-blur-sm"
+      :class="{'translate-x-[-250%]': !openDropdown}"
+      >
+        <nav class="flex flex-col items-center gap-8 p-4">
+          <label for="overlayMenuBtn"
+          class="btn swap ml-auto">
+            <input type="checkbox" id="overlayMenuBtn" v-model="openDropdown">
+            <i class="bi bi-x-lg"></i>
+          </label>
+          <AppLink to="product" class="rfs:text-4xl"
+          @click="openDropdown = false" @keydown="openDropdown = false"> 產品列表 </AppLink>
+          <AppLink to="booking" class="rfs:text-4xl"
+          @click="openDropdown = false" @keydown="openDropdown = false"> 預約訂位 </AppLink>
+          <AppLink to="about" class="rfs:text-4xl"
+          @click="openDropdown = false" @keydown="openDropdown = false"> 關於我們 </AppLink>
+          <p class="py-2 px-3 font-normal text-secondary-300 rfs:text-4xl"
+          v-if="cartList.length > 0"
+          @click="handleCart(true)" @keydown="handleCart(true)"
+          >查看購物車</p>
+        </nav>
+      </div>
+    </Transition>
+  </Teleport>
 </template>

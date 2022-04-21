@@ -84,77 +84,78 @@ export default {
 </script>
 
 <template>
-  <section id="feature" class="container py-9">
-    <AppTitle level="2" class="mb-12">
-      六大基酒
-    </AppTitle>
-    <ul class="group">
-      <li
-      class="flex overflow-hidden odd:flex-row-reverse
-      flex-wrap justify-between odd:text-right bg-secondary-100/20
-      odd:bg-secondary-50/10
-      border-b cursor-pointer md:flex-nowrap"
-      :class="{
-        'group-hover:bg-secondary-100/40': isHovering === idx
-      }"
-      @click="handleGoProducts(item.category)"
-      @keypress="handleGoProducts(item.category)"
-      @mouseover="isHovering = idx"
-      @mouseout="isHovering = null"
-      @focus="isHovering"
-      @blur="isHovering"
-      v-for="(item, idx) in data" :key="item.title"
-      >
-        <article class="order-1 py-12 px-4 w-full sm:px-6
-        md:order-none md:w-1/2 lg:py-16 lg:px-8">
-            <h2 class="mb-4 font-serif rfs:text-3xl font-medium
-            text-primary-500/70 transition duration-150 ease-in-out"
-            :class="{
-              'group-hover:text-primary-500': isHovering === idx
-            }"
-            >
-              {{ item.title }}
-            </h2>
-            <template v-for="article in articles" :key="article.id">
-              <p class="overflow-clip
-              rfs:text-base font-light tracking-wider
-              text-secondary-400/70 transition
-              duration-150 ease-in-out line-clamp-2"
-              :class="{
-                'group-hover:text-secondary-400': isHovering === idx
-              }"
-              v-if="article.tag[0] === item.category"
-              v-html="article.description"
-              />
-            </template>
-            <div class="lg:flex-shrink-0 lg:mt-0">
-                <div class="inline-flex mt-12 rounded-md">
-                    <button type="button" class="py-4 px-12
-                    w-full text-base font-normal text-center
-                    text-primary-300 border border-primary-200
-                    transition duration-150 ease-in
-                    "
-                    :class="
-                    {
-                      'group-hover-btn': isHovering === idx
-                    }"
-                    >
-                        發現更多
-                    </button>
-                </div>
-            </div>
-        </article>
-        <img :src="item.imageUrl" :alt="item.title"
-        :class=
-        "{
-          'saturate-[.3]' : isHovering !== idx,
-          'saturate-[.9]' : isHovering === idx,
+  <section id="feature" class="bg-secondary-50">
+    <div class="container py-9">
+      <AppTitle level="2" class="mb-12 rfs:text-5xl">
+        六大基酒
+      </AppTitle>
+      <ul class="group">
+        <li
+        class="flex flex-col md:flex-row md:odd:flex-row-reverse
+        justify-between text-center md:text-left md:odd:text-right bg-secondary-100/20
+        md:odd:hover:bg-secondary-50/10
+        md:border-b cursor-pointer"
+        :class="{
+          'group-hover:bg-secondary-100/40': isHovering === idx
         }"
-        class="aspect-video object-cover object-center transition-all
-        duration-150 md:aspect-square
-        md:max-w-[24rem] md:h-full"/>
-      </li>
-    </ul>
+        @click="handleGoProducts(item.category)"
+        @keypress="handleGoProducts(item.category)"
+        @mouseover="isHovering = idx"
+        @mouseout="isHovering = null"
+        @focus="isHovering"
+        @blur="isHovering"
+        v-for="(item, idx) in data" :key="item.title"
+        >
+          <article class="order-1 py-12 px-4 w-full sm:px-6
+          md:order-none md:w-1/2 md:py-16 md:px-8">
+              <h2 class="mb-4 font-serif rfs:text-3xl font-medium
+              text-primary-500/70 transition duration-150 ease-in-out"
+              :class="{
+                'group-hover:text-primary-500': isHovering === idx
+              }"
+              >
+                {{ item.title }}
+              </h2>
+              <template v-for="article in articles" :key="article.id">
+                <p class="rfs:text-base font-light tracking-wider
+                text-secondary-400/70 transition-all
+                duration-150 ease-in-out line-clamp-2"
+                :class="{
+                  'group-hover:text-secondary-400': isHovering === idx
+                }"
+                v-if="article.tag[0] === item.category"
+                v-html="article.description"
+                />
+              </template>
+              <div class="lg:flex-shrink-0 lg:mt-0">
+                  <div class="inline-flex mt-12 rounded-md w-full md:w-auto">
+                      <button type="button" class="py-4 px-12
+                      w-full text-base font-normal text-center
+                      text-primary-300 border border-primary-200
+                      transition duration-150 ease-in
+                      "
+                      :class="
+                      {
+                        'group-hover-btn': isHovering === idx
+                      }"
+                      >
+                          發現更多
+                      </button>
+                  </div>
+              </div>
+          </article>
+          <img :src="item.imageUrl" :alt="item.title"
+          :class=
+          "{
+            'saturate-[.3]' : isHovering !== idx,
+            'saturate-[.9]' : isHovering === idx,
+          }"
+          class="aspect-video object-cover object-center transition-all
+          duration-150 md:aspect-square
+          md:max-w-[24rem] md:h-full"/>
+        </li>
+      </ul>
+    </div>
   </section>
 </template>
 <style scoped>

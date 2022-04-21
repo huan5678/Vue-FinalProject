@@ -169,20 +169,21 @@ export default {
     <div class="container">
       <div class="mx-auto card bg-base-100">
         <div class="space-y-4 card-body">
-          <AppTitle class="mb-6" level="1">預約訂位</AppTitle>
+          <AppTitle class="mb-6 rfs:text-5xl" level="1">預約訂位</AppTitle>
           <p class="text-xl rfs:text-base text-center">
             想要辦PARTY，生日慶功宴，不想要被人打擾，已經財富自由想包場，歡迎進行預約。
           </p>
-          <div class="flex flex-col gap-6 justify-between md:flex-row">
+          <div class="flex flex-col gap-6 justify-between lg:flex-row">
             <Form
               :validationSchema="schema"
-              class="order-1 space-y-2 h-full font-light md:order-none md:w-2/3 form-control"
+              class="order-1 space-y-2 h-full font-light lg:order-none lg:w-2/3 form-control"
               @submit="handleSubmit"
             >
               <legend>
                 <h3 class="text-lg font-normal text-center">請填寫預約資料</h3>
               </legend>
-              <div class="flex gap-4 justify-between items-start mb-6">
+              <div class="flex flex-col lg:flex-row
+              gap-4 justify-between items-start mb-6">
                 <InputField
                   name="userName"
                   type="text"
@@ -231,7 +232,7 @@ export default {
               </button>
             </Form>
             <div class="flex-auto space-y-2 w-full max-w-screen-md
-            h-full md:order-none order-0">
+            h-full lg:order-none order-0">
               <h3 :class="selectedDates.length === 0 ? 'opacity-0': 'opacity-100'"
                 class="text-lg font-normal text-center
             transition-all duration-500">選擇預定日期</h3>
@@ -292,6 +293,7 @@ export default {
     </div>
   </section>
 </template>
+
 <style lang="scss">
 .vuecal {
   @apply border-none rounded overflow-hidden

@@ -10,7 +10,8 @@ export default {
   },
 };
 </script>
-<template class="bg-secondary-700">
+<template>
+  <div class="bg-secondary-700">
     <TheHeader />
       <RouterView v-slot="{ Component }">
         <transition name="fade">
@@ -20,4 +21,5 @@ export default {
         </transition>
       </RouterView>
     <TheFooter />
+  </div>
 </template>

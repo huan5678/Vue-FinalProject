@@ -47,23 +47,19 @@ export default {
 </script>
 
 <template>
-  <section class="pb-4 bg-gray-50">
+  <section class="pb-4 bg-gray-100">
     <div class="container flex flex-col space-y-4">
-      <div class="flex gap-4 items-center p-2 whitespace-nowrap">
-        <AppLink to="/home">
-          <SvgLoader name="bar-building" class="h-8 w-8" />
-        </AppLink>
-        <i class="text-xl bi bi-chevron-right" />
-        <AppLink to="/product" class="flex gap-3 items-center text-lg">
+      <div class="flex gap-4 items-center py-2 whitespace-nowrap">
+        <AppLink to="/product" class="flex gap-2 items-center text-lg">
           <SvgLoader name="bar" class="h-8 w-8" />
           產品列表
         </AppLink>
         <i class="text-xl bi bi-chevron-right" />
         <span class="text-lg">{{ products.title }}</span>
       </div>
-      <div class="flex py-4">
-        <div class="flex flex-col gap-2 pr-4 md:w-1/2">
-          <div class="w-full min-h-[50vh] bg-center bg-no-repeat bg-cover
+      <div class="flex flex-col md:flex-row gap-4 py-4">
+        <div class="flex flex-col gap-2 md:pr-4 md:w-1/2">
+          <div class="w-full min-h-[30vh] md:min-h-[50vh] bg-center bg-no-repeat bg-cover
           " :style="{ backgroundImage: `url(${productMainImage})`, }" />
           <div class="grid grid-cols-5 gap-2">
             <div v-for="img in productImages" :key="img"
@@ -74,7 +70,7 @@ export default {
                 :style="{ backgroundImage: `url(${img})`, }" />
           </div>
         </div>
-        <div class="pl-4 space-y-8 md:w-1/2">
+        <div class="md:pl-4 space-y-8 md:w-1/2">
           <div class="flex gap-4 items-center">
             <h1 class="text-4xl font-bold">
               {{ products.title }}

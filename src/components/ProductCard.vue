@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <div class="h-full shadow card">
+  <div class="h-full shadow card bg-base-100">
     <div class="group h-full cursor-pointer"
     @click="handleOpenProductDetail(products.id)"
     @keydown="handleOpenProductDetail(products.id)">

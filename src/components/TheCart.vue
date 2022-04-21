@@ -10,7 +10,8 @@ import useStore from '@/stores';
 
 export default {
   emits: ['handleCart'],
-  setup(props, context) {
+  props: ['handleCart'],
+  setup(props) {
     const { cartStore, couponStore } = useStore();
     const {
       cartData,
@@ -41,12 +42,12 @@ export default {
 
     function handleCloseCart(event) {
       if (event.target.id === 'checkout') {
-        context.attrs.handle(false);
+        props.handleCart(false);
       }
     }
 
     function handleCheckout() {
-      context.attrs.handle(false);
+      props.handleCart(false);
       router.push('/checkout');
     }
 
@@ -113,7 +114,7 @@ export default {
     id="chec-div"
     >
       <div
-        class="flex overflow-x-hidden
+        class="flex
         overflow-y-auto flex-col justify-end items-end
         transition-all duration-700 transform translate-x-0 lg:flex-row
         ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
@@ -121,7 +122,7 @@ export default {
         @click="handleCloseCart" @keydown="handleCloseCart"
       >
         <div
-          class="overflow-x-hidden overflow-y-auto py-4 px-4
+          class="overflow-y-auto py-4 px-4
           h-auto bg-white md:py-8 md:px-6 md:w-8/12 lg:py-14 lg:px-8 lg:w-1/2 lg:h-screen"
           id="scroll"
         >
@@ -169,34 +170,7 @@ export default {
                   text-secondary-800">{{ cart.product.title }}</p>
                   <div class="flex gap-1 items-center ml-auto">
                     <button class="btn btn-sm btn-outline btn-square"
-                    @click="cart.qty += 1; handleUpdateCart(cart.id, cart.qty)">
-                      <svg
-                        class="w-5 h-5 text-gray-300 animate-spin"
-                        :class="isLoading === cart.id ? '' : 'hidden'"
-                        :disabled="isLoading === cart.id"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          class="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          stroke-width="4"
-                        ></circle>
-                        <path
-                          class="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962
-                          7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      <i class="bi bi-plus-lg" :class="{ 'hidden' : isLoading === cart.id }" />
-                    </button>
-                    <span class="p-4">{{ cart.qty }}</span>
-                    <button class="btn btn-sm btn-outline btn-square"
+                    :disabled="cart.qty === 1"
                     @click="
                     cart.qty = handleCountQty(cart.qty -= 1);
                     handleUpdateCart(cart.id, cart.qty)">
@@ -224,6 +198,34 @@ export default {
                         ></path>
                       </svg>
                       <i class="bi bi-dash-lg" :class="{ 'hidden' : isLoading === cart.id }" />
+                    </button>
+                    <span class="p-4">{{ cart.qty }}</span>
+                    <button class="btn btn-sm btn-outline btn-square"
+                    @click="cart.qty += 1; handleUpdateCart(cart.id, cart.qty)">
+                      <svg
+                        class="w-5 h-5 text-gray-300 animate-spin"
+                        :class="isLoading === cart.id ? '' : 'hidden'"
+                        :disabled="isLoading === cart.id"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          class="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          stroke-width="4"
+                        ></circle>
+                        <path
+                          class="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962
+                          7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      <i class="bi bi-plus-lg" :class="{ 'hidden' : isLoading === cart.id }" />
                     </button>
                   </div>
                 </div>

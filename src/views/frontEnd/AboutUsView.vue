@@ -74,27 +74,28 @@ linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${abo
   <div class="container z-10">
     <div class="mx-auto card bg-base-100">
       <article class="card-body">
-        <AppTitle class="mb-6" level="1">
+        <AppTitle class="mb-6 rfs:text-5xl" level="1">
           關於秋吧
         </AppTitle>
-        <div class="flex flex-col gap-6 justify-between mb-2 md:flex-row">
-          <div class="order-1 mx-auto mb-6 space-y-2 text-secondary-700 md:order-none">
-            <h2 class="font-serif text-2xl font-medium text-center">我們的理念</h2>
-            <p class="font-serif font-light md:max-w-screen-md">
+        <div class="flex flex-col gap-6 justify-between mb-2 lg:flex-row">
+          <div class="order-1 mx-auto mb-6 space-y-2 text-secondary-700 lg:order-none">
+            <h2 class="font-serif rfs:text-2xl font-medium text-center">我們的理念</h2>
+            <p class="md:font-serif rfs:text-base font-light lg:max-w-screen-md">
               <span class="block text-center text-primary-500">
                 「
-                <span class="font-medium text-primary-500/70">秋日薄暮，用菊花煮竹葉青，人與海棠俱醉</span>
+                <span class="font-medium rfs:text-lg
+                text-primary-500/70">秋日薄暮，用菊花煮竹葉青，人與海棠俱醉</span>
                 」</span><br />
               林清玄在《溫一壺月光下酒》中寫到，在秋日薄暮時分，<br />
               來點小酒，人和海棠花皆醉了。<br />
               這樣的場景僅在腦海里一閃而過，就不禁陶醉其中。
             </p>
-            <p class="font-serif font-light">
+            <p class="md:font-serif font-light">
               我們致力於打造一個舒適的飲酒場景，<br />
               希望客人在我們店裡只有愜意沒有拘謹。</p>
           </div>
           <div class="relative
-          mx-auto space-y-2 w-[32vw] max-w-sm h-[15vw]
+          mx-auto space-y-2 w-full lg:w-[32vw] md:max-w-sm h-[15vh]
           bg-top bg-no-repeat bg-cover
           md:order-none lg:max-w-screen-sm order-0"
           :style="{ backgroundImage: `url(${aboutImg02})` }"
@@ -102,16 +103,17 @@ linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${abo
           </div>
 
         </div>
-        <div class="flex flex-col gap-6 justify-between md:flex-row">
+        <div class="flex flex-col gap-6 justify-between lg:flex-row">
             <form
             ref="formElement"
             @submit.prevent="handleSubmit"
-            class="order-1 space-y-2 font-light md:order-none md:w-2/3"
+            class="order-1 space-y-2 font-light lg:order-none lg:w-2/3"
             >
               <legend>
-                <h3 class="text-lg font-normal text-center">與我們聯繫</h3>
+                <h3 class="rfs:text-lg font-normal text-center">與我們聯繫</h3>
               </legend>
-              <div class="flex gap-4 justify-between items-start mb-6">
+              <div class="flex flex-col lg:flex-row
+              gap-4 justify-between items-start mb-6">
               <InputField
                 name="entry.1098885017"
                 type="text"
@@ -159,7 +161,7 @@ linear-gradient(rgba(21,22,37,1), rgba(21,22,37,0), rgba(21,22,37,1)), url(${abo
               送出訊息
             </button>
           </form>
-          <ul class="flex-auto space-y-2 w-full max-w-screen-md md:order-none order-0">
+          <ul class="flex-auto space-y-2 w-full max-w-screen-md lg:order-none order-0">
             <li>
               <h3 class="text-lg text-center">
               哪裡可以找到我們

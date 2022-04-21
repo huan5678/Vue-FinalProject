@@ -22,8 +22,8 @@ export default {
           <SvgLoader name="bannerLogo"
             class="w-24 h-8 text-secondary-200" />
         </li>
-        <li class="flex flex-col gap-2 items-center rfs:text-base text-secondary-300 lg:flex-row">
-          <p class="">本網站僅供個人作品使用，不做任何商業用途</p>
+        <li class="flex flex-col gap-2 items-center rfs:text-base text-secondary-300 md:flex-row">
+          <p class="flex md:flex-col">本網站僅供個人作品使用，<span>不做任何商業用途</span></p>
           <span class="hidden order-1 lg:block">-</span>
           <p class="rfs:text-base text-secondary-300">
             ChillBar COPYRIGHT © 2022
