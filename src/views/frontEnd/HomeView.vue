@@ -31,7 +31,8 @@ export default {
 <template>
   <TheHero />
   <TheFeatures />
-  <TheRecommend title="推薦給您" class="text-secondary-100" />
+  <TheRecommend title="推薦給您" :click="true" titleClass="rfs:text-2xl"
+    class="text-secondary-100" limit="15" />
   <TheContact />
   <WarningSign />
   <TheCouponWheel />
