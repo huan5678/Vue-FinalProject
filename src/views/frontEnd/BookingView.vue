@@ -182,8 +182,8 @@ export default {
               <legend>
                 <h3 class="text-lg font-normal text-center">請填寫預約資料</h3>
               </legend>
-              <div class="flex flex-col lg:flex-row
-              gap-4 justify-between items-start mb-6">
+              <div class="flex flex-col gap-4
+              justify-between items-start mb-6 lg:flex-row">
                 <InputField
                   name="userName"
                   type="text"

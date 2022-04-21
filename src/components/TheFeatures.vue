@@ -91,10 +91,10 @@ export default {
       </AppTitle>
       <ul class="group">
         <li
-        class="flex flex-col md:flex-row md:odd:flex-row-reverse
-        justify-between text-center md:text-left md:odd:text-right bg-secondary-100/20
-        md:odd:hover:bg-secondary-50/10
-        md:border-b cursor-pointer"
+        class="flex flex-col justify-between text-center
+        bg-secondary-100/20 cursor-pointer md:flex-row md:odd:flex-row-reverse md:text-left
+        md:odd:text-right
+        md:odd:hover:bg-secondary-50/10 md:border-b"
         :class="{
           'group-hover:bg-secondary-100/40': isHovering === idx
         }"
@@ -107,7 +107,7 @@ export default {
         v-for="(item, idx) in data" :key="item.title"
         >
           <article class="order-1 py-12 px-4 w-full sm:px-6
-          md:order-none md:w-1/2 md:py-16 md:px-8">
+          md:order-none md:py-16 md:px-8 md:w-1/2">
               <h2 class="mb-4 font-serif rfs:text-3xl font-medium
               text-primary-500/70 transition duration-150 ease-in-out"
               :class="{
@@ -128,7 +128,7 @@ export default {
                 />
               </template>
               <div class="lg:flex-shrink-0 lg:mt-0">
-                  <div class="inline-flex mt-12 rounded-md w-full md:w-auto">
+                  <div class="inline-flex mt-12 w-full rounded-md md:w-auto">
                       <button type="button" class="py-4 px-12
                       w-full text-base font-normal text-center
                       text-primary-300 border border-primary-200

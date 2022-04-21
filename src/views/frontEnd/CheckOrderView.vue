@@ -98,8 +98,8 @@ export default {
     <div class="container">
       <div class="flex flex-wrap gap-4
       justify-between lg:flex-nowrap">
-        <div class="flex flex-col flex-auto space-y-8
-        pb-4 w-full border-b border-secondary-500
+        <div class="flex flex-col flex-auto pb-4
+        space-y-8 w-full border-b border-secondary-500
         md:w-2/3
         lg:pt-14 lg:border-0">
           <h1 class="py-4 text-2xl font-medium text-center">訂單內容</h1>

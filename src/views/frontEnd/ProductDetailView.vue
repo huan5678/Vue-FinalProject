@@ -51,15 +51,15 @@ export default {
     <div class="container flex flex-col space-y-4">
       <div class="flex gap-4 items-center py-2 whitespace-nowrap">
         <AppLink to="/product" class="flex gap-2 items-center text-lg">
-          <SvgLoader name="bar" class="h-8 w-8" />
+          <SvgLoader name="bar" class="w-8 h-8" />
           產品列表
         </AppLink>
         <i class="text-xl bi bi-chevron-right" />
         <span class="text-lg">{{ products.title }}</span>
       </div>
-      <div class="flex flex-col md:flex-row gap-4 py-4">
+      <div class="flex flex-col gap-4 py-4 md:flex-row">
         <div class="flex flex-col gap-2 md:pr-4 md:w-1/2">
-          <div class="w-full min-h-[30vh] md:min-h-[50vh] bg-center bg-no-repeat bg-cover
+          <div class="w-full min-h-[30vh] bg-center bg-no-repeat bg-cover md:min-h-[50vh]
           " :style="{ backgroundImage: `url(${productMainImage})`, }" />
           <div class="grid grid-cols-5 gap-2">
             <div v-for="img in productImages" :key="img"
@@ -70,7 +70,7 @@ export default {
                 :style="{ backgroundImage: `url(${img})`, }" />
           </div>
         </div>
-        <div class="md:pl-4 space-y-8 md:w-1/2">
+        <div class="space-y-8 md:pl-4 md:w-1/2">
           <div class="flex gap-4 items-center">
             <h1 class="text-4xl font-bold">
               {{ products.title }}
@@ -89,9 +89,9 @@ export default {
               <span>{{ products.content }}</span></li>
             <li class="flex justify-between">
               <span class="font-semibold">價格:</span>
-              <div class="rfs:text-3xl flex items-end gap-1">
+              <div class="flex gap-1 items-end rfs:text-3xl">
                 {{ products.price }}
-                <span class="pl-1 text-gray-400 line-through rfs:text-base">
+                <span class="pl-1 rfs:text-base text-gray-400 line-through">
                   {{ products.origin_price }}
                 </span>
                 <span class="rfs:text-base">杯 / 元</span>

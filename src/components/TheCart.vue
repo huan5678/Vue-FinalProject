@@ -113,9 +113,9 @@ export default {
     id="chec-div"
     >
       <div
-        class="flex flex-wrap h-screen lg:h-auto
-        overflow-y-auto justify-end
-        transition-all duration-700 transform translate-x-0 lg:flex-row
+        class="flex overflow-y-auto flex-wrap justify-end
+        h-screen transition-all
+        duration-700 transform translate-x-0 lg:flex-row lg:h-auto
         ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
         id="checkout"
         @click="handleCloseCart" @keydown="handleCloseCart"

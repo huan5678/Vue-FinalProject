@@ -138,8 +138,8 @@ export default {
 </script>
 <template>
   <section id="header" ref="header"
-  class="sticky top-0 bg-secondary-900/70
-  z-30 w-full transition-all duration-500"
+  class="sticky top-0 z-30
+  w-full bg-secondary-900/70 transition-all duration-500"
   :class="{
     'bg-secondary-700': !isHome,
     'translate-y-0': scroll.showHeader,
@@ -147,7 +147,7 @@ export default {
   }"
   >
     <nav class="container flex
-    justify-between items-center static py-3">
+    static justify-between items-center py-3">
       <a href="/">
         <SvgLoader name="bannerLogo"
           class="w-28 h-8 text-primary-500" />
@@ -158,23 +158,23 @@ export default {
         <input type="checkbox" id="menuBtn" v-model="openDropdown">
         <i class="bi bi-list"></i>
       </label>
-      <ul class="hidden md:flex transition-all duration-500 pt-2">
-          <li class="flex-auto flex justify-end px-2"
+      <ul class="hidden pt-2 transition-all duration-500 md:flex">
+          <li class="flex flex-auto justify-end px-2"
           v-if="route.name !== 'dashboard'">
             <AppLink to="product"> 產品列表 </AppLink>
           </li>
-          <li class="flex-auto flex justify-end px-2"
+          <li class="flex flex-auto justify-end px-2"
           v-if="route.name !== 'dashboard'">
             <AppLink to="booking"> 預約訂位 </AppLink>
           </li>
-          <li class="flex-auto flex justify-end px-2"
+          <li class="flex flex-auto justify-end px-2"
           v-if="route.name !== 'dashboard'">
             <AppLink to="about"> 關於我們 </AppLink>
           </li>
           <li v-if="route.name === 'dashboard' || route.name === 'confirm'" />
-          <li class="indicator flex-auto" v-else>
-            <span class="indicator-item rfs:text-xs
-            text-primary-50 bg-primary-500 badge
+          <li class="flex-auto indicator" v-else>
+            <span class="rfs:text-xs text-primary-50
+            bg-primary-500 indicator-item badge
             " v-show="cartList.length > 0">{{ cartList.length }}</span>
             <button class="btn btn-circle btn-ghost" type="button"
             @click="handleCart(true)" @keydown="true">
@@ -199,13 +199,13 @@ export default {
   <TheCart v-model="openCart" @handleCart="handleCart" :handleCart="handleCart" />
   <Teleport to="body">
     <Transition name="fade">
-      <div class="absolute inset-0 z-[9999] overflow-hidden transition-all duration-500
-      h-screen w-screen bg-secondary-900/80 backdrop-blur-sm"
+      <div class="overflow-hidden absolute inset-0 z-[9999] w-screen h-screen
+      bg-secondary-900/80 backdrop-blur-sm transition-all duration-500"
       :class="{'translate-x-[-250%]': !openDropdown}"
       >
-        <nav class="flex flex-col items-center gap-8 p-4">
+        <nav class="flex flex-col gap-8 items-center p-4">
           <label for="overlayMenuBtn"
-          class="btn swap ml-auto">
+          class="ml-auto btn swap">
             <input type="checkbox" id="overlayMenuBtn" v-model="openDropdown">
             <i class="bi bi-x-lg"></i>
           </label>
@@ -215,7 +215,7 @@ export default {
           @click="openDropdown = false" @keydown="openDropdown = false"> 預約訂位 </AppLink>
           <AppLink to="about" class="rfs:text-4xl"
           @click="openDropdown = false" @keydown="openDropdown = false"> 關於我們 </AppLink>
-          <p class="py-2 px-3 font-normal text-secondary-300 rfs:text-4xl"
+          <p class="py-2 px-3 rfs:text-4xl font-normal text-secondary-300"
           v-if="cartList.length > 0"
           @click="handleCart(true)" @keydown="handleCart(true)"
           >查看購物車</p>
