@@ -106,24 +106,23 @@ export default {
 </script>
 
 <template>
-  <vue-final-modal
+  <VueFinalModal
     v-bind="$attrs"
     v-slot="{ handleCart }"
     classes="bg-secondary-900 bg-opacity-50 backdrop-blur-[2px]"
-    content-class="hidden"
     id="chec-div"
     >
       <div
-        class="flex
-        overflow-y-auto flex-col justify-end items-end
+        class="flex flex-wrap h-screen lg:h-auto
+        overflow-y-auto justify-end
         transition-all duration-700 transform translate-x-0 lg:flex-row
         ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
         id="checkout"
         @click="handleCloseCart" @keydown="handleCloseCart"
       >
         <div
-          class="overflow-y-auto py-4 px-4
-          h-auto bg-white md:py-8 md:px-6 md:w-8/12 lg:py-14 lg:px-8 lg:w-1/2 lg:h-screen"
+          class="overflow-y-auto py-4 px-4 h-screen
+          bg-white md:py-8 md:px-6 md:w-8/12 lg:py-14 lg:px-8 lg:w-1/2 lg:h-screen"
           id="scroll"
         >
           <div class="flex justify-between items-center">
@@ -261,7 +260,7 @@ export default {
             ">刪除全部品項</button>
           </div>
         </div>
-        <div class="w-full h-full bg-secondary-100 md:w-8/12 lg:w-96">
+        <div class="w-full bg-secondary-100 md:w-8/12 lg:w-96">
           <div
             class="flex overflow-y-auto flex-col justify-between
             py-6 px-4 h-auto md:py-10 md:px-7
@@ -291,6 +290,7 @@ export default {
               </div>
               <button
                 @click="handleCheckout"
+                :disabled="cartList.length === 0"
                 class="
                 w-full text-base leading-none text-secondary-50 bg-secondary-800
                 border border-secondary-800 btn
@@ -301,5 +301,5 @@ export default {
           </div>
         </div>
       </div>
-  </vue-final-modal>
+  </VueFinalModal>
 </template>

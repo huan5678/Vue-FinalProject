@@ -51,7 +51,7 @@ export const useAdminStore = defineStore('admin', () => {
     isLoggedIn.value = false;
     token.value = '';
     expired.value = '';
-    axios.post(`${baseUrl}api/user/logout`);
+    axios.post(`${baseUrl}logout`);
   }
 
   function handleClearToken() {

@@ -159,15 +159,15 @@ export default {
         <i class="bi bi-list"></i>
       </label>
       <ul class="hidden md:flex transition-all duration-500 pt-2">
-          <li class="flex-auto px-2"
+          <li class="flex-auto flex justify-end px-2"
           v-if="route.name !== 'dashboard'">
             <AppLink to="product"> 產品列表 </AppLink>
           </li>
-          <li class="flex-auto px-2"
+          <li class="flex-auto flex justify-end px-2"
           v-if="route.name !== 'dashboard'">
             <AppLink to="booking"> 預約訂位 </AppLink>
           </li>
-          <li class="flex-auto px-2"
+          <li class="flex-auto flex justify-end px-2"
           v-if="route.name !== 'dashboard'">
             <AppLink to="about"> 關於我們 </AppLink>
           </li>

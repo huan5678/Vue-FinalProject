@@ -131,6 +131,9 @@ export const useAdminDataStore = defineStore('adminData', () => {
       case 'coupon':
         target = 'coupon';
         break;
+      case 'article':
+        target = 'article';
+        break;
       default:
         target = 'product';
         break;

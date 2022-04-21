@@ -12,9 +12,9 @@ export default {
     const showTip = ref(false);
     const showWheel = ref(true);
     const openModal = ref(false);
-    const handleCloseModal = function () {
+    function handleCloseModal() {
       openModal.value = false;
-    };
+    }
 
     const giving = [
       {

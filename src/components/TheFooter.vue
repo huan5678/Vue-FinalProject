@@ -11,11 +11,7 @@ export default {
 };
 </script>
 <template>
-  <footer id="footer" class="py-4 bg-secondary-700"
-  :class="{
-    'bg-secondary-900/70': isHome,
-    'bg-secondary-700': !isHome,
-  }">
+  <footer id="footer" class="py-4 bg-secondary-700">
     <nav class="container">
       <ul class="flex flex-col justify-between items-center space-y-4 md:flex-row md:space-y-0">
         <li>
