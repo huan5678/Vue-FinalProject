@@ -55,19 +55,27 @@ export default {
       <ul class="flex flex-wrap justify-between p-4 space-y-2">
         <li class="p-2 space-y-2">
           <span class="block text-sm border-b">文章標籤</span>
-          <p class="text-2xl font-medium">{{articleData?.title}}</p>
+          <p class="text-2xl font-medium">
+            {{articleData?.title}}
+          </p>
         </li>
         <li class="p-2 space-y-2">
           <span class="block text-sm border-b">文章副標題</span>
-          <p class="text-2xl font-medium">{{articleData?.subTitle}}</p>
+          <p class="text-2xl font-medium">
+            {{articleData?.subTitle}}
+          </p>
         </li>
         <li class="p-2 space-y-2">
           <span class="block text-sm border-b">文章作者</span>
-          <p class="text-2xl font-medium">{{articleData?.author}}</p>
+          <p class="text-2xl font-medium">
+            {{articleData?.author}}
+          </p>
         </li>
         <li class="p-2 space-y-2">
           <span class="block text-sm border-b">文章標籤</span>
-          <p class="text-2xl font-medium">{{ tagList[articleData?.tag]}}</p>
+          <p class="text-2xl font-medium">
+            {{ tagList[articleData?.tag]}}
+          </p>
         </li>
         <li class="flex justify-between w-full">
           <div class="p-2 space-y-2">
@@ -96,7 +104,9 @@ export default {
         </li>
         <li class="space-y-2">
           <span class="block text-sm border-b">文章新增日期</span>
-          <p class="text-2xl font-medium">{{ dateTime }}</p>
+          <p class="text-2xl font-medium">
+            {{ dateTime }}
+          </p>
         </li>
       </ul>
     </div>

@@ -53,25 +53,25 @@ export default {
         <td class="py-2 px-4 text-right whitespace-nowrap">{{ item.origin_price }}</td>
         <td class="py-2 px-4 text-right whitespace-nowrap">{{ item.price }}</td>
         <td
-          class="py-2 px-4 text-center text-primary-400 whitespace-nowrap"
+          class="py-2 px-4 text-center text-secondary-700 whitespace-nowrap"
           v-if="item.is_enabled == 1"
         >
           啟用
         </td>
         <td
-          class="py-2 px-4 text-center text-gray-400 whitespace-nowrap"
+          class="py-2 px-4 text-center text-secondary-400 whitespace-nowrap"
           v-else-if="item.is_enabled == 0"
         >
           未啟用
         </td>
         <td
-          class="py-2 px-4 text-center text-gray-400 whitespace-nowrap"
+          class="py-2 px-4 text-center text-secondary-400 whitespace-nowrap"
           v-else-if="item.is_enabled == 2"
         >
           未上架
         </td>
         <td
-          class="py-2 px-4 text-center text-gray-500 whitespace-nowrap"
+          class="py-2 px-4 text-center text-secondary-300 whitespace-nowrap"
           v-if="item.is_enabled == 3"
         >
           已下架

@@ -24,7 +24,7 @@ export default {
           <p class="rfs:text-base text-secondary-300">
             ChillBar COPYRIGHT © 2022
           </p>
-          <router-link to="admin" class="order-none mx-auto ml-auto
+          <router-link to="/admin" class="order-none mx-auto ml-auto
           font-normal tracking-[.1rem] text-secondary-300
           hover:text-secondary-100 hover:bg-secondary-400
           rounded-none border border-secondary-200

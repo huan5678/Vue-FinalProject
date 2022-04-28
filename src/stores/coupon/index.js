@@ -1,6 +1,7 @@
 import { reactive } from 'vue';
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import errorHandle from '@/helpers/errorHandle';
 
 export const useCouponStore = defineStore('coupon', () => {
   const baseUrl = process.env.VUE_APP_API_URL;
@@ -50,7 +51,7 @@ export const useCouponStore = defineStore('coupon', () => {
         return res.data.success;
       })
       .catch((err) => {
-        console.dir(err);
+        errorHandle(err);
       });
   }
 

@@ -301,13 +301,15 @@ export default {
 .vuecal__cell-content {
   @apply p-2
 }
-.vuecal__menu, .vuecal__cell-events-count {
+.vuecal__menu,
+.vuecal__cell-events-count {
   @apply bg-primary-400 text-primary-100
 }
 .vuecal__title-bar {
   @apply bg-primary-200
 }
-.vuecal__cell--today, .vuecal__cell--current {
+.vuecal__cell--today,
+.vuecal__cell--current {
   @apply bg-primary-500 text-primary-50
 }
 .vuecal:not(.vuecal--day-view) .vuecal__cell--selected {

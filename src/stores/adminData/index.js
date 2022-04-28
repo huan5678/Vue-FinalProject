@@ -2,6 +2,7 @@ import { reactive } from 'vue';
 import { defineStore } from 'pinia';
 import { useAdminStore } from '@/stores/admin';
 import axios from 'axios';
+import errorHandle from '@/helpers/errorHandle';
 
 export const useAdminDataStore = defineStore('adminData', () => {
   const baseUrl = process.env.VUE_APP_API_URL;
@@ -65,7 +66,7 @@ export const useAdminDataStore = defineStore('adminData', () => {
         adminData.dataList = res.data[`${target}`];
       })
       .catch((err) => {
-        adminData.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
       });
   }
 
@@ -105,7 +106,7 @@ export const useAdminDataStore = defineStore('adminData', () => {
         adminData.pagination = res.data.pagination;
       })
       .catch((err) => {
-        adminData.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
       });
   }
 
@@ -118,7 +119,7 @@ export const useAdminDataStore = defineStore('adminData', () => {
         handleGetDataList(adminData.currentPage, adminData.category);
       })
       .catch((err) => {
-        adminData.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
       });
   }
 
@@ -144,7 +145,7 @@ export const useAdminDataStore = defineStore('adminData', () => {
         handleGetDataList(adminData.currentPage, adminData.category);
       })
       .catch((err) => {
-        adminData.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
       });
   }
 
@@ -157,7 +158,7 @@ export const useAdminDataStore = defineStore('adminData', () => {
         handleGetDataList(adminData.currentPage);
       })
       .catch((err) => {
-        console.dir(err);
+        errorHandle(err);
       });
   }
 

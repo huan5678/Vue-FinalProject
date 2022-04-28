@@ -6,7 +6,7 @@ import {
   toRef,
 } from 'vue';
 import { $vfm } from 'vue-final-modal';
-import Swal from 'sweetalert2';
+import handleSweetAlert from '@/helpers/handleSweetAlert';
 
 import useStore from '@/stores';
 import DashboardTable from '@/components/DashboardTable.vue';
@@ -52,21 +52,11 @@ export default {
 
     onMounted(() => {
       if (isLoggedIn) {
-        Swal.fire({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
+        handleSweetAlert({
           title: '您已成功登入',
           icon: 'success',
           iconColor: '#f59f13',
-          showClass: {
-            popup: 'animate__animated animate__fadeInRight animate__faster',
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutRight animate__faster',
-          },
+          timer: 3000,
         });
       }
     });

@@ -161,15 +161,15 @@ export default {
       <ul class="hidden pt-2 transition-all duration-500 md:flex">
           <li class="flex flex-auto justify-end px-2"
           v-if="route.name !== 'dashboard'">
-            <AppLink to="product"> 產品列表 </AppLink>
+            <AppLink to="/product"> 產品列表 </AppLink>
           </li>
           <li class="flex flex-auto justify-end px-2"
           v-if="route.name !== 'dashboard'">
-            <AppLink to="booking"> 預約訂位 </AppLink>
+            <AppLink to="/booking"> 預約訂位 </AppLink>
           </li>
           <li class="flex flex-auto justify-end px-2"
           v-if="route.name !== 'dashboard'">
-            <AppLink to="about"> 關於我們 </AppLink>
+            <AppLink to="/about"> 關於我們 </AppLink>
           </li>
           <li v-if="route.name === 'dashboard' || route.name === 'confirm'" />
           <li class="flex-auto indicator" v-else>
@@ -209,11 +209,11 @@ export default {
             <input type="checkbox" id="overlayMenuBtn" v-model="openDropdown">
             <i class="bi bi-x-lg"></i>
           </label>
-          <AppLink to="product" class="rfs:text-4xl"
+          <AppLink to="/product" class="rfs:text-4xl"
           @click="openDropdown = false" @keydown="openDropdown = false"> 產品列表 </AppLink>
-          <AppLink to="booking" class="rfs:text-4xl"
+          <AppLink to="/booking" class="rfs:text-4xl"
           @click="openDropdown = false" @keydown="openDropdown = false"> 預約訂位 </AppLink>
-          <AppLink to="about" class="rfs:text-4xl"
+          <AppLink to="/about" class="rfs:text-4xl"
           @click="openDropdown = false" @keydown="openDropdown = false"> 關於我們 </AppLink>
           <p class="py-2 px-3 rfs:text-4xl font-normal text-secondary-300"
           v-if="cartList.length > 0"

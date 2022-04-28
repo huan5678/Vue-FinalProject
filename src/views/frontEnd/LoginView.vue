@@ -75,7 +75,9 @@ export default {
 <template>
   <main class="flex justify-center items-center h-screen bg-gray-50">
     <div class="container max-w-lg">
-      <form class="p-8 space-y-8 bg-white rounded shadow-sm" @submit.prevent="handlerSubmit">
+      <form class="p-8 space-y-8 bg-white rounded shadow-sm"
+      data-aos="fade-in" data-aos-once="true"
+      @submit.prevent="handlerSubmit">
         <legend class="text-3xl font-medium
         tracking-wide text-center text-primary-600">管理者登入</legend>
         <div class="form-control">
@@ -113,9 +115,15 @@ export default {
       </form>
     </div>
     <AlertModal v-model="openModal" @handleCloseModal="handleCloseModal">
-      <template v-slot:title>{{ modalMessage.title }}</template>
-      <p class="mb-2 text-center">{{ modalMessage.message }}</p>
-      <p>{{ modalMessage.detail }}</p>
+      <template v-slot:title>
+        {{ modalMessage.title }}
+      </template>
+      <p class="mb-2 text-center">
+        {{ modalMessage.message }}
+      </p>
+      <p>
+        {{ modalMessage.detail }}
+      </p>
     </AlertModal>
   </main>
 </template>

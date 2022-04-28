@@ -40,7 +40,7 @@ export default {
     <p class="p-2 text-xl text-center text-secondary-500">
       {{ selectType === 'product'? '產品 : ' :
       selectType === 'order' ? '訂單編號 : ' :
-      selectType === 'coupon' ? '優惠券 : ' : '文章 : '}}
+      selectType === 'coupon' ? '優惠券 : ' : '文章 : ' }}
       {{ selectType === 'product'? productData.title :
       selectType === 'order' ? productData.id :
       selectType === 'coupon' ? productData.title : productData.id }}

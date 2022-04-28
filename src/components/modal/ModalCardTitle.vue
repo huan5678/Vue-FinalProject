@@ -19,7 +19,9 @@ export default {
   <div
   class="flex items-center border-b"
   >
-      <h2 class="p-4 text-lg text-secondary-700">{{ title }}</h2>
+      <h2 class="p-4 text-lg text-secondary-700">
+        {{ title }}
+      </h2>
       <button
         type="button"
         class="ml-auto text-secondary-700 hover:text-secondary-500 hover:bg-transparent

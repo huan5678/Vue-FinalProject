@@ -55,7 +55,7 @@ export default {
         <tr
           class="hover"
           v-for="item in adminData?.dataList"
-          :key="item?.title"
+          :key="item?.id"
         >
           <td class="py-2 px-4 whitespace-nowrap">{{ item?.title }}</td>
           <td class="py-2 px-4 text-center whitespace-nowrap">{{ item?.code }}</td>

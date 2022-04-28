@@ -12,6 +12,7 @@ export default {
     const { handleCheckUser, handleGetToken } = adminStore;
 
     onMounted(() => {
+      console.log('mount admin');
       handleGetToken();
       handleCheckUser();
     });

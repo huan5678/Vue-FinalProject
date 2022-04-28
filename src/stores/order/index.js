@@ -1,6 +1,7 @@
 import { reactive } from 'vue';
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import errorHandle from '@/helpers/errorHandle';
 
 export const useOrderStore = defineStore('order', () => {
   const baseUrl = process.env.VUE_APP_API_URL;
@@ -49,7 +50,7 @@ export const useOrderStore = defineStore('order', () => {
         return res.data.success;
       })
       .catch((err) => {
-        console.dir(err);
+        errorHandle(err);
       });
   }
 
@@ -64,7 +65,7 @@ export const useOrderStore = defineStore('order', () => {
         return res.data.success;
       })
       .catch((err) => {
-        console.dir(err);
+        errorHandle(err);
         return err.response.success;
       });
   }
@@ -80,7 +81,7 @@ export const useOrderStore = defineStore('order', () => {
         orderList.message = res.data.message;
       })
       .catch((err) => {
-        console.dir(err);
+        errorHandle(err);
       });
   }
 

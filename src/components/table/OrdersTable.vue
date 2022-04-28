@@ -57,7 +57,8 @@ export default {
           {{ moneyFormat(item.total) }}
         </td>
         <td
-          class="py-2 px-4 text-center text-primary-400 whitespace-nowrap"
+          class="py-2 px-4 text-center whitespace-nowrap"
+          :class="item.is_paid ? 'text-secondary-400' : 'text-secondary-300'"
         >
           {{ item.is_paid ? '已付款' : '未付款' }}
         </td>

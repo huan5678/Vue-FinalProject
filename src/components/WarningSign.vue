@@ -48,11 +48,11 @@ export default {
 </div>
 </template>
 <style scoped>
-p{
+p {
   animation: marquee 8s linear infinite;
 }
 @keyframes marquee {
-  0%   {
+  0% {
     transform: translate(0%, 0);
   }
 

@@ -57,7 +57,6 @@ export default {
     }
 
     function handleCreateCode() {
-      // couponData.value.code = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
       [couponData.value.code] = uuidv4().split('-');
     }
 
@@ -100,7 +99,9 @@ export default {
             <label for="couponCode" class="label"
               ><span class="label-text">產生優惠券代碼</span></label>
               <div class="flex gap-2">
-                <span class="form-control">{{ couponData.code }}</span>
+                <span class="form-control">
+                  {{ couponData.code }}
+                </span>
                 <button
                   type="button"
                   id="couponCode"

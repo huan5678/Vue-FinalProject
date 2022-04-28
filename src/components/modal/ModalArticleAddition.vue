@@ -136,8 +136,7 @@ export default {
     <Form class="container p-4 space-y-4" @submit="handleProductAddition">
       <div class="flex gap-2 justify-between">
         <div class="flex-1">
-          <label for="articleImage" class="block mb-4"
-            >文章圖片</label>
+          <label for="articleImage" class="block mb-4">文章圖片</label>
           <input
             type="file"
             accept="image/*"
@@ -160,8 +159,7 @@ export default {
       </div>
       <div class="flex gap-4 justify-between w-full">
         <div class="flex-auto">
-          <label for="articleName" class="block mb-4"
-            >文章標題</label>
+          <label for="articleName" class="block mb-4">文章標題</label>
           <input
             type="text"
             id="articleName"
@@ -172,8 +170,7 @@ export default {
           />
         </div>
         <div class="flex-auto">
-          <label for="articleSubTitle" class="block mb-4"
-            >文章副標題</label>
+          <label for="articleSubTitle" class="block mb-4">文章副標題</label>
           <input
             type="text"
             id="articleSubTitle"
@@ -184,8 +181,7 @@ export default {
           />
         </div>
         <div class="flex-auto">
-          <label for="articleAuthor" class="block mb-4"
-            >文章作者</label>
+          <label for="articleAuthor" class="block mb-4">文章作者</label>
           <input
             type="text"
             id="articleAuthor"
@@ -197,14 +193,13 @@ export default {
       </div>
       <div class="flex gap-4 space-between">
         <div class="flex-auto w-full">
-          <label for="articleContent" class="block mb-4"
-            >文章內容</label>
+          <label for="articleContent" class="block mb-4">文章內容</label>
           <ckeditor id="articleContent"
           name="articleContent"
           :editor="editor"
           v-model="article.content"
           :config="editorConfig"
-          ></ckeditor>
+          />
         </div>
         <div class="flex-auto w-1/4">
           <h3 class="block mb-4">文章是否公開</h3>
@@ -231,7 +226,9 @@ export default {
                 v-model="articleData.tag"
                 :value="tag.value"
               >
-                <span class="ml-2 label-text">{{ tag.name }}</span>
+                <span class="ml-2 label-text">
+                  {{ tag.name }}
+                </span>
               </label>
             </div>
             <div class="form-control">

@@ -1,6 +1,7 @@
 import { reactive, ref } from 'vue';
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import errorHandle from '@/helpers/errorHandle';
 
 export const useCartStore = defineStore('cart', () => {
   const baseUrl = process.env.VUE_APP_API_URL;
@@ -36,7 +37,7 @@ export const useCartStore = defineStore('cart', () => {
         cartData.finalPrice = res.data.data.final_total;
       })
       .catch((err) => {
-        cartData.errorMessage = err.data.message;
+        errorHandle(err);
       });
   }
 
@@ -56,7 +57,7 @@ export const useCartStore = defineStore('cart', () => {
         handleGetCart();
       })
       .catch((err) => {
-        cartData.errorMessage = err.data.message;
+        errorHandle(err);
         isLoading.value = '';
       });
   }
@@ -71,7 +72,7 @@ export const useCartStore = defineStore('cart', () => {
         handleGetCart();
       })
       .catch((err) => {
-        cartData.errorMessage = err.data.message;
+        errorHandle(err);
         isLoading.value = '';
       });
   }
@@ -91,7 +92,7 @@ export const useCartStore = defineStore('cart', () => {
         handleGetCart();
       })
       .catch((err) => {
-        cartData.errorMessage = err.data.message;
+        errorHandle(err);
         isLoading.value = '';
       });
   }
@@ -104,7 +105,7 @@ export const useCartStore = defineStore('cart', () => {
         handleGetCart();
       })
       .catch((err) => {
-        cartData.errorMessage = err.data.message;
+        errorHandle(err);
       });
   }
 

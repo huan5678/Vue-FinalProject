@@ -34,15 +34,21 @@ export default {
     <div class="flex justify-between p-4">
       <div class="p-2 divide-y">
         <span class="block text-sm">優惠券名稱</span>
-        <h2 class="text-2xl font-medium">{{ couponData?.title }}</h2>
+        <h2 class="text-2xl font-medium">
+          {{ couponData?.title }}
+        </h2>
       </div>
       <div class="p-2 divide-y">
         <span class="block text-sm">優惠券代碼</span>
-        <h2 class="text-2xl font-medium">{{ couponData?.code }}</h2>
+        <h2 class="text-2xl font-medium">
+          {{ couponData?.code }}
+        </h2>
       </div>
       <div class="p-2 divide-y">
         <span class="block text-sm">優惠券折價</span>
-        <h2 class="text-2xl font-medium">{{ couponData?.percent }}</h2>
+        <h2 class="text-2xl font-medium">
+          {{ couponData?.percent }}
+        </h2>
       </div>
     </div>
     <div class="flex justify-between p-4">
@@ -59,7 +65,9 @@ export default {
       </div>
       <div class="p-2 divide-y">
         <span class="block text-sm">優惠券使用期限</span>
-        <h2 class="text-2xl font-medium">{{ getDate(couponData?.due_date) }}</h2>
+        <h2 class="text-2xl font-medium">
+          {{ getDate(couponData?.due_date) }}
+        </h2>
       </div>
     </div>
   </section>

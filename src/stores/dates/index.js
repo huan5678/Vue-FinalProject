@@ -1,6 +1,7 @@
 import { reactive } from 'vue';
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import errorHandle from '@/helpers/errorHandle';
 
 export const useBookingDateStore = defineStore('bookingDates', () => {
   const crosUrl = 'https://esc-cros-anywhere.herokuapp.com/';
@@ -26,7 +27,7 @@ export const useBookingDateStore = defineStore('bookingDates', () => {
         datesData.bookingList = res.data;
       })
       .catch((err) => {
-        datesData.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
       });
   }
 
@@ -37,7 +38,7 @@ export const useBookingDateStore = defineStore('bookingDates', () => {
         datesData.bookingData = res.data.order;
       })
       .catch((err) => {
-        datesData.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
       });
   }
 
@@ -48,7 +49,7 @@ export const useBookingDateStore = defineStore('bookingDates', () => {
         handleGetBookingDataAll();
       })
       .catch((err) => {
-        datesData.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
       });
   }
 
@@ -59,7 +60,7 @@ export const useBookingDateStore = defineStore('bookingDates', () => {
         handleGetBookingDataAll();
       })
       .catch((err) => {
-        datesData.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
       });
   }
 
@@ -72,7 +73,7 @@ export const useBookingDateStore = defineStore('bookingDates', () => {
         datesData.isLoading = false;
       })
       .catch((err) => {
-        datesData.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
       });
   }
 

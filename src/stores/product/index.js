@@ -1,6 +1,7 @@
 import { reactive, ref } from 'vue';
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import errorHandle from '@/helpers/errorHandle';
 
 export const useProductStore = defineStore('product', () => {
   const baseUrl = process.env.VUE_APP_API_URL;
@@ -59,7 +60,7 @@ export const useProductStore = defineStore('product', () => {
         productList.products = checkImage(res.data.products);
       })
       .catch((err) => {
-        productList.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
       });
   }
 

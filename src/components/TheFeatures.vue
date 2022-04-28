@@ -107,7 +107,9 @@ export default {
         v-for="(item, idx) in data" :key="item.title"
         >
           <article class="order-1 py-12 px-4 w-full sm:px-6
-          md:order-none md:py-16 md:px-8 md:w-1/2">
+          md:order-none md:py-16 md:px-8 md:w-1/2"
+          data-aos="fade-up" data-aos-easing="ease-in-out"
+          data-aos-once="true">
               <h2 class="mb-4 font-serif rfs:text-3xl font-medium
               text-primary-500/70 transition duration-150 ease-in-out"
               :class="{
@@ -160,8 +162,7 @@ export default {
 </template>
 <style scoped>
 .group-hover-btn {
-  @apply group-hover:cursor-pointer
-  group-hover:text-primary-500 group-hover:border
-  group-hover:border-primary-500 group-hover:shadow-sm
+  @apply group-hover:cursor-pointer group-hover:text-primary-500
+    group-hover:border group-hover:border-primary-500 group-hover:shadow-sm
 }
 </style>

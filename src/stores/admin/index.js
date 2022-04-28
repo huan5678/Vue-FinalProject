@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import errorHandle from '@/helpers/errorHandle';
 
 export const useAdminStore = defineStore('admin', () => {
   const baseUrl = process.env.VUE_APP_API_URL;
@@ -12,18 +13,15 @@ export const useAdminStore = defineStore('admin', () => {
   const params = useRoute();
 
   const handleGetToken = function () {
-    const cookies = document.cookie.split('; backendToken=');
-    if (cookies.length > 1) {
-      cookies.shift().split(';');
-    }
+    const cookies = document.cookie.split('backendToken=').pop();
     token.value = cookies;
     return cookies;
   };
 
-  const handleCheckUser = function () {
+  const handleCheckUser = async function () {
     if (token.value) {
       axios.defaults.headers.common.Authorization = token.value;
-      axios
+      await axios
         .post(`${baseUrl}api/user/check`)
         .then((res) => {
           isLoggedIn.value = res.data.success;
@@ -32,8 +30,8 @@ export const useAdminStore = defineStore('admin', () => {
           }
         })
         .catch((err) => {
-          console.dir(err);
           isLoggedIn.value = err.response.data.success;
+          errorHandle(err);
           router.push('login');
         });
     } else {
