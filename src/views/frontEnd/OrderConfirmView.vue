@@ -3,12 +3,13 @@ import {
   onMounted,
   computed,
   reactive,
-  inject,
   ref,
 } from 'vue';
 import { useRouter } from 'vue-router';
 import useStore from '@/stores';
 import CheckStep from '@/components/CheckStep.vue';
+import moneyFormat from '@/helpers/moneyFormat';
+import axios from 'axios';
 
 export default {
   components: {
@@ -25,15 +26,8 @@ export default {
       handleGetOrderData,
     } = orderStore;
 
-    const axios = inject('axios');
     const baseUrl = process.env.VUE_APP_API_URL;
     const apiPath = process.env.VUE_APP_API_PATH;
-
-    function moneyFormat(num, qty) {
-      let number = num;
-      if (qty !== undefined) number *= qty;
-      return num !== undefined ? Number(number.toFixed(1)).toLocaleString() : 0;
-    }
 
     const steps = ref(2);
 
@@ -100,7 +94,7 @@ export default {
         lg:pt-14 lg:pb-20 lg:border-0">
           <h2 class="py-4 text-2xl font-medium text-center">訂單內容</h2>
           <ul id="list" class="overflow-y-auto space-y-4 max-h-[50vh]">
-            <li v-for="data in confirmData?.order?.products" :key="data.id"
+            <li v-for="data in confirmData.order.products" :key="data.id"
             class="flex gap-4 justify-between items-center
             px-4 pb-4 border-b border-secondary-200">
               <div class="flex gap-4">
@@ -111,11 +105,12 @@ export default {
                 />
                 <div class="space-y-4">
                   <h3 class="text-xl font-medium">{{ data.product.title }}</h3>
-                  <span class="block font-mono tracking-wider">數量：{{ data.product.qty }}</span>
+                  <span class="block font-mono tracking-wider">數量：{{ data.qty }}</span>
                 </div>
               </div>
               <span class="font-mono tracking-widest">
-                NT${{ moneyFormat(data.product.price, data.product.qty) }}
+                單項小記<br />
+                NT${{ moneyFormat(data.final_total) }}
               </span>
             </li>
           </ul>
@@ -125,7 +120,7 @@ export default {
             </li>
             <li class="pb-2 font-mono text-2xl
             font-extralight border-b border-secondary-200">
-              NT${{ confirmData?.order?.total }}
+              NT${{ moneyFormat(confirmData.order.total) }}
             </li>
             <li class="text-lg font-medium tracking-widest">
               訂單是否完成付款

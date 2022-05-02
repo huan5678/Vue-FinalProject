@@ -76,7 +76,7 @@ export const useProductStore = defineStore('product', () => {
         productList.pagination = res.data.pagination;
       })
       .catch((err) => {
-        productList.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
       });
   }
 
@@ -95,7 +95,7 @@ export const useProductStore = defineStore('product', () => {
         productList.productImages.push(res.data.product.imageUrl);
       })
       .catch((err) => {
-        productList.errorMessage = `產生錯誤: ${err}`;
+        errorHandle(err);
         isLoading.value = '';
       });
   }

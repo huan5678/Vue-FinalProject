@@ -137,8 +137,8 @@ export default {
         <li>
           <button
             type="button"
-            class="py-1 px-2 text-secondary-300 rounded border
-            disabled:text-secondary-300 disabled:bg-secondary-100
+            class="py-1 px-2 text-secondary-300
+            disabled:text-secondary-300 disabled:bg-secondary-100 rounded border
             border-secondary-300 disabled:border-secondary-100"
             :class="!pagination?.has_pre ?
             '' : 'hover:bg-secondary-400 hover:border-secondary-400 hover:text-white' "
@@ -169,8 +169,8 @@ export default {
         <li>
           <button
             type="button"
-            class="py-1 px-2 text-secondary-300 rounded border
-            disabled:text-secondary-300 disabled:bg-secondary-100
+            class="py-1 px-2 text-secondary-300 disabled:text-secondary-300
+            disabled:bg-secondary-100 rounded border
             border-secondary-300 disabled:border-secondary-100"
             :class="!pagination?.has_next ?
             '' : 'hover:bg-secondary-400 hover:border-secondary-400 hover:text-white' "

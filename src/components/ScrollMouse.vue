@@ -35,11 +35,11 @@ $animDuration: 6s;
     background: linear-gradient(to bottom, $colorPrimary 50%, $colorSecondary 50%);
     background-position: 0 $line-height-abs;
     background-size: 100% 200%;
-    animation: scrolldown $animDuration cubic-bezier(0.43, 0.04, 0.59, 0.93) forwards infinite;
+    animation: scrollDown $animDuration cubic-bezier(0.43, 0.04, 0.59, 0.93) forwards infinite;
   }
 }
 
-@keyframes scrolldown {
+@keyframes scrollDown {
   0%{
     background-position: 0 $line-height-abs;
   }

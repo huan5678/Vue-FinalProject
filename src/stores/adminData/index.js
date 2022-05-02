@@ -111,8 +111,23 @@ export const useAdminDataStore = defineStore('adminData', () => {
   }
 
   function handleEditData(id, item) {
+    let target = adminData.selectedTarget;
+    switch (target) {
+      case 'order':
+        target = 'order';
+        break;
+      case 'coupon':
+        target = 'coupon';
+        break;
+      case 'article':
+        target = 'article';
+        break;
+      default:
+        target = 'product';
+        break;
+    }
     axios
-      .put(`${baseUrl}api/${apiPath}/admin/${adminData.selectedTarget}/${id}`, item, {
+      .put(`${baseUrl}api/${apiPath}/admin/${target}/${id}`, item, {
         token: adminStore.token,
       })
       .then(() => {

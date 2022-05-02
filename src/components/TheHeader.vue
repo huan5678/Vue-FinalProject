@@ -171,7 +171,7 @@ export default {
           v-if="route.name !== 'dashboard'">
             <AppLink to="/about"> 關於我們 </AppLink>
           </li>
-          <li v-if="route.name === 'dashboard' || route.name === 'confirm'" />
+          <li v-if="route.name === 'dashboard' || route.name === 'order-confirm'" />
           <li class="flex-auto indicator" v-else>
             <span class="rfs:text-xs text-primary-50
             bg-primary-500 indicator-item badge

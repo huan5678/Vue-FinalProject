@@ -3,7 +3,7 @@ import { computed, ref, onMounted } from 'vue';
 import useStore from '@/stores';
 import ProductsTable from '@/components/table/ProductsTable.vue';
 import OrdersTable from '@/components/table/OrdersTable.vue';
-import CuponsTable from '@/components/table/CuponsTable.vue';
+import CouponsTable from '@/components/table/CouponsTable.vue';
 import ArticlesTable from '@/components/table/ArticlesTable.vue';
 
 export default {
@@ -49,7 +49,7 @@ export default {
   components: {
     ProductsTable,
     OrdersTable,
-    CuponsTable,
+    CouponsTable,
     ArticlesTable,
   },
 };
@@ -80,7 +80,7 @@ export default {
     </div>
     <ProductsTable v-if="adminData.selectedTarget === 'product'" />
     <OrdersTable v-if="adminData.selectedTarget === 'order'" />
-    <CuponsTable v-if="adminData.selectedTarget === 'coupon'" />
+    <CouponsTable v-if="adminData.selectedTarget === 'coupon'" />
     <ArticlesTable v-if="adminData.selectedTarget === 'article'" />
     <!-- 分頁 -->
     <ul class="flex gap-4 justify-center items-center pb-12 mx-auto">

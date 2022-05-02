@@ -37,6 +37,7 @@ export default {
     </div>
 
     <button
+      type="button"
       aria-label="Close"
       class="bg-primary-700/30 hover:bg-primary-900/40 rounded-lg
       border-0 transition btn btn-sm"

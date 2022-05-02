@@ -11,7 +11,7 @@ export const useCouponStore = defineStore('coupon', () => {
       {
         name: '驚喜大禮包',
         code: '5d003b6e',
-        price: -550,
+        price: 0.5,
         rules: 'minus',
       },
       {
@@ -23,13 +23,13 @@ export const useCouponStore = defineStore('coupon', () => {
       {
         name: '老闆請你喝一杯',
         code: 'e02c47e7',
-        price: -400,
+        price: 0.65,
         rules: 'minus',
       },
       {
         name: '你是醉棒的',
         code: 'db13f8e5',
-        price: -200,
+        price: 0.9,
         rules: 'minus',
       },
     ],

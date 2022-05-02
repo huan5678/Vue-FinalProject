@@ -11,6 +11,7 @@ import { useRouter } from 'vue-router';
 import OrderForm from '@/components/OrderForm.vue';
 import CheckStep from '@/components/CheckStep.vue';
 import TheRecommend from '@/components/TheRecommend.vue';
+import moneyFormat from '@/helpers/moneyFormat';
 
 export default {
   components: {
@@ -31,12 +32,6 @@ export default {
     const { orderResult } = storeToRefs(orderStore);
     const showRecommended = ref(false);
     const router = useRouter();
-
-    function moneyFormat(num, qty) {
-      let number = num;
-      if (qty !== undefined) number *= qty;
-      return num !== undefined ? Number(number.toFixed(1)).toLocaleString() : 0;
-    }
 
     watch(
       () => cartData.cart,
@@ -143,7 +138,7 @@ export default {
                 總金額
               </p>
               <p class="font-mono text-xl font-extralight" v-show="cartList.length > 0">
-                NT${{ cartResultPrice }}
+                NT${{ moneyFormat(cartResultPrice) }}
               </p>
             </div>
           </div>

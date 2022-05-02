@@ -154,7 +154,8 @@ export default {
           }"
           class="aspect-video object-cover object-center transition-all
           duration-150 md:aspect-square
-          md:max-w-[24rem] md:h-full"/>
+          md:max-w-[24rem] md:h-full"
+          />
         </li>
       </ul>
     </div>

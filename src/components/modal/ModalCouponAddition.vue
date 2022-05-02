@@ -48,7 +48,7 @@ export default {
           code: String(couponData.value.code),
         },
       };
-      if (functionSelected.selected === 'productEdit') {
+      if (functionSelected.selected === 'couponEdit') {
         handleEditData(couponData.value.id, data);
       } else {
         handleCreateData(data);
@@ -77,7 +77,7 @@ export default {
 <template>
   <section class="flex overflow-hidden flex-col pb-4 space-y-4 bg-gray-50 rounded-md">
     <ModalCardTitle
-      :title="selectType === 'productEdit' ? '內容編輯' : '新增優惠券'"
+      :title="selectType === 'couponEdit' ? '內容編輯' : '新增優惠券'"
       :close-modal="handleOpenModal"
     />
     <form class="container p-4 space-y-4" @submit.prevent="handleProductAddition">
@@ -160,7 +160,7 @@ export default {
           @click="handleResetFormInput()"
           type="reset"
         >
-          {{ selectType === 'productEdit' ? '取消修改' : '取消新增' }}
+          {{ selectType === 'couponEdit' ? '取消修改' : '取消新增' }}
         </button>
         <button
           class="flex-auto py-2 text-white bg-primary-500 hover:bg-primary-600
@@ -168,7 +168,7 @@ export default {
           transition duration-300"
           type="submit"
         >
-          {{ selectType === 'productEdit' ? '確定修改' : '新增優惠券' }}
+          {{ selectType === 'couponEdit' ? '確定修改' : '新增優惠券' }}
         </button>
       </div>
     </form>

@@ -1,2 +1,6 @@
-const moneyFormat = (num = 0) => `$ ${num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+const moneyFormat = (num, qty) => {
+  let number = num;
+  if (qty !== undefined) number *= qty;
+  return num !== undefined ? Number(number.toFixed(1)).toLocaleString() : 0;
+};
 export default moneyFormat;

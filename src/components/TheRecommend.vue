@@ -91,6 +91,8 @@ export default {
 
     return {
       dataList,
+      cartData,
+      produces,
       productCategory: computed(() => productCategory),
       isLoading: computed(() => isLoading),
       modules: [Autoplay],
@@ -136,6 +138,16 @@ export default {
           disableOnInteraction: false,
         }"
       >
+      <template v-if="cartData.list.length === 0">
+        <swiper-slide
+        class="items-stretch"
+        v-for="product in produces"
+        :key="product.id"
+        >
+          <CollectionCard :click="isClick" :product="product" />
+        </swiper-slide>
+      </template>
+      <template v-else>
         <swiper-slide
         class="items-stretch"
         v-for="product in dataList"
@@ -143,6 +155,7 @@ export default {
         >
           <CollectionCard :click="isClick" :product="product" />
         </swiper-slide>
+      </template>
       </swiper>
     </div>
   </section>

@@ -32,10 +32,10 @@ $animation-distance: 25px;
     @for $i from 1 through $dot-count {
       $dot-move: ceil($i / 2);
       $dot-pos: $dot-start - (($dot-size + $dot-space) * $dot-move);
+      $animation-delay: -#{$i * 0.1}s;
 
-      $animation-delay: -#{$i * .1}s;
       @if $i % 2 == 0 {
-        $animation-delay: -#{($i * .1) + ($animation-time / 2)};
+        $animation-delay: -#{($i * 0.1) + ($animation-time / 2)};
       }
 
       &:nth-of-type(#{$i}) {
@@ -55,7 +55,7 @@ $animation-distance: 25px;
       animation-timing-function: ease;
       background: $dot-secColor;
       border-radius: 50%;
-      content: '';
+      content: "";
       display: block;
       height: 100%;
       width: 100%;
@@ -73,10 +73,12 @@ $animation-distance: 25px;
     transform: translate3d(0, -#{$animation-distance}, 0);
     z-index: 0;
   }
+
   50% {
     transform: translate3d(0, #{$animation-distance}, 0);
     z-index: 10;
   }
+
   100% {
     transform: translate3d(0, -#{$animation-distance}, 0);
     z-index: -5;
@@ -88,19 +90,24 @@ $animation-distance: 25px;
     opacity: 1;
     transform: scale(1);
   }
+
   25% {
     transform: scale(1.5);
   }
+
   50% {
     opacity: 1;
   }
+
   75% {
-    opacity: .35;
-    transform: scale(.5);
+    opacity: 0.35;
+    transform: scale(0.5);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
   }
 }
+
 </style>
